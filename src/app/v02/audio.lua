@@ -18,9 +18,17 @@ local background_ambiance_01 = love.audio.newSource("asset/sounds/background_amb
 background_ambiance_01:setLooping(true)
 background_ambiance_01:setPitch(1.0)
 
+local background_ambiance_02 = love.audio.newSource("asset/sounds/background_ambiance_02.mp3", "static")
+background_ambiance_02:setLooping(true)
+background_ambiance_02:setPitch(1.0)
+
 local background_music_01 = love.audio.newSource("asset/sounds/background_music_01.mp3", "static")
 background_music_01:setLooping(true)
 background_music_01:setPitch(1.0)
+
+local background_music_02 = love.audio.newSource("asset/sounds/background_music_02.mp3", "static")
+background_music_02:setLooping(true)
+background_music_02:setPitch(1.0)
 
 local fx_kiss_01 = love.audio.newSource("asset/sounds/fx_kiss_01.mp3", "static")
 fx_kiss_01:setLooping(false)
@@ -41,9 +49,13 @@ return {
 
   introEnter = function()
     print('introEnter')
+    background_music_02:setVolume(0.5)
+    background_music_02:setLooping(true)
+    background_music_02:play()
   end,
 
   introLeave = function()
+    background_music_02:stop()
     print('introLeave')
   end,
 
@@ -64,10 +76,10 @@ return {
     fx_pig_01:setVolume(1.0)
     fx_pig_01:setLooping(true)
     fx_pig_01:play()
-    background_ambiance_01:setVolume(1.0)
+    background_ambiance_01:setVolume(4.0)
     background_ambiance_01:setLooping(true)
     background_ambiance_01:play()
-    background_music_01:setVolume(1.0)
+    background_music_01:setVolume(0.5)
     background_music_01:setLooping(true)
     background_music_01:play()
   end,
@@ -82,13 +94,13 @@ return {
   pauseEnter = function()
     print('pauseEnter')
     fx_pig_01:setVolume(0.2)
-    background_ambiance_01:setVolume(0.2)
-    background_music_01:setVolume(0.2)
+    background_ambiance_01:setVolume(4.0)
+    background_music_01:setVolume(0.0)
   end,
   
   pauseLeave = function()
-    background_music_01:setVolume(1.0)
-    background_ambiance_01:setVolume(1.0)
+    background_music_01:setVolume(0.5)
+    background_ambiance_01:setVolume(4.0)
     fx_pig_01:setVolume(1.0)
     print('pauseLeave')
   end,
