@@ -101,7 +101,7 @@ function PIG:update(dt)
   --END
 
   --GO TO CLOSER
-  if self.weedD > 40 then
+  if self.weed and self.weedD > 40 then
     local vx = self.weed.body:getX() - self.body:getX()
     local vy = self.weed.body:getY() - self.body:getY()
     local n = math.sqrt(vx * vx + vy * vy)
@@ -109,13 +109,15 @@ function PIG:update(dt)
     vx = vx / n
     vy = vy / n
     self.body:applyLinearImpulse(vx*4, vy*4)
+  elseif self.weed then
+    self.weed.live = self.weed.live - 0.005
   end
   --END
 
   if self.time < 0 then
     self.id = (self.id + 1) % 2
     self.time = 0.2 + math.rad(1)
-    if self.weedD > 40 then
+    if self.weed and self.weedD > 40 then
       self:setId(self.id)
     else
       self:setId(self.id + 2)
@@ -171,15 +173,23 @@ return {
     tab = {}
 
     Weed.foreach(function(v)
-      d = v:distanceFrom(home.body:getX(), home.body:getY())
-      table.insert(tab, {obj=v, d=d})
+      if v.state >= 2 then
+        d = v:distanceFrom(home.body:getX(), home.body:getY())
+        table.insert(tab, {obj=v, d=d})
+      end
     end)
+
+    if #tab <= 0 then return false end
 
     table.sort(tab, function (k1, k2) return k1.d < k2.d end)
 
+    local a = 1
     for i=1,nb do
-      Pig.newPig(world, {x=tab[i].obj.body:getX() + math.random(-5, 5),
-                         y=tab[i].obj.body:getY() + math.random(-5, 5), id=0})
+      Pig.newPig(world, {x=tab[a].obj.body:getX() + math.random(-5, 5),
+                         y=tab[a].obj.body:getY() + math.random(-5, 5), id=0})
+      a = a + 1
+      if a > #tab then a = 1 end
     end
+    return true
   end
 }

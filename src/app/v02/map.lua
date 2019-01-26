@@ -9,7 +9,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 7,
-  nextobjectid = 30,
+  nextobjectid = 34,
   properties = {},
   tilesets = {
     {
@@ -605,6 +605,71 @@ return {
           shape = "rectangle",
           x = 672,
           y = 480,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 30,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 800,
+          y = 416,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["State"] = 2,
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 31,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1120,
+          y = 352,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 32,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 960,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 33,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1248,
+          y = 672,
           width = 32,
           height = 32,
           rotation = 0,

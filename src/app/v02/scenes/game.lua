@@ -52,6 +52,10 @@ function game:enter(previous)
     elseif obj.properties.Player == true then
       player = Player.newPlayer(world, obj)
     elseif obj.properties.Weed == true then
+      if obj.properties.State then
+        print("IS OK!!!")
+        obj.state = obj.properties.State
+      end
       weed = Weed.newWeed(world, obj)
     elseif obj.properties.collidable == true then --DEFAULT COLLIDER
       body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
@@ -79,7 +83,7 @@ function game:enter(previous)
   map:initObj(world)
   --end
 
-  Pig.deploy(3)
+  Pig.deploy(20)
   --camera
   camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
 end
