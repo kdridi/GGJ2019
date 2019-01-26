@@ -9,7 +9,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 7,
-  nextobjectid = 22,
+  nextobjectid = 27,
   properties = {},
   tilesets = {
     {
@@ -705,6 +705,86 @@ return {
           shape = "rectangle",
           x = 384,
           y = 832,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 22,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 992,
+          y = 576,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 23,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1056,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 24,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 608,
+          y = 320,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 25,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 992,
+          y = 864,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["Weed"] = true
+          }
+        },
+        {
+          id = 26,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 992,
+          y = 736,
           width = 32,
           height = 32,
           rotation = 0,

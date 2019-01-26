@@ -13,9 +13,9 @@ Camera = require "../camera"
 screen = require "../vendor/shack/shack"
 
 player = {}
-local world = {}
+world = {}
 local map = {}
-local home = {}
+home = {}
 
 local MAPW = 50
 local MAPH = 40
@@ -33,6 +33,8 @@ function game:init()
        b:getUserData() and b:getUserData().type then
       if a:getUserData().type == "Pig" and b:getUserData().type == "Home" then
         Pig.del(a:getUserData())
+      elseif b:getUserData().type == "Pig" and a:getUserData().type == "Home" then
+        Pig.del(b:getUserData())
       end
     end
   end, nil, nil, nil)
@@ -46,7 +48,7 @@ function game:enter(previous)
   map = loader.loadFromLua(data)
   map.objCreateF = function(obj)
     if obj.properties.Pig == true then
-      pig = Pig.newPig(world, obj)
+      --pig = Pig.newPig(world, obj)
     elseif obj.properties.Player == true then
       player = Player.newPlayer(world, obj)
     elseif obj.properties.Weed == true then
@@ -77,6 +79,7 @@ function game:enter(previous)
   map:initObj(world)
   --end
 
+  Pig.deploy(3)
   --camera
   camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
 end

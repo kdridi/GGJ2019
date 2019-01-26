@@ -10,7 +10,9 @@ function  PIG:new(world, pig)
   pig.height = 32
 
   obj.body = love.physics.newBody(world, pig.x + pig.width / 2, pig.y + pig.height / 2, "dynamic")
+  --obj.body = love.physics.newBody(world, pig.x , pig.y , "dynamic")
   obj.shape = love.physics.newRectangleShape(pig.width, pig.height)
+  --obj.shape = love.physics.newCircleShape(pig.width / 2)
   obj.fix = love.physics.newFixture(obj.body, obj.shape, 2)
 
   obj:setId(0)
@@ -45,6 +47,10 @@ function  PIG:setId(id)
 end
 
 function PIG:draw()
+
+  -- local cx, cy = body:getWorldPoints(shape:getPoint())
+  -- love.graphics.circle("line", cx, cy, shape:getRadius())
+
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
@@ -103,15 +109,9 @@ return {
 
     table.sort(tab, function (k1, k2) return k1.d < k2.d end)
 
-    print(#tab)
-    print("BEGIN")
-    for i=1,#tab do
-      print(tab[i].d.." "..tab[i].obj.type)
-    end
-    print("END")
-
     for i=1,nb do
-      Pig.newPig({x=tab[i].obj.body:getX(), y=tab[i].obj.body:getY(), id=0})
+      Pig.newPig(world, {x=tab[i].obj.body:getX() + math.random(-5, 5),
+                         y=tab[i].obj.body:getY() + math.random(-5, 5), id=0})
     end
   end
 }
