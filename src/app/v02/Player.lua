@@ -51,7 +51,7 @@ function  PLAYER:kick(pig)
   pig.body:applyLinearImpulse(vx * 10, vy * 10)
 
   self.state = 1
-  self.time = 0.3
+  self.time = 0.4
   self:setId(1)
   screen:setShake(20)
 end
@@ -70,7 +70,21 @@ end
 function  PLAYER:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
+
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
+
+  if self.state == 1 then
+    squadeG = love.graphics.newQuad(320, 126, 64, 64, self.imgSheet:getDimensions())
+    squadeD = love.graphics.newQuad(320, 126+64, 64, 64, self.imgSheet:getDimensions())
+    squadeH = love.graphics.newQuad(320+64, 126+64, 64, 64, self.imgSheet:getDimensions())
+    squadeB = love.graphics.newQuad(320+64, 126, 64, 64, self.imgSheet:getDimensions())
+
+    love.graphics.draw(self.imgSheet, squadeG, x - 40 - 20 * (self.time % 0.20) * (1 / 0.20), y, r)
+    love.graphics.draw(self.imgSheet, squadeD, x + 40 + 20 * (self.time % 0.20) * (1 / 0.20), y, r)
+    love.graphics.draw(self.imgSheet, squadeH, x, y - 40 - 20 * (self.time % 0.20) * (1 / 0.20), r)
+    love.graphics.draw(self.imgSheet, squadeB, x, y + 40 + 20 * (self.time % 0.20) * (1 / 0.20), r)
+
+  end
 end
 
 function  PLAYER:update(dt)
