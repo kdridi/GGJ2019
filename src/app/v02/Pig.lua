@@ -51,14 +51,14 @@ function  PIG:setId(id)
   local idy = 0
 
   if id == 0 or id == 1 then
-    idx = 32*6 + 32/2 + (64 * id)
-    idy = 0 + 32/2
+    idx = 32*4*3 + 32 + (32*4 * id)
+    idy = 0 + 32
   else
     idx = 32*8 + 32/2 + (64 * (id - 2))
     idy = 0 + 32/2
   end
-  idx = 32*4*3 + 32
-  idy = 0 + 32
+  -- idx = 32*4*3 + 32
+  -- idy = 0 + 32
 
   self.id = id
   self.squade = love.graphics.newQuad(idx, idy, 32*2, 32*2, self.imgSheet:getDimensions())

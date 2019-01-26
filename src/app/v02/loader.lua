@@ -147,7 +147,6 @@ function Map:initGf()
             while id > self.sheet[i].idmax do
               max = self.sheet[i].idmax
               i = i + 1
-              print(i)
             end
             id = id - max
             local w, h = self.sheet[i].img:getDimensions()
