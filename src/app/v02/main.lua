@@ -7,6 +7,7 @@ Pig = require "Pig"
 Player = require "Player"
 inspect = require "vendor/inspect"
 Camera = require "camera"
+local screen = require "vendor/shack/shack"
 
 player = {}
 world = {}
@@ -40,6 +41,7 @@ end
 
 function love.load()
   love.window.setMode(MAPW*MAPS,MAPH*MAPS)
+  screen:setDimensions(love.graphics.getWidth(), love.graphics.getHeight())
 
   --init map
   map = loader.loadFromLua(data)
@@ -113,8 +115,12 @@ function love.update(dt)
       local vx = closer.body:getX() - player.body:getX()
       local vy = closer.body:getY() - player.body:getY()
       closer.body:applyLinearImpulse(vx * 100, vy * 100)
+      screen:setShake(20)
     end
+    
   end --END
+
+  screen:update(dt)
 
   for _, body in pairs(world:getBodies()) do
     vx, vy = body:getLinearVelocity()
@@ -128,6 +134,7 @@ end
 function love.draw()
   -- DRAW CAMERA BOX
   camera:draw()
+  screen:apply()
 
   love.graphics.setColor(255, 255, 255)
   map:draw(1)
