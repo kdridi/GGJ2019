@@ -4,10 +4,18 @@ map = {}
 loader = require "loader"
 data = require "map"
 Pig = require "Pig"
+inspect = require "vendor/inspect"
+Camera = require "camera"
 
 ball = {}
 world = {}
 map = {}
+
+local MAPW = 50
+local MAPH = 40
+local MAPS = 32
+
+local camera = {}
 
 function objCreation(obj)
   if obj.properties.Pig == true then
@@ -26,7 +34,7 @@ function objCreation(obj)
 end
 
 function love.load()
-  love.window.setMode(50*32,40*32)
+  love.window.setMode(MAPW*MAPS,MAPH*MAPS)
   -- Grab window size
   windowWidth  = love.graphics.getWidth()
   windowHeight = love.graphics.getHeight()
@@ -37,7 +45,6 @@ function love.load()
   love.physics.setMeter(32)
   world = love.physics.newWorld(0, 0, true)
   world:setCallbacks(beginContact, nil, nil, nil)
-
 
   map:initPhx(world)
 
@@ -51,6 +58,8 @@ function love.load()
 
   --PART
 
+  --camera
+  camera = Camera.newCamera(200, 200, ball, MAPS, MAPS, false)
 end
 
 function love.update(dt)
@@ -69,8 +78,10 @@ function love.update(dt)
   if love.keyboard.isDown("down") then
     ball.body:applyLinearImpulse(0, 10)
   end
-
-
+  
+  -- UPDATE CAMERA BOX POSITION
+  camera:update(dt)
+  
   if love.keyboard.isDown("x") then --PUSH
     closer = nil
     dmin = 0
@@ -106,6 +117,8 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.translate(MAPW*MAPS / 2 - camera.x, MAPH*MAPS / 2 - camera.y)
+
   love.graphics.setColor(255, 255, 255)
   love.graphics.print(data.orientation, 250, 250)
   map:draw(1)
@@ -116,8 +129,7 @@ function love.draw()
 
   map:draw(3)
   love.graphics.setColor(255, 255, 255)
-
-
+  
   --DRAW PHYSICS
   for _, body in pairs(world:getBodies()) do
     for _, fixture in pairs(body:getFixtures()) do
@@ -134,6 +146,9 @@ function love.draw()
     end
   end
   --END
+  
+  -- DRAW CAMERA BOX
+  camera:draw()
 end
 
 
