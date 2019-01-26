@@ -27,7 +27,7 @@ function  PIG:new(world, pig)
 
   obj.live = 1
 
-  obj.panic = true
+  obj.panic = false
 
   obj.fix:setUserData(obj)
   return (obj)
