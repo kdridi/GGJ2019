@@ -8,7 +8,6 @@ function  WEED:new(world, p)
 
   p.width = 32
   p.height = 15
-  print(p.state)
   if not p.state then
     p.state = 0
   end
@@ -29,8 +28,6 @@ function  WEED:new(world, p)
 end
 
 function  WEED:setId(id)
-  print(self)
-  print("ID : "..id.." obj :")
   w, h = self.imgSheet:getDimensions()
   self.id = id - 1
   local idx = 16 + 64*id

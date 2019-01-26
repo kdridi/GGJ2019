@@ -107,8 +107,8 @@ function PIG:update(dt)
 
   --GO TO CLOSER
   if self.weed and self.weedD > 40 then
-    local vx = self.weed.body:getX() - self.body:getX() + (1 - math.random(2))
-    local vy = self.weed.body:getY() - self.body:getY() + (1 - math.random(2))
+    local vx = self.weed.body:getX() - self.body:getX() + (32 - math.random(64))
+    local vy = self.weed.body:getY() - self.body:getY() + (32 - math.random(64))
     local n = math.sqrt(vx * vx + vy * vy)
 
     vx = vx / n

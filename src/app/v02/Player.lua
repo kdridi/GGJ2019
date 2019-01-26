@@ -57,11 +57,14 @@ function  PLAYER:kick(pig)
 end
 
 function  PLAYER:setId(id)
-  w, h = self.imgSheet:getDimensions()
+  local idx = 0
+  local idy = 0
   self.id = id
   -- local idx = (self.id * 32) % w
   -- local idy = math.floor((self.id * 32) / w) * 32
-  local idx = 64*2+128*id
+  if id == 0 then idx = 64*2
+  elseif id == 1 then idx = 64*2+128
+  else idx = 64*3 end
   local idy = 64*2
 
   self.squade = love.graphics.newQuad(idx, idy, 64, 64, self.imgSheet:getDimensions())
@@ -92,6 +95,16 @@ function  PLAYER:update(dt)
   if self.state ~= 0 and self.time <= 0 then
     self.state = 0
     self:setId(0)
+  end
+end
+
+function PLAYER:plantedSeed()
+
+  if self.state == 0 then
+    weed = Weed.newWeed(world, {x=self.body:getX(), y=self.body:getY()})
+    self.state = 2
+    self.time = 0.3
+    self:setId(2)
   end
 end
 

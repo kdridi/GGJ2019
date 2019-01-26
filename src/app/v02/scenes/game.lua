@@ -123,7 +123,7 @@ function game:update(dt)
   end
 
   if love.keyboard.isDown("s") then
-    weed = Weed.newWeed(world, {x=player.body:getX(), y=player.body:getY()})
+    player:plantedSeed()
   end
   screen:update(dt)
 
