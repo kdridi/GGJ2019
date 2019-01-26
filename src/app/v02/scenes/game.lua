@@ -15,9 +15,9 @@ screen = require "../vendor/shack/shack"
 local suit = require('../vendor/suit')
 
 player = {}
-local world = {}
+world = {}
 local map = {}
-local home = {}
+home = {}
 
 local MAPW = 50
 local MAPH = 40
@@ -35,6 +35,10 @@ function scene:init()
        b:getUserData() and b:getUserData().type then
       if a:getUserData().type == "Pig" and b:getUserData().type == "Home" then
         Pig.del(a:getUserData())
+        print("DEATH !!!")
+      elseif b:getUserData().type == "Pig" and a:getUserData().type == "Home" then
+        Pig.del(b:getUserData())
+        print("DEATH !!!")
       end
     end
   end, nil, nil, nil)
@@ -46,15 +50,20 @@ function scene:enter(previous, dayCount)
   
   Player.del(player)
   Pig.clear()
+  Weed.clear()
 
   --init map
   map = loader.loadFromLua(data)
   map.objCreateF = function(obj)
     if obj.properties.Pig == true then
-      pig = Pig.newPig(world, obj)
+      --pig = Pig.newPig(world, obj)
     elseif obj.properties.Player == true then
       player = Player.newPlayer(world, obj)
     elseif obj.properties.Weed == true then
+      if obj.properties.State then
+        print("IS OK!!!")
+        obj.state = obj.properties.State
+      end
       weed = Weed.newWeed(world, obj)
     elseif obj.properties.collidable == true then --DEFAULT COLLIDER
       body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
@@ -82,6 +91,7 @@ function scene:enter(previous, dayCount)
   map:initObj(world)
   --end
 
+  Pig.deploy(3)
   --camera
   context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
 end
@@ -116,18 +126,27 @@ function scene:update(dt)
 
   if love.keyboard.isDown("a") then
     Pig.clear()
+    Weed.clear()
   end
 
+  if love.keyboard.isDown("s") then
+    player:plantedSeed()
+  end
   screen:update(dt)
 
+  Player.foreach(function(p) p:update(dt) end)
   Weed.foreach(function(w) w:update(dt) end)
+  Pig.foreach(function(p) p:update(dt) end)
 
   for _, body in pairs(world:getBodies()) do
     vx, vy = body:getLinearVelocity()
+    r = body:getAngularVelocity()
 
     vx = vx * (0.95)
     vy = vy * (0.95)
+    r = r * 0.95
     body:setLinearVelocity(vx, vy)
+    body:setAngularVelocity(r)
   end
 
   if true then
