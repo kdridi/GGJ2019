@@ -12,6 +12,8 @@ inspect = require "../vendor/inspect"
 Camera = require "../camera"
 screen = require "../vendor/shack/shack"
 
+local suit = require('../vendor/suit')
+
 player = {}
 local world = {}
 local map = {}
@@ -22,6 +24,8 @@ local MAPH = 40
 local MAPS = 32
 
 local camera = {}
+
+local dayCount
 
 function game:init()
   screen:setDimensions(love.graphics.getWidth(), love.graphics.getHeight())
@@ -38,7 +42,8 @@ function game:init()
   end, nil, nil, nil)
 end
 
-function game:enter(previous)
+function game:enter(previous, dc)
+  dayCount = dc
   Player.del(player)
   Pig.clear()
 
@@ -117,13 +122,29 @@ function game:update(dt)
 
   Weed.foreach(function(w) w:update(dt) end)
 
-
   for _, body in pairs(world:getBodies()) do
     vx, vy = body:getLinearVelocity()
 
     vx = vx * (0.95)
     vy = vy * (0.95)
     body:setLinearVelocity(vx, vy)
+  end
+
+  if true then
+    local bw, bh, g, w, h = 60, 60, 10, love.graphics.getWidth(), love.graphics.getHeight()
+    if suit.Button("[||]", 1 * w - bw - g, 0 * h + g, bw, bh).hit then
+      Gamestate.push(pause)
+    end
+  end
+  
+  if Pig.count() == 0 then
+    return Gamestate.switch(day, dayCount + 1) -- return to previous state
+  end
+end
+
+function game:keypressed(key)
+  if key == 'w' then
+    return Gamestate.switch(day, dayCount + 1) -- return to previous state
   end
 end
 
@@ -148,6 +169,8 @@ function game:draw()
     map:draw(3)
     love.graphics.setColor(255, 255, 255)
   end)
+
+  suit.draw()
 end
 
 return game

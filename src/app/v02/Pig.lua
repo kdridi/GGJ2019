@@ -72,6 +72,14 @@ return {
     end
   end,
 
+  count = function()
+    local n = 0
+    for idx, value in pairs(PIGS) do
+      n = n + 1
+    end
+    return n
+  end,
+
   del = function(v)
     for idx, value in pairs(PIGS) do
       if value == v then

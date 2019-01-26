@@ -4,3 +4,6 @@
 [submodule "src/app/v02/vendor/hump"]
 	path = src/app/v02/vendor/hump
 	url = https://github.com/vrld/hump.git
+[submodule "src/app/v02/vendor/suit"]
+	path = src/app/v02/vendor/suit
+	url = https://github.com/vrld/suit.git

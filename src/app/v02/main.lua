@@ -3,6 +3,7 @@ Gamestate = require 'vendor/hump/gamestate'
 pause = require 'scenes/pause'
 menu = require 'scenes/menu'
 game = require 'scenes/game'
+day = require 'scenes/day'
 
 function love.load()
   love.window.setMode(1280, 720)
@@ -21,7 +22,7 @@ function love.keypressed(key)
   end
 
   if Gamestate.current() == menu and key == 'return' then
-    Gamestate.push(game)
+    Gamestate.push(day, 1)
   end
 
   if Gamestate.current() == game and key == 'q' then
@@ -30,7 +31,7 @@ function love.keypressed(key)
 
   if Gamestate.current() == game and key == 'r' then
     Gamestate.pop()
-    Gamestate.push(game)
+    Gamestate.push(day, 1)
   end
 end
 
