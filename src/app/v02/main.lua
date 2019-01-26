@@ -5,6 +5,7 @@ loader = require "loader"
 data = require "map"
 Pig = require "Pig"
 Player = require "Player"
+Weed = require "Weed"
 inspect = require "vendor/inspect"
 Camera = require "camera"
 screen = require "vendor/shack/shack"
@@ -12,6 +13,7 @@ screen = require "vendor/shack/shack"
 player = {}
 world = {}
 map = {}
+home = {}
 
 local MAPW = 50
 local MAPH = 40
@@ -26,6 +28,8 @@ function objCreation(obj)
     pig = Pig.newPig(obj)
   elseif obj.properties.Player == true then
     player = Player.newPlayer(obj)
+  elseif obj.properties.Weed == true then
+    weed = Weed.newWeed(obj)
   elseif obj.properties.collidable == true then --DEFAULT COLLIDER
     body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
     shape = love.physics.newRectangleShape(obj.width, obj.height)
@@ -34,6 +38,9 @@ function objCreation(obj)
   end
 
   if obj.properties.Home then
+    home.body = body
+    home.shape = shape
+    home.fix = fix
     --fix:setSensor(true)
     fix:setUserData({type="Home"})
     fix:setRestitution(0.0)
@@ -56,12 +63,14 @@ function love.load()
   --end
 
   --init OBJ
-  local sheet = love.graphics.newImage("asset/sheet.png")
+  local sheet = love.graphics.newImage("asset/houseofpigs.png")
   Pig.setImgSheet(sheet)
+  Weed.setImgSheet(sheet)
   Player.setImgSheet(sheet)
   map:initObj(world)
   --end
 
+  Pig.deploy(2)
   --camera
   camera = Camera.newCamera(200, 200, player, MAPS, MAPS, true)
 end
@@ -91,10 +100,17 @@ function love.update(dt)
     if pig and d < 120 then
       player:kick(pig)
     end
-    
+
   end --END
 
+  if love.keyboard.isDown("a") then
+    Pig.clear()
+  end
+
   screen:update(dt)
+
+  Weed.foreach(function(w) w:update(dt) end)
+
 
   for _, body in pairs(world:getBodies()) do
     vx, vy = body:getLinearVelocity()
@@ -122,6 +138,7 @@ function love.draw()
   love.graphics.setColor(255, 255, 255)
   Pig.foreach(function(pig) pig:draw() end)
 
+  Weed.foreach(function(w) w:draw() end)
   map:draw(3)
   love.graphics.setColor(255, 255, 255)
 

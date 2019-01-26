@@ -6,8 +6,8 @@ function  PLAYER:new(p)
   setmetatable(obj, self)
   self.__index = self
 
-  p.height = 120
-  p.width = 120
+  p.height = 64
+  p.width = 64
   p.id = 0
 
   obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
@@ -58,7 +58,7 @@ function  PLAYER:setId(id)
   local idy = 0
 
   self.id = id
-  self.squade = love.graphics.newQuad(idx, idy, 120, 120, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy, 64, 64, self.imgSheet:getDimensions())
 end
 
 function  PLAYER:draw()
