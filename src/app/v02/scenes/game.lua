@@ -119,14 +119,17 @@ function game:update(dt)
   screen:update(dt)
 
   Weed.foreach(function(w) w:update(dt) end)
-
+  Pig.foreach(function(p) p:update(dt) end)
 
   for _, body in pairs(world:getBodies()) do
     vx, vy = body:getLinearVelocity()
+    r = body:getAngularVelocity()
 
     vx = vx * (0.95)
     vy = vy * (0.95)
+    r = r * 0.95
     body:setLinearVelocity(vx, vy)
+    body:setAngularVelocity(r)
   end
 end
 

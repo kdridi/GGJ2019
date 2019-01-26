@@ -54,8 +54,8 @@ function  PLAYER:setId(id)
   self.id = id - 1
   -- local idx = (self.id * 32) % w
   -- local idy = math.floor((self.id * 32) / w) * 32
-  local idx = 0
-  local idy = 0
+  local idx = 64*2
+  local idy = 64*2
 
   self.id = id
   self.squade = love.graphics.newQuad(idx, idy, 64, 64, self.imgSheet:getDimensions())
