@@ -12,7 +12,7 @@ function scene:enter(previous)
   local iwait = function(wait, w)
     background = love.graphics.newImage("asset/cinematics/" .. string.format("cinematic_a%02d.jpg", slide))
     slide = slide + 1
-    wait(w * 2.0)
+    wait(w * 4.0)
     if slide == 19 then
       Director.enterNextDay()
     end

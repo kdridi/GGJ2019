@@ -30,6 +30,10 @@ local background_music_02 = love.audio.newSource("asset/sounds/background_music_
 background_music_02:setLooping(true)
 background_music_02:setPitch(1.0)
 
+local background_music_03 = love.audio.newSource("asset/sounds/background_music_03.mp3", "static")
+background_music_03:setLooping(true)
+background_music_03:setPitch(1.0)
+
 local fx_kiss_01 = love.audio.newSource("asset/sounds/fx_kiss_01.mp3", "static")
 fx_kiss_01:setLooping(false)
 fx_kiss_01:setPitch(1.0)
@@ -49,13 +53,13 @@ return {
 
   introEnter = function()
     print('introEnter')
-    background_music_02:setVolume(0.5)
-    background_music_02:setLooping(true)
-    background_music_02:play()
+    background_music_03:setVolume(0.5)
+    background_music_03:setLooping(true)
+    background_music_03:play()
   end,
 
   introLeave = function()
-    background_music_02:stop()
+    background_music_03:stop()
     print('introLeave')
   end,
 
