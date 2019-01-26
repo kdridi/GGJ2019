@@ -127,6 +127,7 @@ function game:update(dt)
   end
   screen:update(dt)
 
+  Player.foreach(function(p) p:update(dt) end)
   Weed.foreach(function(w) w:update(dt) end)
   Pig.foreach(function(p) p:update(dt) end)
 

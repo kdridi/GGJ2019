@@ -107,12 +107,13 @@ function PIG:update(dt)
 
   --GO TO CLOSER
   if self.weed and self.weedD > 40 then
-    local vx = self.weed.body:getX() - self.body:getX()
-    local vy = self.weed.body:getY() - self.body:getY()
+    local vx = self.weed.body:getX() - self.body:getX() + (1 - math.random(2))
+    local vy = self.weed.body:getY() - self.body:getY() + (1 - math.random(2))
     local n = math.sqrt(vx * vx + vy * vy)
 
     vx = vx / n
     vy = vy / n
+
     self.body:applyLinearImpulse(vx*4, vy*4)
   elseif self.weed then
     self.weed.live = self.weed.live - 0.005
