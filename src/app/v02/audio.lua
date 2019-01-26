@@ -18,6 +18,10 @@ local background_ambiance_01 = love.audio.newSource("asset/sounds/background_amb
 background_ambiance_01:setLooping(true)
 background_ambiance_01:setPitch(1.0)
 
+local background_music_01 = love.audio.newSource("asset/sounds/background_music_01.mp3", "static")
+background_music_01:setLooping(true)
+background_music_01:setPitch(1.0)
+
 local fx_kiss_01 = love.audio.newSource("asset/sounds/fx_kiss_01.mp3", "static")
 fx_kiss_01:setLooping(false)
 fx_kiss_01:setPitch(1.0)
@@ -63,9 +67,13 @@ return {
     background_ambiance_01:setVolume(1.0)
     background_ambiance_01:setLooping(true)
     background_ambiance_01:play()
+    background_music_01:setVolume(1.0)
+    background_music_01:setLooping(true)
+    background_music_01:play()
   end,
   
   gameLeave = function()
+    background_music_01:stop()
     background_ambiance_01:stop()
     fx_pig_01:stop()
     print('gameLeave')
@@ -75,9 +83,11 @@ return {
     print('pauseEnter')
     fx_pig_01:setVolume(0.2)
     background_ambiance_01:setVolume(0.2)
+    background_music_01:setVolume(0.2)
   end,
   
   pauseLeave = function()
+    background_music_01:setVolume(1.0)
     background_ambiance_01:setVolume(1.0)
     fx_pig_01:setVolume(1.0)
     print('pauseLeave')
