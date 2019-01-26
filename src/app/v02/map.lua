@@ -9,7 +9,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 6,
-  nextobjectid = 11,
+  nextobjectid = 14,
   properties = {},
   tilesets = {
     {
@@ -592,7 +592,7 @@ return {
           gid = 65,
           visible = true,
           properties = {
-            ["padre"] = true
+            ["Player"] = true
           }
         }
       }

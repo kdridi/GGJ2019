@@ -1,36 +1,24 @@
-PIG = {}
-PIGS = {}
+PLAYER = {}
+PLAYERS = {}
 
-function  PIG:new(pig)
+function  PLAYER:new(p)
   obj = {}
   setmetatable(obj, self)
   self.__index = self
 
-  obj.body = love.physics.newBody(world, pig.x + pig.width / 2, pig.y + pig.height / 2, "dynamic")
-  obj.shape = love.physics.newRectangleShape(pig.width, pig.height)
-  obj.fix = love.physics.newFixture(obj.body, obj.shape, 20)
+  obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
+  obj.body:setFixedRotation(true)
+  obj.shape = love.physics.newRectangleShape(p.width, p.height)
+  obj.fix = love.physics.newFixture(obj.body, obj.shape, 1)
 
-  print("OBJ : "..pig.gid)
-  obj:setId(pig.gid)
+  obj:setId(p.gid)
 
-  obj.type = "Pig"
+  obj.type = "Player"
   obj.fix:setUserData(obj)
   return (obj)
 end
 
-function  PIG:Kick(v)
-
-end
-
-function  PIG:distanceFrom(x, y)
-  local vx = x - self.body:getX()
-  local vy = y - self.body:getY()
-
-  local d = math.sqrt((vx * vx) + (vy * vy))
-  return d
-end
-
-function  PIG:setId(id)
+function  PLAYER:setId(id)
   w, h = self.imgSheet:getDimensions()
   self.id = id - 1
   local idx = (self.id * 32) % w
@@ -40,27 +28,28 @@ function  PIG:setId(id)
   self.squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
 end
 
-function  PIG:draw()
+function  PLAYER:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
 end
 
 --RETURN
+
 return {
   setImgSheet = function(img)
-    PIG.imgSheet = img
+    PLAYER.imgSheet = img
   end,
 
-  newPig = function(x, y)
-    obj = PIG:new(x,y)
-    table.insert(PIGS, obj)
+  newPlayer = function(x, y)
+    obj = PLAYER:new(x,y)
+    table.insert(PLAYERS, obj)
     return obj
   end,
 
   foreach = function(f)
     t_c = {}
-    for i, v in pairs(PIGS) do
+    for i, v in pairs(PLAYERS) do
       table.insert(t_c, v)
     end
     for i, v in pairs(t_c) do
@@ -69,9 +58,9 @@ return {
   end,
 
   del = function(v)
-    for idx, value in pairs(PIGS) do
+    for idx, value in pairs(PLAYERS) do
       if value == v then
-        table.remove(PIGS, idx)
+        table.remove(PLAYERS, idx)
         v.fix:destroy()
         return
       end
@@ -79,6 +68,7 @@ return {
   end,
 
   all = function()
-    return ipair(PIGS)
+    return ipair(PLAYERS)
   end
+
 }

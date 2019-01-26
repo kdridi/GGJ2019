@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="11">
+<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="14">
  <tileset firstgid="1" source="goodly-2x.tsx"/>
  <layer id="1" name="Ground" width="50" height="40" locked="1">
   <data encoding="csv">
@@ -140,7 +140,7 @@
   <object id="4" template="Pig.tx" x="576" y="544" visible="1"/>
   <object id="6" gid="65" x="800" y="672" width="32" height="32">
    <properties>
-    <property name="padre" type="bool" value="true"/>
+    <property name="Player" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

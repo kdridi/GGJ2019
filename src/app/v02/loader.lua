@@ -29,7 +29,7 @@ end
 ---     PHISIC     -----
 ------------------------
 
-function Map:initPhx(world)
+function Map:initObj(world)
   self.phx = {}
   self.phx.world = world
   self.phx.fix = {}

@@ -20,6 +20,7 @@ function CAMERA:new(cw, ch, target, w, h, debug)
 end
 
 function  CAMERA:draw()
+  love.graphics.translate(love.graphics.getWidth() / 2 - self.x, love.graphics.getHeight() / 2 - self.y)
   if (self.debug) then
     love.graphics.rectangle("line", self.x - self.w / 2, self.y - self.h / 2, self.w, self.h)
   end
