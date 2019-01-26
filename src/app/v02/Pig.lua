@@ -15,9 +15,16 @@ function  PIG:new(world, pig)
   --obj.shape = love.physics.newCircleShape(pig.width / 2)
   obj.fix = love.physics.newFixture(obj.body, obj.shape, 2)
 
-  obj:setId(0)
+  obj.id = 0
+  obj:setId(obj.id)
 
+  obj.time = 0.5
   obj.type = "Pig"
+
+  obj.checkTime = -1
+  obj.weed = nil
+  obj.weedD = 0
+
   obj.fix:setUserData(obj)
   return (obj)
 end
@@ -36,11 +43,16 @@ end
 
 function  PIG:setId(id)
   w, h = self.imgSheet:getDimensions()
-  self.id = id - 1
-  -- local idx = (self.id * 32) % w
-  -- local idy = math.floor((self.id * 32) / w) * 32
-  local idx = 64 + 32/2
-  local idy = 0 + 32/2
+  local idx = 0
+  local idy = 0
+
+  if id == 0 or id == 1 then
+    idx = 32*6 + 32/2 + (64 * id)
+    idy = 0 + 32/2
+  else
+    idx = 32*8 + 32/2 + (64 * (id - 2))
+    idy = 0 + 32/2
+  end
 
   self.id = id
   self.squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
@@ -54,6 +66,62 @@ function PIG:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
+end
+
+function  PIG:findCloser(list)
+  closer = nil
+  dmin = 0
+
+  list.foreach(function(v)
+    if not closer then
+      closer = v
+      dmin = v:distanceFrom(self.body:getX(), self.body:getY())
+    else
+      d = v:distanceFrom(self.body:getX(), self.body:getY())
+      if d < dmin then
+        dmin = d
+        closer = v
+      end
+    end --closer
+  end)
+
+  return closer, dmin
+end
+
+
+function PIG:update(dt)
+  self.time = self.time - dt
+  self.checkTime = self.checkTime - dt
+
+  --NEED TO FIND CLOSER
+  if self.checkTime < 0 then
+    self.weed, self.weedD = self:findCloser(Weed)
+    self.checkTime = 0.5
+  end
+  --END
+
+  --GO TO CLOSER
+  if self.weedD > 40 then
+    local vx = self.weed.body:getX() - self.body:getX()
+    local vy = self.weed.body:getY() - self.body:getY()
+    local n = math.sqrt(vx * vx + vy * vy)
+
+    vx = vx / n
+    vy = vy / n
+    self.body:applyLinearImpulse(vx*4, vy*4)
+  end
+  --END
+
+  if self.time < 0 then
+    self.id = (self.id + 1) % 2
+    self.time = 0.2 + math.rad(1)
+    if self.weedD > 40 then
+      self:setId(self.id)
+    else
+      self:setId(self.id + 2)
+    end
+  end
+
 end
 
 --RETURN
