@@ -6,12 +6,16 @@ function  PLAYER:new(p)
   setmetatable(obj, self)
   self.__index = self
 
+  p.height = 120
+  p.width = 120
+  p.id = 0
+
   obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
   obj.body:setFixedRotation(true)
   obj.shape = love.physics.newRectangleShape(p.width, p.height)
-  obj.fix = love.physics.newFixture(obj.body, obj.shape, 1)
+  obj.fix = love.physics.newFixture(obj.body, obj.shape, 0.10)
 
-  obj:setId(p.gid)
+  obj:setId(p.id)
 
   obj.type = "Player"
   obj.fix:setUserData(obj)
@@ -21,11 +25,13 @@ end
 function  PLAYER:setId(id)
   w, h = self.imgSheet:getDimensions()
   self.id = id - 1
-  local idx = (self.id * 32) % w
-  local idy = math.floor((self.id * 32) / w) * 32
+  -- local idx = (self.id * 32) % w
+  -- local idy = math.floor((self.id * 32) / w) * 32
+  local idx = 0
+  local idy = 0
 
   self.id = id
-  self.squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy, 120, 120, self.imgSheet:getDimensions())
 end
 
 function  PLAYER:draw()

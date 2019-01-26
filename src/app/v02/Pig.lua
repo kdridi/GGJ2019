@@ -6,9 +6,12 @@ function  PIG:new(pig)
   setmetatable(obj, self)
   self.__index = self
 
+  pig.width = 60
+  pig.height = 60
+
   obj.body = love.physics.newBody(world, pig.x + pig.width / 2, pig.y + pig.height / 2, "dynamic")
   obj.shape = love.physics.newRectangleShape(pig.width, pig.height)
-  obj.fix = love.physics.newFixture(obj.body, obj.shape, 20)
+  obj.fix = love.physics.newFixture(obj.body, obj.shape, 2)
 
   print("OBJ : "..pig.gid)
   obj:setId(pig.gid)
@@ -33,11 +36,13 @@ end
 function  PIG:setId(id)
   w, h = self.imgSheet:getDimensions()
   self.id = id - 1
-  local idx = (self.id * 32) % w
-  local idy = math.floor((self.id * 32) / w) * 32
+  -- local idx = (self.id * 32) % w
+  -- local idy = math.floor((self.id * 32) / w) * 32
+  local idx = 120 + 30
+  local idy = 30
 
   self.id = id
-  self.squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy, 90, 90, self.imgSheet:getDimensions())
 end
 
 function  PIG:draw()

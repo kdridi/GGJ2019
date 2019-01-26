@@ -1,0 +1,3 @@
+[submodule "src/app/v02/vendor/shack"]
+	path = src/app/v02/vendor/shack
+	url = https://github.com/Ulydev/shack.git
