@@ -85,5 +85,12 @@ return {
 
   all = function()
     return ipair(PIGS)
+  end,
+
+  clear = function()
+    while #PIGS >= 1 do
+      PIGS[1].fix:destroy()
+      table.remove(PIGS, 1)
+    end
   end
 }
