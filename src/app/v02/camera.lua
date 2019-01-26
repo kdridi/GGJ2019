@@ -19,11 +19,31 @@ function CAMERA:new(cw, ch, target, w, h, debug)
   return (camera)
 end
 
-function  CAMERA:draw()
+function CAMERA:draw(world, f)
   love.graphics.translate(love.graphics.getWidth() / 2 - self.x, love.graphics.getHeight() / 2 - self.y)
+  f()
   if (self.debug) then
     love.graphics.rectangle("line", self.x - self.w / 2, self.y - self.h / 2, self.w, self.h)
   end
+
+  --DRAW PHYSICS
+  for _, body in pairs(world:getBodies()) do
+    for _, fixture in pairs(body:getFixtures()) do
+        local shape = fixture:getShape()
+
+        if shape:typeOf("CircleShape") then
+            local cx, cy = body:getWorldPoints(shape:getPoint())
+            love.graphics.circle("line", cx, cy, shape:getRadius())
+        elseif shape:typeOf("PolygonShape") then
+            love.graphics.polygon("line", body:getWorldPoints(shape:getPoints()))
+        else
+            love.graphics.line(body:getWorldPoints(shape:getPoints()))
+        end
+    end
+  end
+  --END
+  
+  love.graphics.translate(self.x - love.graphics.getWidth() / 2, self.y - love.graphics.getHeight() / 2)
 end
 
 function CAMERA:update(dt)

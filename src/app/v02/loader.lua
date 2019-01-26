@@ -160,7 +160,7 @@ end
 function Loader:loadFromLua(data)
 
   obj = Map:new(data)
-  obj:initGf()
+  --obj:initGf()
   --obj:updateGraph()
   --obj.map = map
 

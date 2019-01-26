@@ -1,7 +1,7 @@
 PIG = {}
 PIGS = {}
 
-function  PIG:new(pig)
+function  PIG:new(world, pig)
   obj = {}
   setmetatable(obj, self)
   self.__index = self
@@ -40,7 +40,7 @@ function  PIG:setId(id)
   self.squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
 end
 
-function  PIG:draw()
+function PIG:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
@@ -52,8 +52,8 @@ return {
     PIG.imgSheet = img
   end,
 
-  newPig = function(x, y)
-    obj = PIG:new(x,y)
+  newPig = function(world, x, y)
+    obj = PIG:new(world, x,y)
     table.insert(PIGS, obj)
     return obj
   end,
@@ -80,5 +80,12 @@ return {
 
   all = function()
     return ipair(PIGS)
+  end,
+
+  clear = function()
+    while #PIGS >= 1 do
+      PIGS[1].fix:destroy()
+      table.remove(PIGS, 1)
+    end
   end
 }

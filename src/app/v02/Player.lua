@@ -1,7 +1,7 @@
 PLAYER = {}
 PLAYERS = {}
 
-function  PLAYER:new(p)
+function  PLAYER:new(world, p)
   obj = {}
   setmetatable(obj, self)
   self.__index = self
@@ -41,8 +41,8 @@ return {
     PLAYER.imgSheet = img
   end,
 
-  newPlayer = function(x, y)
-    obj = PLAYER:new(x,y)
+  newPlayer = function(world, x, y)
+    obj = PLAYER:new(world, x,y)
     table.insert(PLAYERS, obj)
     return obj
   end,
