@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="goodly-2x.tsx"/>
+ <object gid="4" width="32" height="32">
+  <properties>
+   <property name="Pig" type="bool" value="true"/>
+   <property name="collidable" type="bool" value="true"/>
+  </properties>
+ </object>
+</template>
