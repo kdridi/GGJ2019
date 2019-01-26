@@ -6,14 +6,14 @@ function  PLAYER:new(world, p)
   setmetatable(obj, self)
   self.__index = self
 
-  p.height = 64
-  p.width = 64
+  p.height = 32*4
+  p.width = 32*4
   p.id = 0
 
   obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
   obj.body:setFixedRotation(true)
   obj.shape = love.physics.newRectangleShape(p.width, p.height)
-  obj.fix = love.physics.newFixture(obj.body, obj.shape, 0.10)
+  obj.fix = love.physics.newFixture(obj.body, obj.shape, 0.05)
 
   obj:setId(0)
 
@@ -45,16 +45,23 @@ function  PLAYER:findCloser(list)
   return closer, dmin
 end
 
-function  PLAYER:kick(pig)
-  local vx = pig.body:getX() - self.body:getX()
-  local vy = pig.body:getY() - self.body:getY()
-  pig.body:applyLinearImpulse(vx * 10, vy * 10)
+function  PLAYER:kick(pig, power)
+  if self.state == 0 then
+    local vx = pig.body:getX() - self.body:getX()
+    local vy = pig.body:getY() - self.body:getY()
+    local n = math.sqrt(vx * vx + vy * vy)
 
-  self.state = 1
-  self.time = 0.4
-  self:setId(1)
-  screen:setShake(20)
-  playFX('punch')
+    if not power then power = 2000 end
+    vx = vx / n
+    vy = vy / n
+    pig.body:applyLinearImpulse(vx * power, vy * power)
+
+    self.state = 1
+    self.time = 0.4
+    self:setId(1)
+    screen:setShake(20)
+    playFX('punch')
+  end
 end
 
 function  PLAYER:setId(id)
@@ -63,12 +70,12 @@ function  PLAYER:setId(id)
   self.id = id
   -- local idx = (self.id * 32) % w
   -- local idy = math.floor((self.id * 32) / w) * 32
-  if id == 0 then idx = 64*2
-  elseif id == 1 then idx = 64*2+128
-  else idx = 64*3 end
-  local idy = 64*2
+  if id == 0 then idx = 32*8
+  elseif id == 1 then idx = 32*4+128*2
+  else idx = 32*6 end
+  local idy = 32*8
 
-  self.squade = love.graphics.newQuad(idx, idy, 64, 64, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy, 32*4, 32*4, self.imgSheet:getDimensions())
 end
 
 function  PLAYER:draw()

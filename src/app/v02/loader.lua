@@ -55,13 +55,13 @@ function Map:initObj(world)
 
         if self:isCollidable(id) == true then
           body = love.physics.newBody(world, x + 16, y + 16)
-          shape = love.physics.newRectangleShape(32, 32)
+          shape = love.physics.newRectangleShape(64, 64)
           table.insert(self.phx.fix, love.physics.newFixture(body, shape))
         end
 
-        x = x + 32
+        x = x + 64
         if x >= self.width then
-          y = y + 32
+          y = y + 64
           x = 0
         end
       end
@@ -111,10 +111,11 @@ function Map:initGf()
 
   --GET IMAGE
   for i=1,#self.map.tilesets do
+    print("IMAGE")
     self.sheet[i] = {}
     self.sheet[i].img = love.graphics.newImage(self.map.tilesets[i].image)
     local w, h = self.sheet[i].img:getDimensions()
-    max = max + math.floor((w / 32) * (h / 32))
+    max = max + math.floor((w / 64) * (h / 64))
     self.sheet[i].idmax = max
   end
   --END
@@ -146,18 +147,19 @@ function Map:initGf()
             while id > self.sheet[i].idmax do
               max = self.sheet[i].idmax
               i = i + 1
+              print(i)
             end
             id = id - max
             local w, h = self.sheet[i].img:getDimensions()
-            local idx = (id * 32) % w
-            local idy = math.floor((id * 32) / w) * 32
-            local squade = love.graphics.newQuad(idx, idy, 32, 32, self.sheet[i].img:getDimensions())
+            local idx = (id * 64) % w
+            local idy = math.floor((id * 64) / w) * 64
+            local squade = love.graphics.newQuad(idx, idy, 64, 64, self.sheet[i].img:getDimensions())
 
             love.graphics.draw(self.sheet[i].img, squade, x, y)
           end
-          x = x + 32
+          x = x + 64
           if x >= self.width then
-            y = y + 32
+            y = y + 64
             x = 0
           end
         end

@@ -6,8 +6,8 @@ function  PIG:new(world, pig)
   setmetatable(obj, self)
   self.__index = self
 
-  pig.width = 32
-  pig.height = 32
+  pig.width = 32*2
+  pig.height = 32*2
 
   obj.body = love.physics.newBody(world, pig.x + pig.width / 2, pig.y + pig.height / 2, "dynamic")
   --obj.body = love.physics.newBody(world, pig.x , pig.y , "dynamic")
@@ -25,8 +25,8 @@ function  PIG:new(world, pig)
   obj.weed = nil
   obj.weedD = 0
 
-  obj.live = 1
 
+  obj.live = 1
   obj.panic = false
 
   obj.fix:setUserData(obj)
@@ -57,9 +57,11 @@ function  PIG:setId(id)
     idx = 32*8 + 32/2 + (64 * (id - 2))
     idy = 0 + 32/2
   end
+  idx = 32*4*3 + 32
+  idy = 0 + 32
 
   self.id = id
-  self.squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy, 32*2, 32*2, self.imgSheet:getDimensions())
 end
 
 function PIG:draw()
@@ -137,21 +139,22 @@ function PIG:update(dt)
         self:setId(self.id)
       end
     end
-  else
+  elseif self.time < 0 then
+
+    self.time = 0.1
     local vx = 32 - math.random(64)
     local vy = 32 - math.random(64)
     local n = math.sqrt(vx * vx + vy * vy)
     vx = vx / n
     vy = vy / n
 
-    self.body:applyLinearImpulse(vx*40, vy*40)
+    self.body:applyLinearImpulse(vx*100, vy*100)
   end -- PANIC
 
 
 
   --DEATH
   if self.live < 0 then
-    print("DEATH !!!")
     for idx, value in pairs(PIGS) do
       if value == self then
         value.fix:destroy()
