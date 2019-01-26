@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+set -e
+set -x
+
+cd "$(dirname $0)/../.."
+ROOTDIR="$(pwd)"
+cd - > /dev/null
+
+L2DVMAJ="11.2"
+L2DVMIN="${L2DVMAJ}.0"
+
+GAME="HouseOfPigs"
+
+package_win64() {
+	local L2DPLTF="$1"
+	local rdir="${ROOTDIR}/release/${L2DPLTF}"
+	rm -rf "${rdir}"
+
+	local vdir="love-${L2DVMIN}-${L2DPLTF}"
+	cat "${vdir}/love.exe" game.love > "${GAME}.exe"
+	rm -rf "${vdir}"/*.exe
+	rm -rf "${vdir}"/*.txt
+	mv "${GAME}.exe" "${vdir}/"
+	mv "${vdir}" "${rdir}"
+}
+
+package_macos() {
+	local L2DPLTF="$1"
+	local rdir="${ROOTDIR}/release/${L2DPLTF}"
+	rm -rf "${rdir}"
+
+	mv game.love "love.app/Contents/Resources/"
+	cp "${ROOTDIR}/other/Info.plist" "love.app/Contents/Info.plist"
+	mkdir "${rdir}"
+	mv "love.app" "${rdir}/${GAME}.app"
+}
+
+package() {
+	local version="$1"
+	if [[ "${version}" == "" ]]; then
+		echo "Please enter a version"
+		exit 84
+	fi
+
+	local vdir="${ROOTDIR}/src/app/${version}"
+	if [[ ! -d "${vdir}" ]]; then
+		echo "Please enter a valid version"
+		exit 84
+	fi
+
+	rm -rf "${vdir}.zip"
+	cd "${vdir}"
+	zip -9 -r "${vdir}.zip" .
+	rm -rf "${ROOTDIR}/release/tmp"
+	mkdir -p "${ROOTDIR}/release/tmp"
+	mv "${vdir}.zip" "${ROOTDIR}/release/tmp/game.love"
+	cd "${ROOTDIR}/release/tmp"
+
+	local target="$2"
+
+	echo "Packaging ${target} version"
+	mkdir -p "${ROOTDIR}/binaries"
+	if [[ ! -f "${ROOTDIR}/binaries/love-${L2DVMAJ}-${target}.zip" ]]; then
+		wget "https://bitbucket.org/rude/love/downloads/love-${L2DVMAJ}-${target}.zip" -O "${ROOTDIR}/binaries/love-${L2DVMAJ}-${target}.zip"
+	fi
+	unzip "${ROOTDIR}/binaries/love-${L2DVMAJ}-${target}.zip"
+
+	case "${target}" in
+		win64)
+			package_win64 "${target}"
+			;;
+		macos)
+			package_macos "${target}"
+			;;
+	esac
+	rm -rf "${ROOTDIR}/release/tmp"
+}
+
+package $1 win64
+package $1 macos
+
+cd "${ROOTDIR}"
+tar -cf tmp.tar .
+rm -rf tmp
+mkdir tmp
+tar -xf tmp.tar -C tmp
+rm -rf tmp.tar
+cd tmp
+rm -rf binaries .git* README.md tmp
+zip -9 -r "../archive.zip" *
+cd ..
+rm -rf tmp
