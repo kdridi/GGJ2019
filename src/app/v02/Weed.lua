@@ -1,7 +1,7 @@
-PLAYER = {}
-PLAYERS = {}
+WEED = {}
+WEEDS = {}
 
-function  PLAYER:new(p)
+function  WEED:new(p)
   obj = {}
   setmetatable(obj, self)
   self.__index = self
@@ -22,34 +22,7 @@ function  PLAYER:new(p)
   return (obj)
 end
 
-function  PLAYER:findCloser(list)
-  closer = nil
-  dmin = 0
-
-  list.foreach(function(v)
-    if not closer then
-      closer = v
-      dmin = v:distanceFrom(player.body:getX(), player.body:getY())
-    else
-      d = v:distanceFrom(player.body:getX(), player.body:getY())
-      if d < dmin then
-        dmin = d
-        closer = v
-      end
-    end --closer
-  end)
-
-  return closer, dmin
-end
-
-function  PLAYER:kick(pig)
-  local vx = pig.body:getX() - self.body:getX()
-  local vy = pig.body:getY() - self.body:getY()
-  pig.body:applyLinearImpulse(vx * 10, vy * 10)
-  screen:setShake(20)
-end
-
-function  PLAYER:setId(id)
+function  WEED:setId(id)
   w, h = self.imgSheet:getDimensions()
   self.id = id - 1
   -- local idx = (self.id * 32) % w
@@ -61,7 +34,7 @@ function  PLAYER:setId(id)
   self.squade = love.graphics.newQuad(idx, idy, 120, 120, self.imgSheet:getDimensions())
 end
 
-function  PLAYER:draw()
+function  WEED:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
@@ -71,18 +44,18 @@ end
 
 return {
   setImgSheet = function(img)
-    PLAYER.imgSheet = img
+    WEED.imgSheet = img
   end,
 
   newPlayer = function(x, y)
-    obj = PLAYER:new(x,y)
-    table.insert(PLAYERS, obj)
+    obj = WEED:new(x,y)
+    table.insert(WEEDS, obj)
     return obj
   end,
 
   foreach = function(f)
     t_c = {}
-    for i, v in pairs(PLAYERS) do
+    for i, v in pairs(WEEDS) do
       table.insert(t_c, v)
     end
     for i, v in pairs(t_c) do
@@ -91,9 +64,9 @@ return {
   end,
 
   del = function(v)
-    for idx, value in pairs(PLAYERS) do
+    for idx, value in pairs(WEEDS) do
       if value == v then
-        table.remove(PLAYERS, idx)
+        table.remove(WEEDS, idx)
         v.fix:destroy()
         return
       end
@@ -101,7 +74,7 @@ return {
   end,
 
   all = function()
-    return ipair(PLAYERS)
+    return ipair(WEEDS)
   end
 
 }

@@ -7,7 +7,7 @@ Pig = require "Pig"
 Player = require "Player"
 inspect = require "vendor/inspect"
 Camera = require "camera"
-local screen = require "vendor/shack/shack"
+screen = require "vendor/shack/shack"
 
 player = {}
 world = {}
@@ -30,11 +30,13 @@ function objCreation(obj)
     body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
     shape = love.physics.newRectangleShape(obj.width, obj.height)
     fix = love.physics.newFixture(body, shape, 20)
+    fix:setRestitution(0.9)
   end
 
   if obj.properties.Home then
     --fix:setSensor(true)
     fix:setUserData({type="Home"})
+    fix:setRestitution(0.0)
   end
 end
 
@@ -84,29 +86,12 @@ function love.update(dt)
   camera:update(dt)
 
   if love.keyboard.isDown("x") then --PUSH
-    closer = nil
-    dmin = 0
 
-    Pig.foreach(function(pig)
-      if not closer then
-        closer = pig
-        dmin = pig:distanceFrom(player.body:getX(), player.body:getY())
-      else
-        d = pig:distanceFrom(player.body:getX(), player.body:getY())
-        if d < dmin then
-          dmin = d
-          closer = pig
-        end
-      end --closer
-    end)
-
-    if dmin < 120 * 1.2 and closer then
-      local vx = closer.body:getX() - player.body:getX()
-      local vy = closer.body:getY() - player.body:getY()
-      closer.body:applyLinearImpulse(vx * 10, vy * 10)
-      screen:setShake(20)
+    local pig, d = player:findCloser(Pig)
+    if pig and d < 120 then
+      player:kick(pig)
     end
-
+    
   end --END
 
   screen:update(dt)

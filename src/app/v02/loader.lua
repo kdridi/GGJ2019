@@ -48,7 +48,6 @@ function Map:initObj(world)
     local layer = (self.map.layers)
     local x = 0
     local y = 0
-    print(layer[ia].name)
 
     if layer[ia].type == 'tilelayer' then
       for ib = 1, #layer[ia].data do
@@ -73,7 +72,6 @@ function Map:initObj(world)
         if self.objCreateF then --IF CALLBACK
           self.objCreateF(obj)
         else --DEFAULT
-          print(obj.properties.Pig)
           if obj.properties.Pig == true then
             body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2, "dynamic")
           else
@@ -102,7 +100,6 @@ function  Map:draw(idx)
   love.graphics.draw(self.canvas[idx])
   --  love.graphics.draw(self.imgSheet)
 
-  love.graphics.print("toto", 250, 250)
 end
 
 
@@ -119,8 +116,6 @@ function Map:initGf()
     local w, h = self.sheet[i].img:getDimensions()
     max = max + math.floor((w / 32) * (h / 32))
     self.sheet[i].idmax = max
-
-    print("NEW IMAGE")
   end
   --END
 
@@ -156,10 +151,6 @@ function Map:initGf()
             local w, h = self.sheet[i].img:getDimensions()
             local idx = (id * 32) % w
             local idy = math.floor((id * 32) / w) * 32
-            if i > 1 then
-              print("ID : "..id.." W :"..w)
-              print(idx.." "..idy)
-            end
             local squade = love.graphics.newQuad(idx, idy, 32, 32, self.sheet[i].img:getDimensions())
 
             love.graphics.draw(self.sheet[i].img, squade, x, y)
