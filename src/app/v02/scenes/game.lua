@@ -33,8 +33,10 @@ function game:init()
        b:getUserData() and b:getUserData().type then
       if a:getUserData().type == "Pig" and b:getUserData().type == "Home" then
         Pig.del(a:getUserData())
+        print("DEATH !!!")
       elseif b:getUserData().type == "Pig" and a:getUserData().type == "Home" then
         Pig.del(b:getUserData())
+        print("DEATH !!!")
       end
     end
   end, nil, nil, nil)

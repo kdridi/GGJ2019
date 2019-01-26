@@ -27,6 +27,8 @@ function  PIG:new(world, pig)
 
   obj.live = 1
 
+  obj.panic = true
+
   obj.fix:setUserData(obj)
   return (obj)
 end
@@ -77,10 +79,10 @@ function  PIG:findCloser(list)
   dmin = 0
 
   list.foreach(function(v)
-    if not closer then
+    if not closer and v.state == 2 then
       closer = v
       dmin = v:distanceFrom(self.body:getX(), self.body:getY())
-    else
+    elseif v.state == 2 then
       d = v:distanceFrom(self.body:getX(), self.body:getY())
       if d < dmin then
         dmin = d
@@ -95,47 +97,61 @@ end
 
 function PIG:update(dt)
   self.time = self.time - dt
-  self.checkTime = self.checkTime - dt
-  self.live = self.live - dt * 0.10
 
-  --NEED TO FIND CLOSER
-  if self.checkTime < 0 then
-    self.weed, self.weedD = self:findCloser(Weed)
-    self.checkTime = 0.5
-  end
-  --END
+  if self.panic == false then
+    self.checkTime = self.checkTime - dt
+    self.live = self.live - dt * 0.025
 
-  --GO TO CLOSER
-  if self.weed and self.weedD > 40 then
-    local vx = self.weed.body:getX() - self.body:getX() + (32 - math.random(64))
-    local vy = self.weed.body:getY() - self.body:getY() + (32 - math.random(64))
+    --NEED TO FIND CLOSER
+    if self.checkTime < 0 then
+      self.weed, self.weedD = self:findCloser(Weed)
+      self.checkTime = 0.5
+    end
+    --END
+
+    --GO TO CLOSER
+    if self.weed and self.weedD > 40 then
+      local vx = self.weed.body:getX() - self.body:getX() + (32 - math.random(64))
+      local vy = self.weed.body:getY() - self.body:getY() + (32 - math.random(64))
+      local n = math.sqrt(vx * vx + vy * vy)
+
+      vx = vx / n
+      vy = vy / n
+
+      self.body:applyLinearImpulse(vx*4, vy*4)
+    elseif self.weed then
+      self.weed.live = self.weed.live - dt * 0.05
+      self.live = self.live + dt * 0.3
+      if self.live > 1 then self.live = 1 end
+    end
+    --END
+
+    if self.time < 0 then
+      self.id = (self.id + 1) % 2
+      self.time = 0.2 + math.rad(1)
+      if self.weed and self.weedD > 40 then
+        self:setId(self.id)
+      elseif self.weed then
+        self:setId(self.id + 2)
+      else
+        self:setId(self.id)
+      end
+    end
+  else
+    local vx = 32 - math.random(64)
+    local vy = 32 - math.random(64)
     local n = math.sqrt(vx * vx + vy * vy)
-
     vx = vx / n
     vy = vy / n
 
-    self.body:applyLinearImpulse(vx*4, vy*4)
-  elseif self.weed then
-    self.weed.live = self.weed.live - 0.005
-    self.live = self.live + dt * 0.20
-  end
-  --END
+    self.body:applyLinearImpulse(vx*40, vy*40)
+  end -- PANIC
 
-  if self.time < 0 then
-    self.id = (self.id + 1) % 2
-    self.time = 0.2 + math.rad(1)
-    if self.weed and self.weedD > 40 then
-      self:setId(self.id)
-    elseif self.weed then
-      self:setId(self.id + 2)
-    else
-      self:setId(self.id)
-    end
-  end
 
 
   --DEATH
   if self.live < 0 then
+    print("DEATH !!!")
     for idx, value in pairs(PIGS) do
       if value == self then
         value.fix:destroy()
