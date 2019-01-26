@@ -18,6 +18,14 @@ local background_ambiance_01 = love.audio.newSource("asset/sounds/background_amb
 background_ambiance_01:setLooping(true)
 background_ambiance_01:setPitch(1.0)
 
+local fx_kiss_01 = love.audio.newSource("asset/sounds/fx_kiss_01.mp3", "static")
+fx_kiss_01:setLooping(false)
+fx_kiss_01:setPitch(1.0)
+
+local fx_kiss_02 = love.audio.newSource("asset/sounds/fx_kiss_02.mp3", "static")
+fx_kiss_02:setLooping(false)
+fx_kiss_02:setPitch(1.0)
+
 return {
   menuEnter = function()
     print('menuEnter')
@@ -80,6 +88,9 @@ return {
       fx_punch_01:play()
       fx_pig_03:setPitch(1 + love.math.random())
       fx_pig_03:play()
+    elseif name == 'kiss' then
+      fx_kiss_01:setPitch(1 + love.math.random())
+      fx_kiss_01:play()
     end
   end,
 }
