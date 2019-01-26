@@ -1,6 +1,5 @@
 game = Gamestate.new()
 
-
 map = {}
 
 --sti = require "STI/sti"
@@ -8,13 +7,15 @@ loader = require "../loader"
 data = require "../map"
 Pig = require "../Pig"
 Player = require "../Player"
+Weed = require "../Weed"
 inspect = require "../vendor/inspect"
 Camera = require "../camera"
-local screen = require "../vendor/shack/shack"
+screen = require "../vendor/shack/shack"
 
-local player = {}
+player = {}
 local world = {}
 local map = {}
+local home = {}
 
 local MAPW = 50
 local MAPH = 40
@@ -30,12 +31,8 @@ function game:init()
   world:setCallbacks(function(a, b, coll)
     if a:getUserData() and a:getUserData().type and
        b:getUserData() and b:getUserData().type then
-      print("a : "..a:getUserData().type)
-      print("b : "..b:getUserData().type)
-
       if a:getUserData().type == "Pig" and b:getUserData().type == "Home" then
         Pig.del(a:getUserData())
-        print("DELETE")
       end
     end
   end, nil, nil, nil)
@@ -51,24 +48,32 @@ function game:enter(previous)
     if obj.properties.Pig == true then
       pig = Pig.newPig(world, obj)
     elseif obj.properties.Player == true then
-      print("PLAYER")
       player = Player.newPlayer(world, obj)
+    elseif obj.properties.Weed == true then
+      weed = Weed.newWeed(world, obj)
     elseif obj.properties.collidable == true then --DEFAULT COLLIDER
       body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
       shape = love.physics.newRectangleShape(obj.width, obj.height)
       fix = love.physics.newFixture(body, shape, 20)
+      fix:setRestitution(0.9)
     end
 
     if obj.properties.Home then
+      home.body = body
+      home.shape = shape
+      home.fix = fix
       --fix:setSensor(true)
       fix:setUserData({type="Home"})
+      fix:setRestitution(0.0)
     end
   end
   --end
 
   --init OBJ
-  Pig.setImgSheet(map.imgSheet)
-  Player.setImgSheet(map.imgSheet)
+  local sheet = love.graphics.newImage("asset/houseofpigs.png")
+  Pig.setImgSheet(sheet)
+  Weed.setImgSheet(sheet)
+  Player.setImgSheet(sheet)
   map:initObj(world)
   --end
 
@@ -79,7 +84,6 @@ end
 function game:update(dt)
   world:update(dt)
 
-  print(dt)
   if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
     player.body:applyLinearImpulse(10, 0)
   end
@@ -97,32 +101,22 @@ function game:update(dt)
   camera:update(dt)
 
   if love.keyboard.isDown("x") then --PUSH
-    closer = nil
-    dmin = 0
 
-    Pig.foreach(function(pig)
-      if not closer then
-        closer = pig
-        dmin = pig:distanceFrom(player.body:getX(), player.body:getY())
-      else
-        d = pig:distanceFrom(player.body:getX(), player.body:getY())
-        if d < dmin then
-          dmin = d
-          closer = pig
-        end
-      end --closer
-    end)
-
-    if dmin < 50 and closer then
-      local vx = closer.body:getX() - player.body:getX()
-      local vy = closer.body:getY() - player.body:getY()
-      closer.body:applyLinearImpulse(vx * 100, vy * 100)
-      screen:setShake(20)
+    local pig, d = player:findCloser(Pig)
+    if pig and d < 120 then
+      player:kick(pig)
     end
-    
+
   end --END
 
+  if love.keyboard.isDown("a") then
+    Pig.clear()
+  end
+
   screen:update(dt)
+
+  Weed.foreach(function(w) w:update(dt) end)
+
 
   for _, body in pairs(world:getBodies()) do
     vx, vy = body:getLinearVelocity()
@@ -150,14 +144,10 @@ function game:draw()
     love.graphics.setColor(255, 255, 255)
     Pig.foreach(function(pig) pig:draw() end)
 
+    Weed.foreach(function(w) w:draw() end)
     map:draw(3)
     love.graphics.setColor(255, 255, 255)
   end)
 end
 
-
-
-
-
 return game
-

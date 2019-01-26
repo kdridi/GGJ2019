@@ -6,11 +6,13 @@ function  PIG:new(world, pig)
   setmetatable(obj, self)
   self.__index = self
 
+  pig.width = 32
+  pig.height = 32
+
   obj.body = love.physics.newBody(world, pig.x + pig.width / 2, pig.y + pig.height / 2, "dynamic")
   obj.shape = love.physics.newRectangleShape(pig.width, pig.height)
-  obj.fix = love.physics.newFixture(obj.body, obj.shape, 20)
+  obj.fix = love.physics.newFixture(obj.body, obj.shape, 2)
 
-  print("OBJ : "..pig.gid)
   obj:setId(pig.gid)
 
   obj.type = "Pig"
@@ -33,8 +35,10 @@ end
 function  PIG:setId(id)
   w, h = self.imgSheet:getDimensions()
   self.id = id - 1
-  local idx = (self.id * 32) % w
-  local idy = math.floor((self.id * 32) / w) * 32
+  -- local idx = (self.id * 32) % w
+  -- local idy = math.floor((self.id * 32) / w) * 32
+  local idx = 64 + 32/2
+  local idy = 0 + 32/2
 
   self.id = id
   self.squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
@@ -87,5 +91,27 @@ return {
       PIGS[1].fix:destroy()
       table.remove(PIGS, 1)
     end
+  end,
+
+  deploy = function(nb)
+    tab = {}
+
+    Weed.foreach(function(v)
+      d = v:distanceFrom(home.body:getX(), home.body:getY())
+      table.insert(tab, {obj=pig, d=d})
+    end)
+
+    table.sort(tab, function (k1, k2) return k1.d < k2.d end)
+
+    print(#tab)
+    print("BEGIN")
+    for i=1,#tab do
+      print(tab[i].d)
+    end
+    print("END")
+
+    -- for i=1,nb do
+    --   Pig.newPig({x=tab.obj.body:getX(), y=tab.obj.body:getY()})
+    -- end
   end
 }
