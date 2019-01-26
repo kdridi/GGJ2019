@@ -34,6 +34,7 @@ end
 return {
   initialize = function()
     love.window.setMode(1280, 720)
+    --love.window.setFullscreen(true)
   
     Gamestate.registerEvents()
     audio.menuEnter()
