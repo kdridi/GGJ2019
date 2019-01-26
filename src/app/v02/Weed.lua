@@ -1,6 +1,8 @@
 WEED = {}
 WEEDS = {}
 
+local waitT = 2
+
 function  WEED:new(world, p)
   obj = {}
   setmetatable(obj, self)
@@ -9,7 +11,7 @@ function  WEED:new(world, p)
   p.width = 32
   p.height = 15
   if not p.state then
-    p.state = 0
+    p.state = 2
   end
 
   obj.state = p.state
@@ -22,7 +24,7 @@ function  WEED:new(world, p)
   obj.type = "Weed"
   obj.fix:setUserData(obj)
 
-  obj.time = 1
+  obj.time = waitT
   obj.live = 1
   return (obj)
 end
@@ -53,7 +55,7 @@ function WEED:update(dt)
     self.time = self.time - dt
     if self.time < 0 then
       self.state = self.state + 1
-      self.time = 1
+      self.time = waitT
       self:setId(self.state)
     end
   end
@@ -122,5 +124,4 @@ return {
   all = function()
     return ipair(WEEDS)
   end
-
 }

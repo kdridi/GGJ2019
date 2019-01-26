@@ -28,7 +28,7 @@ local context = {}
 function scene:init()
   screen:setDimensions(love.graphics.getWidth(), love.graphics.getHeight())
 
-  love.physics.setMeter(32)
+  love.physics.setMeter(64)
   world = love.physics.newWorld(0, 0, true)
   world:setCallbacks(function(a, b, coll)
     if a:getUserData() and a:getUserData().type and
@@ -47,7 +47,7 @@ end
 function scene:enter(previous, dayCount)
   context.dayCount = dayCount
   context.time = 0
-  
+
   Player.del(player)
   Pig.clear()
   Weed.clear()
@@ -84,7 +84,7 @@ function scene:enter(previous, dayCount)
   --end
 
   --init OBJ
-  local sheet = love.graphics.newImage("asset/houseofpigs.png")
+  local sheet = love.graphics.newImage("asset/test.png")
   Pig.setImgSheet(sheet)
   Weed.setImgSheet(sheet)
   Player.setImgSheet(sheet)
@@ -93,7 +93,7 @@ function scene:enter(previous, dayCount)
 
   Pig.deploy(3)
   --camera
-  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
+  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, true)
 end
 
 function scene:update(dt)
@@ -156,7 +156,7 @@ function scene:update(dt)
       Director.pause()
     end
   end
-  
+
   if Pig.count() == 0 then
     return Director.enterNextDay()
   end

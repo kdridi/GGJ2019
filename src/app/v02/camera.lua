@@ -23,8 +23,8 @@ function CAMERA:draw(world, f)
   love.graphics.translate(love.graphics.getWidth() / 2 - self.x, love.graphics.getHeight() / 2 - self.y)
   f()
   if (self.debug) then
-    love.graphics.rectangle("line", self.x - self.w / 2, self.y - self.h / 2, self.w, self.h)
-  
+    --love.graphics.rectangle("line", self.x - self.w / 2, self.y - self.h / 2, self.w, self.h)
+
     --DRAW PHYSICS
     for _, body in pairs(world:getBodies()) do
       for _, fixture in pairs(body:getFixtures()) do
