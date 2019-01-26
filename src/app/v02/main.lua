@@ -53,20 +53,11 @@ function love.load()
   --end
 
   --init OBJ
-  Pig.setImgSheet(map.imgSheet)
-  Player.setImgSheet(map.imgSheet)
+  local sheet = love.graphics.newImage("asset/sheet.png")
+  Pig.setImgSheet(sheet)
+  Player.setImgSheet(sheet)
   map:initObj(world)
   --end
-
-  --player
-  -- ball.body = love.physics.newBody(world, 20*32/2, 30*32/2, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
-  -- ball.body:setFixedRotation(true)
-  -- ball.shape = love.physics.newRectangleShape(32, 32)
-  -- ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1) -- Attach fixture to body and give it a density of 1.
-  -- ball.fixture:setUserData({type="Player"})
-  --end
-
-  --PART
 
   --camera
   camera = Camera.newCamera(200, 200, player, MAPS, MAPS, true)
@@ -109,10 +100,10 @@ function love.update(dt)
       end --closer
     end)
 
-    if dmin < 50 and closer then
+    if dmin < 120 * 1.2 and closer then
       local vx = closer.body:getX() - player.body:getX()
       local vy = closer.body:getY() - player.body:getY()
-      closer.body:applyLinearImpulse(vx * 100, vy * 100)
+      closer.body:applyLinearImpulse(vx * 10, vy * 10)
     end
   end --END
 
