@@ -12,6 +12,7 @@ local pause = require 'scenes/pause'
 local menu = require 'scenes/menu'
 local game = require 'scenes/game'
 local day = require 'scenes/day'
+local intro = require 'scenes/intro'
 
 local audio = require('audio')
 
@@ -24,17 +25,13 @@ local dayCount
 function start(dc, replace)
   audio.dayEnter(dc, replace)
   dayCount = dc
-  if (replace) then
-    Gamestate.switch(day, dayCount)
-  else
-    Gamestate.push(day, dayCount)
-  end
+  Gamestate.switch(day, dayCount)
 end
 
 return {
   initialize = function()
-    love.window.setMode(1280, 720)
-    --love.window.setFullscreen(true)
+    love.window.setMode(1920, 1080)
+    love.window.setFullscreen(true)
   
     Gamestate.registerEvents()
     audio.menuEnter()
@@ -51,7 +48,10 @@ return {
   startJourney = function()
     if Gamestate.current() == menu then
       audio.menuLeave()
-      start(1, false)
+      audio.introEnter()
+      Gamestate.push(intro)
+    elseif Gamestate.current() == intro then
+      Director.enterNextDay()
     end
   end,
 
@@ -76,7 +76,12 @@ return {
   end,
   
   enterNextDay = function()
-    audio.gameLeave()
-    start(dayCount + 1, true)
+    if Gamestate.current() == intro then
+      audio.introLeave()
+      start(1)
+    elseif Gamestate.current() == game then
+      audio.gameLeave()
+      start(dayCount + 1)
+    end
   end
 }

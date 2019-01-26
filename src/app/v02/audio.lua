@@ -27,6 +27,14 @@ return {
     print('menuLeave')
   end,
 
+  introEnter = function()
+    print('introEnter')
+  end,
+
+  introLeave = function()
+    print('introLeave')
+  end,
+
   dayEnter = function(dayCount, replace)
     print('dayEnter')
     fx_pig_02:setVolume(1.0)
