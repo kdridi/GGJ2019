@@ -25,6 +25,8 @@ function  PIG:new(world, pig)
   obj.weed = nil
   obj.weedD = 0
 
+  obj.live = 1
+
   obj.fix:setUserData(obj)
   return (obj)
 end
@@ -65,6 +67,8 @@ function PIG:draw()
 
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
+
+  love.graphics.setColor(self.live, self.live, self.live)
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
 end
 
@@ -92,6 +96,7 @@ end
 function PIG:update(dt)
   self.time = self.time - dt
   self.checkTime = self.checkTime - dt
+  self.live = self.live - dt * 0.10
 
   --NEED TO FIND CLOSER
   if self.checkTime < 0 then
@@ -111,6 +116,7 @@ function PIG:update(dt)
     self.body:applyLinearImpulse(vx*4, vy*4)
   elseif self.weed then
     self.weed.live = self.weed.live - 0.005
+    self.live = self.live + dt * 0.20
   end
   --END
 
@@ -119,10 +125,24 @@ function PIG:update(dt)
     self.time = 0.2 + math.rad(1)
     if self.weed and self.weedD > 40 then
       self:setId(self.id)
-    else
+    elseif self.weed then
       self:setId(self.id + 2)
+    else
+      self:setId(self.id)
     end
   end
+
+
+  --DEATH
+  if self.live < 0 then
+    for idx, value in pairs(PIGS) do
+      if value == self then
+        value.fix:destroy()
+        table.remove(PIGS, idx)
+        return
+      end
+    end--FOR
+  end--IF
 
 end
 

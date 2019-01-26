@@ -43,6 +43,7 @@ end
 function game:enter(previous)
   Player.del(player)
   Pig.clear()
+  Weed.clear()
 
   --init map
   map = loader.loadFromLua(data)
@@ -83,7 +84,7 @@ function game:enter(previous)
   map:initObj(world)
   --end
 
-  Pig.deploy(20)
+  Pig.deploy(3)
   --camera
   camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
 end
@@ -118,8 +119,12 @@ function game:update(dt)
 
   if love.keyboard.isDown("a") then
     Pig.clear()
+    Weed.clear()
   end
 
+  if love.keyboard.isDown("s") then
+    weed = Weed.newWeed(world, {x=player.body:getX(), y=player.body:getY()})
+  end
   screen:update(dt)
 
   Weed.foreach(function(w) w:update(dt) end)

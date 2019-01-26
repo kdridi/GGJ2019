@@ -10,7 +10,7 @@ function  WEED:new(world, p)
   p.height = 15
   print(p.state)
   if not p.state then
-    p.state = 2
+    p.state = 0
   end
 
   obj.state = p.state
@@ -61,6 +61,7 @@ function WEED:update(dt)
     end
   end
 
+  --DEATH
   if self.live < 0 then
     for idx, value in pairs(WEEDS) do
       if value == self then
@@ -111,6 +112,13 @@ return {
         v.fix:destroy()
         return
       end
+    end
+  end,
+
+  clear = function()
+    while #WEEDS >= 1 do
+      WEEDS[1].fix:destroy()
+      table.remove(WEEDS, 1)
     end
   end,
 
