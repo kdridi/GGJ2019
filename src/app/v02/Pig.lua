@@ -13,7 +13,7 @@ function  PIG:new(world, pig)
   obj.shape = love.physics.newRectangleShape(pig.width, pig.height)
   obj.fix = love.physics.newFixture(obj.body, obj.shape, 2)
 
-  obj:setId(pig.gid)
+  obj:setId(0)
 
   obj.type = "Pig"
   obj.fix:setUserData(obj)
@@ -98,7 +98,7 @@ return {
 
     Weed.foreach(function(v)
       d = v:distanceFrom(home.body:getX(), home.body:getY())
-      table.insert(tab, {obj=pig, d=d})
+      table.insert(tab, {obj=v, d=d})
     end)
 
     table.sort(tab, function (k1, k2) return k1.d < k2.d end)
@@ -106,12 +106,12 @@ return {
     print(#tab)
     print("BEGIN")
     for i=1,#tab do
-      print(tab[i].d)
+      print(tab[i].d.." "..tab[i].obj.type)
     end
     print("END")
 
-    -- for i=1,nb do
-    --   Pig.newPig({x=tab.obj.body:getX(), y=tab.obj.body:getY()})
-    -- end
+    for i=1,nb do
+      Pig.newPig({x=tab[i].obj.body:getX(), y=tab[i].obj.body:getY(), id=0})
+    end
   end
 }
