@@ -1,7 +1,7 @@
 return {
   version = "1.2",
   luaversion = "5.1",
-  tiledversion = "1.2.1",
+  tiledversion = "2018.12.22",
   orientation = "orthogonal",
   renderorder = "right-down",
   width = 50,
@@ -637,6 +637,7 @@ return {
           gid = 1,
           visible = true,
           properties = {
+            ["State"] = 2,
             ["Weed"] = true
           }
         }
