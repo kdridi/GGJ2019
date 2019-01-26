@@ -47,6 +47,7 @@ function  PLAYER:kick(pig)
   local vy = pig.body:getY() - self.body:getY()
   pig.body:applyLinearImpulse(vx * 10, vy * 10)
   screen:setShake(20)
+  playFX('punch')
 end
 
 function  PLAYER:setId(id)

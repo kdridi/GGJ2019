@@ -1,4 +1,4 @@
-game = Gamestate.new()
+local scene = newScene()
 
 map = {}
 
@@ -23,11 +23,9 @@ local MAPW = 50
 local MAPH = 40
 local MAPS = 32
 
-local camera = {}
+local context = {}
 
-local dayCount
-
-function game:init()
+function scene:init()
   screen:setDimensions(love.graphics.getWidth(), love.graphics.getHeight())
 
   love.physics.setMeter(32)
@@ -42,8 +40,10 @@ function game:init()
   end, nil, nil, nil)
 end
 
-function game:enter(previous, dc)
-  dayCount = dc
+function scene:enter(previous, dayCount)
+  context.dayCount = dayCount
+  context.time = 0
+  
   Player.del(player)
   Pig.clear()
 
@@ -83,10 +83,10 @@ function game:enter(previous, dc)
   --end
 
   --camera
-  camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
+  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
 end
 
-function game:update(dt)
+function scene:update(dt)
   world:update(dt)
 
   if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
@@ -103,7 +103,7 @@ function game:update(dt)
   end
 
   -- UPDATE CAMERA BOX POSITION
-  camera:update(dt)
+  context.camera:update(dt)
 
   if love.keyboard.isDown("x") then --PUSH
 
@@ -132,23 +132,18 @@ function game:update(dt)
 
   if true then
     local bw, bh, g, w, h = 60, 60, 10, love.graphics.getWidth(), love.graphics.getHeight()
-    if suit.Button("[||]", 1 * w - bw - g, 0 * h + g, bw, bh).hit then
-      Gamestate.push(pause)
+    setFontSize(12)
+    if suit.Button("pause", 1 * w - bw - g, 0 * h + g, bw, bh).hit then
+      Director.pause()
     end
   end
   
   if Pig.count() == 0 then
-    return Gamestate.switch(day, dayCount + 1) -- return to previous state
+    return Director.enterNextDay()
   end
 end
 
-function game:keypressed(key)
-  if key == 'w' then
-    return Gamestate.switch(day, dayCount + 1) -- return to previous state
-  end
-end
-
-function game:draw()
+function scene:draw()
   -- DRAW CAMERA BOX
   camera:draw(world, function()
     screen:apply()
@@ -173,4 +168,4 @@ function game:draw()
   suit.draw()
 end
 
-return game
+return scene

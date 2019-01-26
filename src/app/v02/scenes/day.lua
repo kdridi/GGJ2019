@@ -1,31 +1,30 @@
-day = Gamestate.new()
+local scene = newScene()
+local suit = require('../vendor/suit')
+local context = {}
 
-local time
-local dayCount
-local font
-
-function day:enter(previous, dc)
-  dayCount = dc
-  time = 0
-  font = love.graphics.newFont("Quite Magical - TTF.ttf", 154)
+function scene:enter(previous, dayCount)
+  context.dayCount = dayCount
+  context.time = 0
 end
 
-function day:update(dt)
-  time = time + dt
+function scene:update(dt)
+  if true then
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    local bw, bh = w, 60
+    
+    setFontSize(96)
+    suit.Label(string.format("Day %02d", context.dayCount), 0, 2 * (h - bh) / 4, w, bh)
+  end
   
-  if time > 1 then
-    Gamestate.switch(game, dayCount)
+  context.time = context.time + dt
+  
+  if context.time > 2 then
+    Director.enterGame()
   end
 end
 
-function day:draw()
-  local w, h = love.graphics.getWidth(), love.graphics.getHeight()
-  
-  love.graphics.setColor(0,0,0,1)
-  love.graphics.rectangle('fill', 0,0, w, h)
-  love.graphics.setColor(1,1,1,1)
-  love.graphics.setFont(font)
-  love.graphics.printf(string.format("Day %02d", dayCount), 0, 2*h/4, w, 'center')
+function scene:draw()
+  suit.draw()
 end
 
-return day
+return scene

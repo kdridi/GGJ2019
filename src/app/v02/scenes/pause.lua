@@ -1,25 +1,22 @@
-pause = Gamestate.new()
+local scene = newScene()
+local suit = require('../vendor/suit')
 
-function pause:enter(from)
+function scene:enter(from)
   self.from = from -- record previous state
 end
 
-function pause:draw()
-  local w, h = love.graphics.getWidth(), love.graphics.getHeight()
-  -- draw previous screen
-  self.from:draw()
-
-  -- overlay with pause message
-  love.graphics.setColor(0,0,0,0.7)
-  love.graphics.rectangle('fill', 0,0, w, h)
-  love.graphics.setColor(1,1,1,1)
-  love.graphics.printf('PAUSE', 0, h/2, w, 'center')
-end
-
-function pause:keypressed(key)
-  if key == 'p' then
-    return Gamestate.pop() -- return to previous state
+function scene:update(dt)
+  if true then
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    local bw, bh = w, 60
+    
+    setFontSize(96)
+    suit.Label("Pause", 0, 2 * (h - bh) / 4, w, bh)
   end
 end
 
-return pause
+function scene:draw()
+  suit.draw()
+end
+
+return scene

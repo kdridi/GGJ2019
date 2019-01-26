@@ -1,37 +1,16 @@
-Gamestate = require 'vendor/hump/gamestate'
-
-pause = require 'scenes/pause'
-menu = require 'scenes/menu'
-game = require 'scenes/game'
-day = require 'scenes/day'
+Director = require('director')
 
 function love.load()
-  love.window.setMode(1280, 720)
-  
-  Gamestate.registerEvents()
-  Gamestate.switch(menu)
+  Director.initialize()
 end
 
 function love.keypressed(key)
-  if key == "escape" then
-    love.event.push("quit")
-  end
-
-  if Gamestate.current() == game and Gamestate.current() ~= pause and key == 'p' then
-    Gamestate.push(pause)
-  end
-
-  if Gamestate.current() == menu and key == 'return' then
-    Gamestate.push(day, 1)
-  end
-
-  if Gamestate.current() == game and key == 'q' then
-    Gamestate.pop()
-  end
-
-  if Gamestate.current() == game and key == 'r' then
-    Gamestate.pop()
-    Gamestate.push(day, 1)
+  if key == 'p' then
+    Director.pause()
+  elseif key == 'return' then
+    Director.startJourney()
+  elseif key == 'escape' then
+    Director.leaveJourney()
   end
 end
 

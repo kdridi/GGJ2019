@@ -1,28 +1,28 @@
-menu = Gamestate.new()
-
+local scene = newScene()
 local suit = require('../vendor/suit')
 
-function menu:update(dt)
-  -- Put a button on the screen. If hit, show a message.
+function scene:update(dt)
   if true then
-    local bw, bh, w, h = 300, 60, love.graphics.getWidth(), love.graphics.getHeight()
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    local bw, bh = w, 60
+    
+    setFontSize(96)
+    suit.Label("House Of Pigs", 0, 1 * (h - bh) / 4, w, bh)
+  end
+  
+  if true then
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    local bw, bh = 300, 60
+    
+    setFontSize(36)
     if suit.Button("Play!", (w - bw) / 2, 3 * (h - bh) / 4, bw, bh).hit then
-      Gamestate.push(game)
+      Director.startJourney()
     end
   end
 end
 
-function menu:draw()
-  if false then
-    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
-    love.graphics.setColor(0,0,0, 100)
-    love.graphics.rectangle('fill', 0,0, w, h)
-    love.graphics.setColor(255,255,255)
-    love.graphics.printf('House Of Pigs', 0, 1*h/4, w, 'center')
-    love.graphics.printf('[PRESS ENTER]', 0, 3*h/4, w, 'center')
-  end
-
+function scene:draw()
   suit.draw()
 end
 
-return menu
+return scene
