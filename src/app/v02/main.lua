@@ -25,7 +25,6 @@ function objCreation(obj)
   if obj.properties.Pig == true then
     pig = Pig.newPig(obj)
   elseif obj.properties.Player == true then
-    print("PLAYER")
     player = Player.newPlayer(obj)
   elseif obj.properties.collidable == true then --DEFAULT COLLIDER
     body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
@@ -68,7 +67,6 @@ end
 function love.update(dt)
   world:update(dt)
 
-  print(dt)
   if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
     player.body:applyLinearImpulse(10, 0)
   end
@@ -169,12 +167,9 @@ function beginContact(a, b, coll)
 
   if a:getUserData() and a:getUserData().type and
      b:getUserData() and b:getUserData().type then
-    print("a : "..a:getUserData().type)
-    print("b : "..b:getUserData().type)
 
     if a:getUserData().type == "Pig" and b:getUserData().type == "Home" then
       Pig.del(a:getUserData())
-      print("DELETE")
     end
   end
 

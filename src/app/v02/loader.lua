@@ -109,20 +109,31 @@ end
 function Map:initGf()
 
   self.canvas = love.graphics.newCanvas(self.width, self.height)
-  self.imgSheet = love.graphics.newImage(self.map.tilesets[1].image)
+  self.sheet = {}
+  max = 0
+
+  --GET IMAGE
+  for i=1,#self.map.tilesets do
+    self.sheet[i] = {}
+    self.sheet[i].img = love.graphics.newImage(self.map.tilesets[i].image)
+    local w, h = self.sheet[i].img:getDimensions()
+    max = max + math.floor((w / 32) * (h / 32))
+    self.sheet[i].idmax = max
+
+    print("NEW IMAGE")
+  end
+  --END
 
   self.canvas = {}
   self.canvas[0] = {}
 
   local c_i = 1
-  --love.graphics.setCanvas(self.canvas[0])
   --BEGIN DRAW
     love.graphics.setColor(1, 1, 1, 1)
     for ia = 1, #(self.map.layers) do
       local layer = (self.map.layers)
       local x = 0
       local y = 0
-      local w = self.map.tilesets[1].imagewidth
 
       if layer[ia].type == 'tilelayer' then
         self.canvas[c_i] = love.graphics.newCanvas(self.width, self.height)
@@ -134,11 +145,24 @@ function Map:initGf()
 
           if id > 0 then
             id = id - 1
+
+            local max = 0
+            local i = 1
+            while id > self.sheet[i].idmax do
+              max = self.sheet[i].idmax
+              i = i + 1
+            end
+            id = id - max
+            local w, h = self.sheet[i].img:getDimensions()
             local idx = (id * 32) % w
             local idy = math.floor((id * 32) / w) * 32
-            local squade = love.graphics.newQuad(idx, idy, 32, 32, self.imgSheet:getDimensions())
+            if i > 1 then
+              print("ID : "..id.." W :"..w)
+              print(idx.." "..idy)
+            end
+            local squade = love.graphics.newQuad(idx, idy, 32, 32, self.sheet[i].img:getDimensions())
 
-            love.graphics.draw(self.imgSheet, squade, x, y)
+            love.graphics.draw(self.sheet[i].img, squade, x, y)
           end
           x = x + 32
           if x >= self.width then
