@@ -6,7 +6,6 @@ function  BONUS:new(p, img)
   setmetatable(obj, self)
   self.__index = self
 
-  print(p)
   obj.img = img
   obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
   obj.body:setFixedRotation(true)
@@ -29,7 +28,6 @@ end
 --RETURN
 return {
   newBonus = function(obj,img)
-    print(obj.x)
     bonus = BONUS:new(obj, img)
     table.insert(BONUSS, bonus)
     return bonus

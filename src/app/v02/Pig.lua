@@ -287,7 +287,6 @@ function PIG:update(dt)
       self.time = 0.2
       self.body:getLinearVelocity(self.vx * 10, self.vy * 10)
     end
-    print(self.live)
   end
   --DEATH
   if self.live < 0 then
