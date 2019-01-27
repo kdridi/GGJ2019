@@ -9,7 +9,7 @@ return {
   tilewidth = 64,
   tileheight = 64,
   nextlayerid = 13,
-  nextobjectid = 49,
+  nextobjectid = 51,
   properties = {},
   tilesets = {
     {
@@ -1363,6 +1363,36 @@ return {
           properties = {
             ["Root"] = true
           }
+        },
+        {
+          id = 49,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2048,
+          y = 3008,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 43,
+          visible = true,
+          properties = {
+            ["Wolf"] = true
+          }
+        },
+        {
+          id = 50,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1243.42,
+          y = 2807.42,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 43,
+          visible = true,
+          properties = {}
         }
       }
     }
