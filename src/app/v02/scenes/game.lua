@@ -62,10 +62,10 @@ function scene:init()
       elseif b:getUserData().type == "Medecine" and a:getUserData().type == "Player" then
         a:getUserData():addMedecine(1)
         Bonus.del(b:getUserData())
-      elseif a:getUserData().type == "Root" and (b:getUserData().type == "Player" or b:getUserData().type == "Pig") then
+      elseif a:getUserData().type == "Root" and b:getUserData().type == "Pig" then
         b:getUserData():setRoot(true)
         Bonus.del(a:getUserData())
-      elseif b:getUserData().type == "Root" and (a:getUserData().type == "Player" or a:getUserData().type == "Pig") then
+      elseif b:getUserData().type == "Root" and a:getUserData().type == "Pig" then
         a:getUserData():setRoot(true)
         Bonus.del(b:getUserData())
       end
@@ -202,6 +202,25 @@ function scene:enter(previous, dayCount)
 
   print("pig: "..self.pig)
   Pig.deploy(scene, self.pig)
+
+  for i=1,dayCount,2 do
+    local dx = 64 + math.random(0, 64*62)
+    local dy = 64 + math.random(0, 64*62)
+
+    if i >= 2 then
+      boar = Boar.newBoar(world, {x=dx, y=dy})
+      print("boar")
+    end
+  end
+  for i=1,dayCount,5 do
+    local dx = 64 + math.random(0, 64*62)
+    local dy = 64 + math.random(0, 64*62)
+
+    if i >= 5 then
+      wolf = Wolf.newBoar(world, {x=dx, y=dy})
+      print("wolf")
+    end
+  end
   self.pig = 0
   --camera
   context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, panicTIme, isDebug())
