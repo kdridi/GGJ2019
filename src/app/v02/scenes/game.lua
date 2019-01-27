@@ -81,6 +81,7 @@ function scene:enter(previous, dayCount)
   self.pig = self.pig + 2
 
   Player.del(player)
+  Wolf.clear()
   if self.isInit == false then
     print("INIT!!!!!!!!!!")
     Player.del(player)
