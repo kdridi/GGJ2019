@@ -267,7 +267,6 @@ rot = function(vx, vy, a)
 end
 
 function scene:update(dt)
-  dt = dt + dt
   world:update(dt)
 
   self.time = self.time - dt
