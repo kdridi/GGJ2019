@@ -9,7 +9,7 @@ return {
   tilewidth = 64,
   tileheight = 64,
   nextlayerid = 13,
-  nextobjectid = 51,
+  nextobjectid = 54,
   properties = {},
   tilesets = {
     {
@@ -1369,30 +1369,64 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2048,
-          y = 3008,
+          x = 2368,
+          y = 2688,
           width = 64,
           height = 64,
           rotation = 0,
           gid = 43,
           visible = true,
           properties = {
-            ["Wolf"] = true
+            ["Wolf"] = false
           }
         },
         {
-          id = 50,
+          id = 51,
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1243.42,
-          y = 2807.42,
+          x = 2752,
+          y = 2816,
           width = 64,
           height = 64,
           rotation = 0,
           gid = 43,
           visible = true,
-          properties = {}
+          properties = {
+            ["Wolf"] = false
+          }
+        },
+        {
+          id = 52,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2752,
+          y = 2112,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 43,
+          visible = true,
+          properties = {
+            ["Wolf"] = false
+          }
+        },
+        {
+          id = 53,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1920,
+          y = 2176,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 43,
+          visible = true,
+          properties = {
+            ["Wolf"] = false
+          }
         }
       }
     }

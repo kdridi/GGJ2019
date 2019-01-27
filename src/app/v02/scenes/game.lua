@@ -85,6 +85,7 @@ function scene:enter(previous, dayCount)
     if obj.properties.Pig == true then
       --pig = Pig.newPig(world, obj)
     elseif obj.properties.Wolf == true then
+        print("OK!!!")
         wolf = Wolf.newWolf(world, obj)
     elseif obj.properties.Player == true then
       player = Player.newPlayer(world, obj)
