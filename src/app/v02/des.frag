@@ -14,5 +14,5 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords)
     if (time > fto)
       return vec4(pixel.xyz, 0);
     else
-      return pixel;
+      return pixel*color;
 }

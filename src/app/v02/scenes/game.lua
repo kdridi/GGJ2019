@@ -39,10 +39,10 @@ function scene:init()
        b:getUserData() and b:getUserData().type then
       if a:getUserData().type == "Pig" and b:getUserData().type == "Home" then
         if a:getUserData().panic == true then
-          Pig.del(a:getUserData()) end
+          a:getUserData():enter(1) end
       elseif b:getUserData().type == "Pig" and a:getUserData().type == "Home" then
         if b:getUserData().panic == true then
-          Pig.del(b:getUserData()) end
+          b:getUserData():enter(1) end
       elseif a:getUserData().type == "Pomme" and b:getUserData().type == "Player" then
         b:getUserData():addPomme(1)
         Bonus.del(a:getUserData())
@@ -314,6 +314,9 @@ function scene:draw()
     map:draw(4)--top
     love.graphics.setColor(255, 255, 255)
     map:draw(5)--top2
+
+    Pig.foreach(function(pig) pig:drawFinal() end)
+
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(psystem)
 
