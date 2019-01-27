@@ -1,46 +1,56 @@
 local scene = newScene()
-local suit = require('../vendor/suit')
+local suit = require("../vendor/suit")
 local context = {}
 
-local messages = {
-  "Rentrez votre cochonaille à la maison avant que les loups s'en occupent...",
-  "La nuit tombe vite, magnez vous !",
-  "Le gros porc ? Il s'appelle Gaston !",
-  "Le saviez-vous ? Le mot pause commence par la lettre P.",
-  "Soyez un bon père ! Une bonne grosse semaine...",
-}
+local messages =
+	{
+		"Rentrez votre cochonaille à la maison avant que les loups s'en occupent...",
+		"La nuit tombe vite, magnez vous !",
+		"Le gros porc ? Il s'appelle Gaston !",
+		"Le saviez-vous ? Le mot pause commence par la lettre P.",
+		"Soyez un bon père ! Une bonne grosse semaine...",
+		"Mangez des pommes!",
+		"Pas de besoin de tapper sa cochonnaille, il suffit juste de hurler (avec X) !",
+		"Pour ne pas vous planter, il suffit de semer (avec S)..."
+	}
 
 function scene:enter(previous, dayCount)
-  context.dayCount = dayCount
-  context.time = 0
-  context.slide = math.random(100 * #messages) % #messages + 1
+	context.dayCount = dayCount
+	context.time = 0
+	context.slide = math.random(100 * #messages) % #messages + 1
 end
 
 function scene:update(dt)
-  if true then
-    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
-    local bw, bh = w, 60
+	if true then
+		local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+		local bw, bh = w, 60
 
-    setFontSize(96)
-    suit.Label(string.format("Day %02d", context.dayCount), 0, 2 * (h - bh) / 4, w, bh)
-    
-    setFontSize(16)
-    suit.Label(messages[context.slide], 0, 5 * (h - bh) / 6, w, bh)
-  end
+		setFontSize(96)
+		suit.Label(
+			string.format("Day %02d", context.dayCount),
+			0,
+			2 * (h - bh) / 4,
+			w,
+			bh
+		)
 
-  context.time = context.time + dt
+		setFontSize(16)
+		suit.Label(messages[context.slide], 0, 5 * (h - bh) / 6, w, bh)
+	end
 
-  local ttime = 2
-  if isDebug() then
-    ttime = 0
-  end
-  if context.time > ttime then
-    Director.enterGame()
-  end
+	context.time = context.time + dt
+
+	local ttime = 2
+	if isDebug() then
+		ttime = 0
+	end
+	if context.time > ttime then
+		Director.enterGame()
+	end
 end
 
 function scene:draw()
-  suit.draw()
+	suit.draw()
 end
 
 return scene
