@@ -2,17 +2,21 @@ dist: xenial
 
 script:
 - src/scripts/package v02
+
+before_deploy:
 - bash -c "cd release && zip -9 -r win64.zip win64"
 - bash -c "cd release && zip -9 -r macos.zip macos"
 
 deploy:
   provider: releases
-  file_glob: true
-  file: release/*.zip
+  api_key:
+    secure: cQx7/2XF8dXdZzdRghunVg1omBnbLERtEE8udHfR7GBHsFuDMPIEaz1hDkjMLhviL0Y9WZC0GDeRF0S9uHRMYRqv2rRhedg6HVicMXliaSoVyQWGYlTWvK4sZuh7A5jhoOpLZkm+Rzql4aT+YTqtm3XvO/m2zpbtEmjTP5iqWlaUAUj0UmLZgDTKasXBIUCkkq9Cf3Wg/MY2jcs1k2A/p/DP3I4mUDFVwUTvTdqu+r7txJIuX3AKImAbMAJdI+mkiU7ZWgEoikGqGBodZzvL3cxfGBLeWTF6+5Ny6WvGYuhi8kgIlEjPqy1b9ERKFXVm7axrgyX4X+p1MF83VNwcoh0LiZgjNXqubT+E8Mc5o3lwv4aybxAFg6CJP2A/jT+7OzY1yp8KDdtgXz/bBPEC8bY/LIMR429UnD9pm1ns53Tg4/hTRtztN0Rmtnpxiys1uEW5QV+6YHYNkfndTlsNjS0Tgx/qAMUwns50z6qgVKCYxUy1U/E/YsPoYlQpXPPEGYJDngG0owAz4/rDsdxerAViCUCetlGJFDBA244Qq/1RmDsB5YAOHnY48Mn275HD5zky1wwSs46Pzzj51z+fx81kfqTLEOnoRZ431L6MQ7BFM1XnUbMclVOTcaF15WSCK310s3TLgF4RB9oZhZ3B+vajn7RG9Buxj5telh4gWjQ=
+  file:
+    - archive.zip
+    - release/win64.zip
+    - release/macos.zip
   skip_cleanup: true
   draft: true
   on:
     repo: kdridi/GGJ2019
     tags: false
-  api_key:
-    secure: JGBVCvXiIjF8YT3gxIa+QX8ma3dFcT3A6ah8z6HNtFBhS5XDuj16p7rFrQMEZmyYlPF5dajCOs3PV2HJq4TPjj7MUL7T7yLPO6AC6xsypgW14sz+/mggbvOo1AWcklYTDWn3TaVSr8M2uCKf/M3Nsbuje/i9gysDpHEoL5I61djQjUTwkONxomBkPjattCXAiHJcVdwcAVj/BgeHQhjcXGZ/pzFNWQy/vXuVA4RfyZZqKLW+imPNpHm+KPSj+/RTlIZLLMfByYYBxP+W5Z42KBRgxhsQhu+cQ/JfhDh3yXYlNfHdT+n0fp1axbk1Z2BN4mEOngR2A4OfwaB0ke43XkyreK8wv8J8O4/9/GiGH3+1hYlbvPvpBgzO/eslyWrruAJY3ePttotBgdu3isXylQyt6gKeeCF+u/83FOn3nVlX99cNZ8A0IXXVER3CV1b+jtewL73UlvV1BSNgJuRkI7rTwRDPC9ZF2hckvtBT1n715+Vcz8JqswXM4B6QuqznQzwZOVRaScbt7Ubiw8ztHwDGObc+0XlksYaMYPnNm2USsDk45Pp8S7iwrwau4duzNKIMHABHVQOeLDz9qCnFuzT/8E5BgxVbeRFNjmQYdabozRkj299Sh8eqm0ZtU0WJRjwJyZXGXkOLuyUV/qfNGx8Dm/KAKfeWATba/Kh6Q14=
