@@ -28,8 +28,8 @@ local MAPW = 50
 local MAPH = 40
 local MAPS = 32
 
-local amTL = 40
-local pmTL = 20
+local amTL = 80
+local pmTL = 50
 
 local context = {}
 
@@ -202,7 +202,7 @@ function scene:enter(previous, dayCount)
   print("pig: "..self.pig)
   Pig.deploy(scene, self.pig)
 
-  for p=1,4+dayCount do
+  for p=1,9+(dayCount*2) do
     obj.width = 64
     obj.height = 64
     obj.x = 64 + math.random(0, 64*62)
@@ -392,7 +392,7 @@ function scene:draw()
 
     love.graphics.setColor(255, 255, 255)
     map:draw(1)--sol
-    love.graphics.setColor(1, 1, 1, 0.33)
+    love.graphics.setColor(1, 1, 1, 0.66)
     map:draw(2)--ombre
     love.graphics.setColor(255, 255, 255)
     player:drawShadow()
@@ -403,19 +403,20 @@ function scene:draw()
     --Wolf.foreach(function(w) w:drawShadow() end)
     map:draw(3)--mid
 
-    Player.foreach(function(p) p:draw() end)
     --player:draw()
     -- love.graphics.setColor(0.76, 0.18, 0.05)
     -- love.graphics.rectangle("fill", ball.body:getX() - 16, ball.body:getY() - 16, 32, 32)
 
     love.graphics.setColor(255, 255, 255)
 
+    Bonus.foreach(function(b) b:draw() end)
     Pig.foreach(function(pig) pig:draw() end)
     Wolf.foreach(function(w) w:draw() end)
     Boar.foreach(function(w) w:draw() end)
     love.graphics.setShader()
     Weed.foreach(function(w) w:draw() end)
-    Bonus.foreach(function(b) b:draw() end)
+
+    Player.foreach(function(p) p:draw() end)
 
     love.graphics.setColor(255, 255, 255)
     map:draw(4)--top

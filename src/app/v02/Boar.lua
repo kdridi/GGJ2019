@@ -105,6 +105,7 @@ function  BOAR:update(dt)
   self.closer = nil
 
   if self.atk < 0 then
+    
     self.closer, self.d = self:findCloser(Pig)
     self.state = 0
     if self.closer and self.d < 160 then
