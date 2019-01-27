@@ -14,7 +14,7 @@ This year's theme : **What home means to you**
   <img width="480" height="270" src="https://github.com/kdridi/GGJ2019/blob/master/press/hop02.gif">
 </p>
 
-# Technical Stuff
+# House Of Pigs : Technical Stuff
 
 Please check [our team entry](https://globalgamejam.org/2019/games/house-pigs).
 
