@@ -1,7 +1,7 @@
 return {
   version = "1.2",
   luaversion = "5.1",
-  tiledversion = "1.2.1",
+  tiledversion = "2018.12.22",
   orientation = "orthogonal",
   renderorder = "right-down",
   width = 80,
@@ -1975,7 +1975,8 @@ return {
           gid = 68,
           visible = true,
           properties = {
-            ["Weed"] = true
+            ["Weed"] = true,
+            ["state"] = 2
           }
         },
         {
@@ -1991,7 +1992,8 @@ return {
           gid = 68,
           visible = true,
           properties = {
-            ["Weed"] = true
+            ["Weed"] = true,
+            ["state"] = 2
           }
         },
         {
@@ -2039,7 +2041,8 @@ return {
           gid = 68,
           visible = true,
           properties = {
-            ["Weed"] = true
+            ["Weed"] = true,
+            ["state"] = 2
           }
         },
         {
@@ -2515,7 +2518,7 @@ return {
           gid = 43,
           visible = true,
           properties = {
-            ["Wolf"] = true
+            ["Wolf"] = false
           }
         },
         {
@@ -2531,7 +2534,7 @@ return {
           gid = 43,
           visible = true,
           properties = {
-            ["Wolf"] = true
+            ["Wolf"] = false
           }
         },
         {
@@ -2547,7 +2550,7 @@ return {
           gid = 43,
           visible = true,
           properties = {
-            ["Wolf"] = true
+            ["Wolf"] = false
           }
         },
         {
@@ -2563,7 +2566,7 @@ return {
           gid = 43,
           visible = true,
           properties = {
-            ["Wolf"] = true
+            ["Wolf"] = false
           }
         },
         {
