@@ -98,6 +98,8 @@ function  PIG:setId(id)
     idx = 64*2*3 + 32
     idy = 0 + 32
   end
+
+
   -- idx = 32*4*3 + 32
   -- idy = 0 + 32
   self.id = id

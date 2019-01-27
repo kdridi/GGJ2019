@@ -90,6 +90,15 @@ function  BOAR:attack(pig)
   end
 end
 
+function  BOAR:distanceFrom(x, y)
+  local vx = x - self.body:getX()
+  local vy = y - self.body:getY()
+
+  local d = math.sqrt((vx * vx) + (vy * vy))
+  return d
+end
+
+
 function  BOAR:update(dt)
   self.time = self.time - dt
   self.atk = self.atk - dt
@@ -105,11 +114,11 @@ function  BOAR:update(dt)
   end
 
   if self.time < 0 then
-    self.time = 0.5
+    self.time = 0.75
 
     r = math.random(0, 10)
 
-    if r > 3 and self.closer then
+    if r > 2 and self.closer then
       local vx = self.closer.body:getX() - self.body:getX()
       local vy = self.closer.body:getY() - self.body:getY()
       local n = math.sqrt(vx * vx + vy * vy)

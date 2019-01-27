@@ -62,10 +62,10 @@ function scene:init()
       elseif b:getUserData().type == "Medecine" and a:getUserData().type == "Player" then
         a:getUserData():addMedecine(1)
         Bonus.del(b:getUserData())
-      elseif a:getUserData().type == "Root" and (b:getUserData().type == "Player" or b:getUserData().type == "Pig") then
+      elseif a:getUserData().type == "Root" and b:getUserData().type == "Pig" then
         b:getUserData():setRoot(true)
         Bonus.del(a:getUserData())
-      elseif b:getUserData().type == "Root" and (a:getUserData().type == "Player" or a:getUserData().type == "Pig") then
+      elseif b:getUserData().type == "Root" and a:getUserData().type == "Pig" then
         a:getUserData():setRoot(true)
         Bonus.del(b:getUserData())
       end
@@ -84,6 +84,7 @@ function scene:enter(previous, dayCount)
   Player.del(player)
   Wolf.clear()
   Boar.clear()
+  Pig.clear()
   if self.isInit == false then
     Player.del(player)
     Weed.clear()
@@ -95,10 +96,10 @@ function scene:enter(previous, dayCount)
     map = loader.loadFromLua(data)
 
     --init OBJ
-    local sheet = love.graphics.newImage("asset/assets.png")
-    local shadow = love.graphics.newImage("asset/ombres.png")
-    local sheet2 = love.graphics.newImage("asset/assets2.png")
-    local shadow2 = love.graphics.newImage("asset/ombres2.png")
+     sheet = love.graphics.newImage("asset/assets.png")
+     shadow = love.graphics.newImage("asset/ombres.png")
+     sheet2 = love.graphics.newImage("asset/assets2.png")
+     shadow2 = love.graphics.newImage("asset/ombres2.png")
     pommeImg = love.graphics.newImage("asset/pomme.png")
     medecineImg = love.graphics.newImage("asset/medecine.png")
     maisImg = love.graphics.newImage("asset/mais.png")
@@ -131,7 +132,6 @@ function scene:enter(previous, dayCount)
       elseif obj.properties.Pomme == true then
         obj.width = 64
         obj.height = 64
-        print(obj)
         b = Bonus.newBonus(obj, pommeImg)
         b.type = "Pomme"
         b.fix:setSensor(true)
@@ -201,6 +201,59 @@ function scene:enter(previous, dayCount)
 
   print("pig: "..self.pig)
   Pig.deploy(scene, self.pig)
+
+  for p=1,4+dayCount do
+    obj.width = 64
+    obj.height = 64
+    obj.x = 64 + math.random(0, 64*62)
+    obj.y = 64 + math.random(0, 64*62)
+    b = Bonus.newBonus(obj, pommeImg)
+    b.type = "Pomme"
+    b.fix:setSensor(true)
+  end
+  for p=1,4+dayCount do
+    obj.width = 128-64
+    obj.height = 64
+    obj.x = 64 + math.random(0, 64*62)
+    obj.y = 64 + math.random(0, 64*62)
+    obj.idx = 128*2+32
+    obj.idy = 32+16
+    b = Bonus.newBonus(obj, sheet2)
+    b.type = "Root"
+    b.fix:setSensor(true)
+  end
+
+
+  for p=1,4+dayCount do
+    obj.width = 128-32
+    obj.height = 64
+    obj.x = 64 + math.random(0, 64*62)
+    obj.y = 64 + math.random(0, 64*62)
+    obj.idx = 128+16
+    obj.idy = 128*2+32
+    b = Bonus.newBonus(obj, sheet2)
+    b.type = "Medecine"
+    b.fix:setSensor(true)
+  end
+
+  for i=1,dayCount,2 do --CREATION DE BOAR
+    local dx = 64 + math.random(0, 64*62)
+    local dy = 64 + math.random(0, 64*62)
+
+    if i >= 2 then
+      boar = Boar.newBoar(world, {x=dx, y=dy})
+      print("boar")
+    end
+  end
+
+  for i=1,dayCount,5 do --CREATION WOLF
+    local dx = 64 + math.random(0, 64*62)
+    local dy = 64 + math.random(0, 64*62)
+
+    if i >= 5 then
+      wolf = Wolf.newWolf(world, {x=dx, y=dy})
+    end
+  end
   self.pig = 0
   --camera
   context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, amTL, pmTL, isDebug())
@@ -240,10 +293,22 @@ function scene:update(dt)
   context.camera:update(dt)
 
   if love.keyboard.isDown("x") then --PUSH
-    local pig, d = player:findCloser(Pig)
-    if pig and d < 120 then
-      local vx = pig.body:getX() - player.body:getX()
-      local vy = pig.body:getY() - player.body:getY()
+    local pig, dp = player:findCloser(Pig)
+    local wolf, dw = player:findCloser(Wolf)
+    local boar, db = player:findCloser(Boar)
+    local obj = nil
+    local d = 0
+
+    if not obj and pig then obj = pig d = dp end
+    if not obj and wolf then obj = wolf d = dw end
+    if not obj and boar then obj = boar d = db end
+
+    if wolf and d > dw then obj = wolf d = dw end
+    if boar and d > db then obj = boar d = db end
+
+    if obj and d < 120 then
+      local vx = obj.body:getX() - player.body:getX()
+      local vy = obj.body:getY() - player.body:getY()
       local n = math.sqrt(vx * vx + vy * vy)
       vx = vx / n
       vy = vy / n
@@ -253,9 +318,9 @@ function scene:update(dt)
       psystem:setLinearAcceleration(vx1 * 5000, vy1 * 5000, vx2 * 8000, vy2 * 8000)
       -- psystem:setPosition(pig.body:getX() - (camera.x - love.graphics.getWidth() / 2),
       --                     pig.body:getY() - (camera.y - love.graphics.getHeight() / 2))
-      psystem:setPosition(pig.body:getX(), pig.body:getY())
+      psystem:setPosition(obj.body:getX(), obj.body:getY())
       psystem:emit(16)
-      player:kick(pig)
+      player:kick(obj)
     end
   end --END
 
