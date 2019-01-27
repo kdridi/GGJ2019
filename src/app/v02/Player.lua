@@ -80,6 +80,9 @@ function  PLAYER:kick(pig, power)
     local n = math.sqrt(vx * vx + vy * vy)
 
     if not power then power = 2000 end
+
+    if pig.type == "Wolf" or pig.type == "Boar" then power = 5000 end
+
     vx = vx / n
     vy = vy / n
     pig.body:applyLinearImpulse(vx * power, vy * power)

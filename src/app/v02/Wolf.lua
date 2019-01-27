@@ -72,6 +72,15 @@ function  WOLF:findCloser(list)
   return closer, dmin
 end
 
+function  WOLF:distanceFrom(x, y)
+  local vx = x - self.body:getX()
+  local vy = y - self.body:getY()
+
+  local d = math.sqrt((vx * vx) + (vy * vy))
+  return d
+end
+
+
 function  WOLF:attack(pig)
   if self.state == 0 then
     local vx = pig.body:getX() - self.body:getX()

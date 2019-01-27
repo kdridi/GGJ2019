@@ -292,10 +292,22 @@ function scene:update(dt)
   context.camera:update(dt)
 
   if love.keyboard.isDown("x") then --PUSH
-    local pig, d = player:findCloser(Pig)
-    if pig and d < 120 then
-      local vx = pig.body:getX() - player.body:getX()
-      local vy = pig.body:getY() - player.body:getY()
+    local pig, dp = player:findCloser(Pig)
+    local wolf, dw = player:findCloser(Wolf)
+    local boar, db = player:findCloser(Boar)
+    local obj = nil
+    local d = 0
+
+    if not obj and pig then obj = pig d = dp end
+    if not obj and wolf then obj = wolf d = dw end
+    if not obj and boar then obj = boar d = db end
+
+    if wolf and d > dw then obj = wolf d = dw end
+    if boar and d > db then obj = boar d = db end
+
+    if obj and d < 120 then
+      local vx = obj.body:getX() - player.body:getX()
+      local vy = obj.body:getY() - player.body:getY()
       local n = math.sqrt(vx * vx + vy * vy)
       vx = vx / n
       vy = vy / n
@@ -305,9 +317,9 @@ function scene:update(dt)
       psystem:setLinearAcceleration(vx1 * 5000, vy1 * 5000, vx2 * 8000, vy2 * 8000)
       -- psystem:setPosition(pig.body:getX() - (camera.x - love.graphics.getWidth() / 2),
       --                     pig.body:getY() - (camera.y - love.graphics.getHeight() / 2))
-      psystem:setPosition(pig.body:getX(), pig.body:getY())
+      psystem:setPosition(obj.body:getX(), obj.body:getY())
       psystem:emit(16)
-      player:kick(pig)
+      player:kick(obj)
     end
   end --END
 
