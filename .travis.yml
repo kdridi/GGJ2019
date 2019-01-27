@@ -2,3 +2,11 @@ dist: xenial
 
 script:
   - src/scripts/package v02
+  - ls -l
+
+deploy:
+  provider: releases
+  file: "archive.zip"
+  skip_cleanup: true
+  on:
+    tags: true
