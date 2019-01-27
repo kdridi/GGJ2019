@@ -1,6 +1,7 @@
 Director = require('director')
 
 function love.load()
+  math.randomseed(os.time())
   if arg[#arg] == "-debug" then
     --require("mobdebug").start()
     Director.initialize(true)
