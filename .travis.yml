@@ -1,12 +1,15 @@
 dist: xenial
 
 script:
-  - src/scripts/package v02
-  - ls -l
+- src/scripts/package v02
+- ls -l
 
 deploy:
   provider: releases
-  file: "archive.zip"
+  file: archive.zip
   skip_cleanup: true
+  draft: true
+  api_key:
+    secure: wiVoQbiupEgrRjw5Z0pALmA9/EK8AkoLgc6RpE/anI2gGUpxCK/+zV2VIQKTlYFkKeEu5fjh0PfAN5WJ7UK7LSZxbK8z8rvG45MwQ77oUJwjr3thZOBsQU7f4fn9xRfkoUCTsze3Kw1WSZKIrAEszOV6koFFMJoLaGVoPXb+UrKMRjFC9V9GwCXJvePYJ7BhUH9U7VO/4DmjZ2ypfjL9vf2FU07+WdFDMpw4LbQBrTmMiGem/KO8/cJjIobROwByW7pdatCgQbViqCCwGxTKUFucFJpRZ2uLEfrfhjCPTbDs6Zkte9h0xYoAdPtIfaSBOwqNeyzrN6G8HiIvf/p/F12XVotVlYcXT4+VL4+KkjNHsDFmFspDEQ+dvXXc9Cub0nhU8I/tFjkMASQXdULG98wLiI2sCGBzfZ/NtQRdXsT5Qa4o1jgSe2ijUGYzbeBNmL7jfVyMO8sHFM3w0jSotzbyxXKTjsmpI6+BIpCEyjSqdm/hSKf8upSZmhOGZ7HVUBGB716ZCNBMp6E5B7vbPP9kQd9HJfJ92GRxNOqoysHWTAqpc5ui7Ag96PICKex9AO7YcHo4UDcdpHR7O08Dnsnd6HwANXxYZ+fMR+ccp83p37O5YFFQmRYZXUjEfbsET98e8yt6nCfN4SJ8KUpWbckD15+nGMZthrSuF+46m/0=
   on:
     tags: false
