@@ -4,11 +4,15 @@ This year's theme : **What home means to you**
 
 # House Of Pigs : Intro
 
-![](press/hop01.gif)
+<p align="center">
+  <img width="480" height="270" src="https://github.com/kdridi/GGJ2019/blob/master/press/hop01.gif">
+</p>
 
 # House Of Pigs : Gameplay
 
-![](press/hop02.gif)
+<p align="center">
+  <img width="480" height="270" src="https://github.com/kdridi/GGJ2019/blob/master/press/hop02.gif">
+</p>
 
 # Technical Stuff
 
