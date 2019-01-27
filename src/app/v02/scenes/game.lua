@@ -96,10 +96,10 @@ function scene:enter(previous, dayCount)
     map = loader.loadFromLua(data)
 
     --init OBJ
-    local sheet = love.graphics.newImage("asset/assets.png")
-    local shadow = love.graphics.newImage("asset/ombres.png")
-    local sheet2 = love.graphics.newImage("asset/assets2.png")
-    local shadow2 = love.graphics.newImage("asset/ombres2.png")
+     sheet = love.graphics.newImage("asset/assets.png")
+     shadow = love.graphics.newImage("asset/ombres.png")
+     sheet2 = love.graphics.newImage("asset/assets2.png")
+     shadow2 = love.graphics.newImage("asset/ombres2.png")
     pommeImg = love.graphics.newImage("asset/pomme.png")
     medecineImg = love.graphics.newImage("asset/medecine.png")
     maisImg = love.graphics.newImage("asset/mais.png")
@@ -132,7 +132,6 @@ function scene:enter(previous, dayCount)
       elseif obj.properties.Pomme == true then
         obj.width = 64
         obj.height = 64
-        print(obj)
         b = Bonus.newBonus(obj, pommeImg)
         b.type = "Pomme"
         b.fix:setSensor(true)
@@ -203,7 +202,41 @@ function scene:enter(previous, dayCount)
   print("pig: "..self.pig)
   Pig.deploy(scene, self.pig)
 
-  for i=1,dayCount,2 do
+  for p=1,4+dayCount do
+    obj.width = 64
+    obj.height = 64
+    obj.x = 64 + math.random(0, 64*62)
+    obj.y = 64 + math.random(0, 64*62)
+    b = Bonus.newBonus(obj, pommeImg)
+    b.type = "Pomme"
+    b.fix:setSensor(true)
+  end
+  for p=1,4+dayCount do
+    obj.width = 128-64
+    obj.height = 64
+    obj.x = 64 + math.random(0, 64*62)
+    obj.y = 64 + math.random(0, 64*62)
+    obj.idx = 128*2+32
+    obj.idy = 32+16
+    b = Bonus.newBonus(obj, sheet2)
+    b.type = "Root"
+    b.fix:setSensor(true)
+  end
+
+
+  for p=1,4+dayCount do
+    obj.width = 128-32
+    obj.height = 64
+    obj.x = 64 + math.random(0, 64*62)
+    obj.y = 64 + math.random(0, 64*62)
+    obj.idx = 128+16
+    obj.idy = 128*2+32
+    b = Bonus.newBonus(obj, sheet2)
+    b.type = "Medecine"
+    b.fix:setSensor(true)
+  end
+
+  for i=1,dayCount,2 do --CREATION DE BOAR
     local dx = 64 + math.random(0, 64*62)
     local dy = 64 + math.random(0, 64*62)
 
@@ -212,13 +245,13 @@ function scene:enter(previous, dayCount)
       print("boar")
     end
   end
-  for i=1,dayCount,5 do
+
+  for i=1,dayCount,5 do --CREATION WOLF
     local dx = 64 + math.random(0, 64*62)
     local dy = 64 + math.random(0, 64*62)
 
     if i >= 5 then
-      wolf = Wolf.newBoar(world, {x=dx, y=dy})
-      print("wolf")
+      wolf = Wolf.newWolf(world, {x=dx, y=dy})
     end
   end
   self.pig = 0
