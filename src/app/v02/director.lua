@@ -21,6 +21,11 @@ function playFX(name)
 end
 
 local dayCount
+local debug
+
+function isDebug()
+  return debug
+end
 
 function start(dc, replace)
   audio.dayEnter(dc, replace)
@@ -29,7 +34,8 @@ function start(dc, replace)
 end
 
 return {
-  initialize = function()
+  initialize = function(d)
+    debug = d
     Gamestate.registerEvents()
     audio.menuEnter()
     Gamestate.switch(menu)

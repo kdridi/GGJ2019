@@ -173,7 +173,7 @@ function scene:enter(previous, dayCount)
 
   Pig.deploy(5)
   --camera
-  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, true)
+  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, isDebug())
   camera = context.camera
 end
 

@@ -1,7 +1,12 @@
 Director = require('director')
 
 function love.load()
-  Director.initialize()
+  if arg[#arg] == "-debug" then
+    --require("mobdebug").start()
+    Director.initialize(true)
+  else
+    Director.initialize(false)
+  end
 end
 
 function love.keypressed(key)
