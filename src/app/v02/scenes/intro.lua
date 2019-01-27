@@ -8,9 +8,13 @@ local background
 function scene:enter(previous)
   context.slide = 1
   
+  
+  
   local slide = 2
+  local ww, wh = love.graphics.getWidth(), love.graphics.getHeight()
   local iwait = function(wait, w)
-    background = love.graphics.newImage("asset/cinematics/" .. string.format("cinematic_a%02d.jpg", slide))
+    
+    background = love.graphics.newImage(string.format("asset/cinematics/%dx%d/cinematic_a%02d.jpg", ww, wh, slide))
     slide = slide + 1
     wait(w * 4.0)
     if slide == 19 then

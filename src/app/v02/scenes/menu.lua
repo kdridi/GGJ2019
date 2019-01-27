@@ -4,7 +4,8 @@ local suit = require('../vendor/suit')
 local background
 
 function scene:init()
-  background = love.graphics.newImage("asset/cinematics/cinematic_a01.jpg")
+  local ww, wh = love.graphics.getWidth(), love.graphics.getHeight()
+  background = love.graphics.newImage(string.format("asset/cinematics/%dx%d/cinematic_a%02d.jpg", ww, wh, 1))
 end
 
 function scene:update(dt)

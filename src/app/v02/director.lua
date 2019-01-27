@@ -30,14 +30,9 @@ end
 
 return {
   initialize = function()
-    love.window.setMode(1280, 720)
-    --love.window.setMode(1920, 1080)
-    --love.window.setFullscreen(true)
-
     Gamestate.registerEvents()
-    --audio.menuEnter()
-    --Gamestate.switch(menu)
-    Gamestate.switch(game)
+    audio.menuEnter()
+    Gamestate.switch(menu)
   end,
 
   pause = function()

@@ -18,7 +18,7 @@ function scene:update(dt)
 
   context.time = context.time + dt
 
-  if context.time > 0 then
+  if context.time > 2 then
     Director.enterGame()
   end
 end
