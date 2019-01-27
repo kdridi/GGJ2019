@@ -84,6 +84,7 @@ function scene:enter(previous, dayCount)
   Player.del(player)
   Wolf.clear()
   Boar.clear()
+  Pig.clear()
   if self.isInit == false then
     Player.del(player)
     Weed.clear()

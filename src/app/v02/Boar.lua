@@ -105,11 +105,11 @@ function  BOAR:update(dt)
   end
 
   if self.time < 0 then
-    self.time = 0.5
+    self.time = 0.75
 
     r = math.random(0, 10)
 
-    if r > 3 and self.closer then
+    if r > 2 and self.closer then
       local vx = self.closer.body:getX() - self.body:getX()
       local vy = self.closer.body:getY() - self.body:getY()
       local n = math.sqrt(vx * vx + vy * vy)
