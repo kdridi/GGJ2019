@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="54">
+<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="148">
  <tileset firstgid="1" source="assets.tsx"/>
  <tileset firstgid="151" source="sol.tsx"/>
  <tileset firstgid="301" source="ombres.tsx"/>
@@ -90,7 +90,7 @@
 300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300
 </data>
  </layer>
- <layer id="11" name="Ombre" width="80" height="80" visible="0">
+ <layer id="11" name="Ombre" width="80" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -136,13 +136,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,331,331,331,331,332,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,346,346,346,346,347,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,348,349,0,0,0,0,348,349,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,348,349,0,0,0,0,348,349,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,348,349,0,0,0,0,348,349,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,348,349,0,0,0,0,348,349,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,348,349,0,0,0,0,348,349,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,346,347,346,347,347,347,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -174,7 +174,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="8" name="mid" width="80" height="80" visible="0">
+ <layer id="8" name="mid" width="80" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -303,14 +303,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,106,107,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,32,31,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,47,46,47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,36,0,0,0,0,35,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,51,0,0,0,0,50,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,36,0,0,0,0,35,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,51,0,0,0,0,50,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,36,0,0,0,0,35,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,51,33,34,33,34,50,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,49,48,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -387,14 +387,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,32,31,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,47,46,47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,36,0,0,0,0,35,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,51,0,0,0,0,50,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,36,0,0,0,0,35,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,51,0,0,0,0,50,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,34,33,34,33,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,49,48,49,48,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -459,8 +459,9 @@
     <property name="Weed" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="7" x="2459.62" y="2829.84" width="259.356" height="23.0762">
+  <object id="7" x="2398.29" y="3211.41" width="317.955" height="23.0762">
    <properties>
+    <property name="bounce" type="bool" value="true"/>
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
@@ -581,6 +582,53 @@
     <property name="state" type="int" value="2"/>
    </properties>
   </object>
+  <object id="54" x="2720.29" y="2889.65" width="61.4598" height="293.49">
+   <properties>
+    <property name="bounce" type="bool" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="55" x="2332.74" y="2889.44" width="61.4598" height="293.49">
+   <properties>
+    <property name="bounce" type="bool" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="56" gid="68" x="2624" y="2944" width="64" height="64">
+   <properties>
+    <property name="Weed" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="57" gid="68" x="2624" y="3008" width="64" height="64">
+   <properties>
+    <property name="Weed" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="58" gid="68" x="2624" y="3072" width="64" height="64">
+   <properties>
+    <property name="Weed" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" gid="68" x="2624" y="3136" width="64" height="64">
+   <properties>
+    <property name="Weed" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="60" gid="68" x="2560" y="3136" width="64" height="64">
+   <properties>
+    <property name="Weed" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="61" gid="68" x="2496" y="3136" width="64" height="64">
+   <properties>
+    <property name="Weed" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="63" gid="68" x="2432" y="3136" width="64" height="64">
+   <properties>
+    <property name="Weed" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="6" name="obj">
   <object id="33" gid="451" x="3008" y="1920" width="64" height="64">
@@ -660,17 +708,437 @@
   </object>
   <object id="51" gid="43" x="2752" y="2816" width="64" height="64">
    <properties>
-    <property name="Wolf" type="bool" value="true"/>
+    <property name="Wolf" type="bool" value="false"/>
    </properties>
   </object>
   <object id="52" gid="43" x="2752" y="2112" width="64" height="64">
    <properties>
-    <property name="Wolf" type="bool" value="true"/>
+    <property name="Wolf" type="bool" value="false"/>
    </properties>
   </object>
   <object id="53" gid="43" x="1920" y="2176" width="64" height="64">
    <properties>
-    <property name="Wolf" type="bool" value="true"/>
+    <property name="Wolf" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="64" gid="451" x="3904" y="2752" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="65" gid="451" x="2176" y="1536" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="66" gid="451" x="1792" y="2752" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="67" gid="451" x="1984" y="3648" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="68" gid="451" x="1536" y="1536" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="69" gid="451" x="889.766" y="2748.79" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="70" gid="451" x="576.056" y="1974.2" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="71" gid="451" x="421.137" y="3775.13" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="72" gid="451" x="1308.05" y="4255.37" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="73" gid="451" x="208.124" y="2497.05" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="74" gid="451" x="250.727" y="1381.63" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="75" gid="451" x="2578.38" y="4433.53" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="76" gid="451" x="2497.05" y="3844.84" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="77" gid="451" x="3515.64" y="4464.51" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="78" gid="451" x="1858.01" y="4495.5" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="79" gid="451" x="576.056" y="4402.55" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="80" gid="451" x="897.512" y="3724.78" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="81" gid="451" x="467.613" y="3244.53" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="82" gid="451" x="1137.64" y="3116.72" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="83" gid="451" x="920.75" y="2407.97" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="84" gid="451" x="1017.57" y="1714.71" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="85" gid="451" x="1559.79" y="1838.64" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="86" gid="451" x="2566.76" y="1737.95" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="87" gid="451" x="3387.83" y="1641.12" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="88" gid="451" x="3612.46" y="2655.84" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="89" gid="451" x="3686.05" y="3349.1" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="90" gid="451" x="3232.91" y="2934.69" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="91" gid="451" x="2237.56" y="2047.78" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="92" gid="451" x="3248.4" y="4007.5" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="93" gid="451" x="4510.99" y="4123.69" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="94" gid="451" x="4503.24" y="2628.73" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="95" gid="451" x="4224.39" y="2009.05" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="96" gid="451" x="4263.12" y="1408.74" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="97" gid="451" x="4882.79" y="3248.4" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="98" gid="451" x="4588.45" y="4650.42" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="99" gid="451" x="2977.3" y="4855.68" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="100" gid="451" x="676.753" y="5010.6" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="101" gid="451" x="897.512" y="467.613" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="102" gid="451" x="1459.09" y="847.163" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="103" gid="451" x="2783.65" y="467.613" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="104" gid="451" x="2872.73" y="1141.51" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="105" gid="451" x="1919.98" y="242.981" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="106" gid="451" x="494.723" y="661.261" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="107" gid="451" x="4073.34" y="669.007" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="108" gid="451" x="4836.32" y="270.091" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="109" gid="451" x="3453.67" y="277.837" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="110" gid="451" x="4875.05" y="1002.08" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="111" gid="452" x="3476.91" y="959.479" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="112" gid="452" x="2373.11" y="800.688" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="113" gid="452" x="1838.64" y="1253.82" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="114" gid="452" x="1126.02" y="1168.62" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="115" gid="452" x="1292.55" y="1854.13" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="116" gid="452" x="1966.45" y="1703.09" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="117" gid="452" x="4952.51" y="1567.54" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="118" gid="452" x="4600.07" y="444.375" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="119" gid="452" x="2713.93" y="184.886" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="120" gid="452" x="1238.33" y="332.059" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="121" gid="452" x="3728.65" y="2210.45" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="122" gid="452" x="2907.58" y="1590.77" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="123" gid="452" x="4375.44" y="1776.68" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="124" gid="452" x="4727.88" y="2400.22" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="125" gid="452" x="4383.18" y="3701.54" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="126" gid="452" x="4030.74" y="4185.66" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="127" gid="452" x="3600.84" y="3012.15" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="128" gid="452" x="3035.39" y="4042.36" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="129" gid="452" x="2121.37" y="4030.74" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="130" gid="452" x="1563.66" y="3112.85" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="131" gid="452" x="1296.43" y="3914.55" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="132" gid="452" x="1114.4" y="4584.58" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="133" gid="452" x="1947.09" y="4859.56" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="134" gid="452" x="2965.68" y="4603.94" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="135" gid="452" x="2249.18" y="4429.66" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="136" gid="452" x="1788.29" y="4011.38" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="137" gid="452" x="1869.63" y="3271.64" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="138" gid="452" x="796.815" y="3391.7" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="139" gid="452" x="479.232" y="2775.9" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="140" gid="452" x="239.108" y="4239.88" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="141" gid="452" x="239.108" y="3488.53" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="142" gid="452" x="1420.36" y="2613.24" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="143" gid="452" x="955.607" y="2020.67" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="144" gid="452" x="614.785" y="1625.63" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="145" gid="452" x="293.329" y="1842.52" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="146" gid="452" x="943.988" y="630.277" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="147" gid="452" x="239.108" y="680.626" width="64" height="64">
+   <properties>
+    <property name="Medecine" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

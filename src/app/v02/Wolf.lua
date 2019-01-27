@@ -9,9 +9,11 @@ function  WOLF:new(world, p)
   self.__index = self
 
 
-  p.width = 32*2-9
-  p.height = 32*2-10
+  p.width = 64*2
+  p.height = 64
 
+  obj.width = p.width
+  obj.height = p.height
   obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
   obj.shape = love.physics.newRectangleShape(p.width, p.height)
   obj.fix = love.physics.newFixture(obj.body, obj.shape, 2)
@@ -34,11 +36,11 @@ end
 function  WOLF:setId(id)
   w, h = self.imgSheet:getDimensions()
 
-  local idx = 128*6 + 32
-  local idy = 128 + 32
+  local idx = 0
+  local idy = 32
 
   self.id = id
-  self.squade = love.graphics.newQuad(idx, idy, 64, 64, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy, self.width, self.height, self.imgSheet:getDimensions())
 end
 
 function  WOLF:draw()

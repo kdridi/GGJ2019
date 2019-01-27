@@ -14,6 +14,16 @@ function  BONUS:new(p, img)
 
   obj.fix:setUserData(obj)
 
+  if p.idx and p.idy then
+    w, h = self.imgSheet:getDimensions()
+
+    local idx = 0
+    local idy = 32
+
+    self.id = id
+    self.squade = love.graphics.newQuad(idx, idy, self.width, self.height, self.imgSheet:getDimensions())
+  end
+
   return (obj)
 end
 
@@ -21,7 +31,11 @@ function  BONUS:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
 
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.draw(self.img, x, y)
+  if self.squade then
+    love.graphics.draw(self.imgSheet, self.squade, x, y, r)
+  else
+    love.graphics.draw(self.img, x, y)
+  end
 end
 
 

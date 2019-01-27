@@ -6,9 +6,12 @@ function  PLAYER:new(world, p)
   setmetatable(obj, self)
   self.__index = self
 
-  p.width = 32*4-42
+  p.width = 32*4-40
   p.height = 32*4-50
   p.id = 0
+
+  obj.width = p.width
+  obj.height = p.height
 
   obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
   obj.body:setFixedRotation(true)
@@ -105,7 +108,8 @@ function  PLAYER:setId(id)
   else idx = 64*2 end
   local idy = 32*8
 
-  self.squade = love.graphics.newQuad(idx+18, idy+22, 32*4-22, 32*4-22, self.imgSheet:getDimensions())
+  --self.squade = love.graphics.newQuad(idx+18, idy+22, 32*4-22, 32*4-22, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx+18, idy+22, self.width, self.height+32, self.imgSheet:getDimensions())
 end
 
 function  PLAYER:draw()
@@ -115,7 +119,7 @@ function  PLAYER:draw()
   love.graphics.setColor(1, 1, 1)
 
   if self.rev == 0 then
-    love.graphics.draw(self.imgSheet, self.squade, x + (32*4-22), y - self.z * 8, 0, -1, 1)
+    love.graphics.draw(self.imgSheet, self.squade, x + self.width, y - self.z * 8, 0, -1, 1)
   else
     love.graphics.draw(self.imgSheet, self.squade, x, y - self.z * 8)
   end

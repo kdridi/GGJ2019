@@ -21,6 +21,8 @@ world = {}
 local map = {}
 home = {}
 
+local objStart = {}
+
 local MAPW = 50
 local MAPH = 40
 local MAPS = 32
@@ -33,6 +35,9 @@ local context = {}
 function scene:init()
   screen:setDimensions(love.graphics.getWidth(), love.graphics.getHeight())
 
+  print("init")
+  self.pig = 1
+  self.isInit = false
   love.physics.setMeter(64)
   world = love.physics.newWorld(0, 0, true)
   world:setCallbacks(function(a, b, coll)
@@ -73,106 +78,119 @@ function scene:enter(previous, dayCount)
 
   self.time = startTime
   self.panic = false
+  self.pig = self.pig + 2
 
   Player.del(player)
-  Pig.clear()
-  Weed.clear()
-  Bonus.clear()
+  if self.isInit == false then
+    print("INIT!!!!!!!!!!")
+    Player.del(player)
+    Weed.clear()
+    Bonus.clear()
+    Pig.clear()
+    Wolf.clear()
 
-  --init map
-  map = loader.loadFromLua(data)
-  map.objCreateF = function(obj)
-    if obj.properties.Pig == true then
-      --pig = Pig.newPig(world, obj)
-    elseif obj.properties.Wolf == true then
-        print("OK!!!")
-        wolf = Wolf.newWolf(world, obj)
-    elseif obj.properties.Player == true then
-      player = Player.newPlayer(world, obj)
-    elseif obj.properties.Weed == true then
-      if obj.properties.state then
-        obj.state = obj.properties.state
+    --init map
+    map = loader.loadFromLua(data)
+    map.objCreateF = function(obj)
+      if obj.properties.Pig == true then
+        --pig = Pig.newPig(world, obj)
+      elseif obj.properties.Wolf == true then
+          print("OK!!!")
+          wolf = Wolf.newWolf(world, obj)
+      elseif obj.properties.Player == true then
+        objStart = obj
+      elseif obj.properties.Weed == true then
+        if obj.properties.state then
+          obj.state = obj.properties.state
+        end
+        weed = Weed.newWeed(world, obj)
+      elseif obj.properties.Pomme == true then
+        obj.width = 64
+        obj.height = 64
+        print(obj)
+        b = Bonus.newBonus(obj, pommeImg)
+        b.type = "Pomme"
+        b.fix:setSensor(true)
+      elseif obj.properties.Medecine == true then
+        obj.width = 64
+        obj.height = 64
+        b = Bonus.newBonus(obj, medecineImg)
+        b.type = "Medecine"
+        b.fix:setSensor(true)
+      elseif obj.properties.Mais == true then
+        obj.width = 64
+        obj.height = 64
+        b = Bonus.newBonus(obj, maisImg)
+        b.type = "Mais"
+        b.fix:setSensor(true)
+      elseif obj.properties.Root == true then
+        obj.width = 64
+        obj.height = 64
+        b = Bonus.newBonus(obj, rootImg)
+        b.type = "Root"
+        b.fix:setSensor(true)
+      elseif obj.properties.collidable == true then --DEFAULT COLLIDER
+        body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
+        shape = love.physics.newRectangleShape(obj.width, obj.height)
+        fix = love.physics.newFixture(body, shape, 20)
       end
-      weed = Weed.newWeed(world, obj)
-    elseif obj.properties.Pomme == true then
-      obj.width = 64
-      obj.height = 64
-      print(obj)
-      b = Bonus.newBonus(obj, pommeImg)
-      b.type = "Pomme"
-      b.fix:setSensor(true)
-    elseif obj.properties.Medecine == true then
-      obj.width = 64
-      obj.height = 64
-      b = Bonus.newBonus(obj, medecineImg)
-      b.type = "Medecine"
-      b.fix:setSensor(true)
-    elseif obj.properties.Mais == true then
-      obj.width = 64
-      obj.height = 64
-      b = Bonus.newBonus(obj, maisImg)
-      b.type = "Mais"
-      b.fix:setSensor(true)
-    elseif obj.properties.Root == true then
-      obj.width = 64
-      obj.height = 64
-      b = Bonus.newBonus(obj, rootImg)
-      b.type = "Root"
-      b.fix:setSensor(true)
-    elseif obj.properties.collidable == true then --DEFAULT COLLIDER
-      body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
-      shape = love.physics.newRectangleShape(obj.width, obj.height)
-      fix = love.physics.newFixture(body, shape, 20)
-    end
 
-    if obj.properties.bounce then
-      fix:setRestitution(0.9)
+      if obj.properties.bounce then
+        fix:setRestitution(0.9)
+      end
+      if obj.properties.Home then
+        home.body = body
+        home.shape = shape
+        home.fix = fix
+        --fix:setSensor(true)
+        fix:setUserData({type="Home"})
+        fix:setRestitution(0.0)
+      end
     end
-    if obj.properties.Home then
-      home.body = body
-      home.shape = shape
-      home.fix = fix
-      --fix:setSensor(true)
-      fix:setUserData({type="Home"})
-      fix:setRestitution(0.0)
-    end
+    --end
+
+    --init OBJ
+    local sheet = love.graphics.newImage("asset/assets.png")
+    local shadow = love.graphics.newImage("asset/ombres.png")
+    local sheet2 = love.graphics.newImage("asset/assets2.png")
+    local shadow2 = love.graphics.newImage("asset/ombres2.png")
+    pommeImg = love.graphics.newImage("asset/pomme.png")
+    medecineImg = love.graphics.newImage("asset/medecine.png")
+    maisImg = love.graphics.newImage("asset/mais.png")
+    cochonImg = love.graphics.newImage("asset/cochon.png")
+    rootImg = love.graphics.newImage("asset/root.png")
+    noiseImg = love.graphics.newImage("asset/noise.png")
+
+    fUp = love.graphics.newImage("asset/haut.png")
+    fDown = love.graphics.newImage("asset/bas.png")
+    fLeft = love.graphics.newImage("asset/gauche.png")
+    fRight = love.graphics.newImage("asset/droite.png")
+    parImg = love.graphics.newImage("asset/part.png")
+    psystem = love.graphics.newParticleSystem(parImg, 400)
+    --effect  = love.graphics.newShader("toto.frag")
+    effect  = love.graphics.newShader("des.frag")
+
+  	psystem:setParticleLifetime(0.25, 0.7) -- Particles live at least 2s and at most 5s.
+  	psystem:setSizeVariation(0, 1)
+    --psystem:setEmissionRate(5)
+  	--psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.
+  	psystem:setColors(0, 0, 0, 1, 1, 1, 1, 0) -- Fade to transparency.
+    --psystem:pause()
+
+    Pig.setImgSheet(sheet, shadow)
+    Weed.setImgSheet(sheet, shadow)
+    Player.setImgSheet(sheet, shadow)
+    Wolf.setImgSheet(sheet2, shadow2)
+    map:initObj(world)
+    --end
+    self.isInit = true
   end
-  --end
 
-  --init OBJ
-  local sheet = love.graphics.newImage("asset/test.png")
-  local shadow = love.graphics.newImage("asset/ombres.png")
-  pommeImg = love.graphics.newImage("asset/pomme.png")
-  medecineImg = love.graphics.newImage("asset/medecine.png")
-  maisImg = love.graphics.newImage("asset/mais.png")
-  cochonImg = love.graphics.newImage("asset/cochon.png")
-  rootImg = love.graphics.newImage("asset/root.png")
-  noiseImg = love.graphics.newImage("asset/noise.png")
+  player = Player.newPlayer(world, objStart)
 
-  fUp = love.graphics.newImage("asset/haut.png")
-  fDown = love.graphics.newImage("asset/bas.png")
-  fLeft = love.graphics.newImage("asset/gauche.png")
-  fRight = love.graphics.newImage("asset/droite.png")
-  parImg = love.graphics.newImage("asset/part.png")
-  psystem = love.graphics.newParticleSystem(parImg, 400)
-  --effect  = love.graphics.newShader("toto.frag")
-  effect  = love.graphics.newShader("des.frag")
-
-	psystem:setParticleLifetime(0.25, 0.7) -- Particles live at least 2s and at most 5s.
-	psystem:setSizeVariation(0, 1)
-  --psystem:setEmissionRate(5)
-	--psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.
-	psystem:setColors(0, 0, 0, 1, 1, 1, 1, 0) -- Fade to transparency.
-  --psystem:pause()
-
-  Pig.setImgSheet(sheet, shadow)
-  Weed.setImgSheet(sheet, shadow)
-  Player.setImgSheet(sheet, shadow)
-  Wolf.setImgSheet(sheet, shadow)
-  map:initObj(world)
-  --end
-
-  Pig.deploy(5)
+  print("pig: "..self.pig)
+  Pig.deploy(scene, self.pig)
+  self.pig = 0
   --camera
   context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, isDebug())
   camera = context.camera
@@ -248,7 +266,6 @@ function scene:update(dt)
 
   if love.keyboard.isDown("a") then
     Pig.clear()
-    Weed.clear()
   elseif love.keyboard.isDown("s") then
     player:plantedSeed()
   elseif love.keyboard.isDown("o") then
@@ -324,6 +341,7 @@ function scene:draw()
     map:draw(5)--top2
 
     Pig.foreach(function(pig) pig:drawFinal() end)
+    Pig.foreach(function(pig) pig:drawEtat() end)
 
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(psystem)

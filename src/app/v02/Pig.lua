@@ -5,7 +5,7 @@ local foodD = 64 -- food distance
 local foodAlert = 0.99
 local density = 2
 
-function  PIG:new(world, pig)
+function  PIG:new(scene, world, pig)
   obj = {}
   setmetatable(obj, self)
   self.__index = self
@@ -13,6 +13,7 @@ function  PIG:new(world, pig)
   pig.width = 32*2-9
   pig.height = 32*2-10
 
+  obj.scene = scene
   obj.body = love.physics.newBody(world, pig.x + pig.width / 2, pig.y + pig.height / 2, "dynamic")
   --obj.body = love.physics.newBody(world, pig.x , pig.y , "dynamic")
   obj.shape = love.physics.newRectangleShape(pig.width, pig.height)
@@ -118,7 +119,7 @@ function PIG:draw()
   if self.state ~= 42 then
     love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
 
-    self:drawEtat()
+    --self:drawEtat()
   end
 end
 
@@ -140,7 +141,7 @@ end
 
 function PIG:drawEtat()
 
-  if self.live < foodAlert or self.panic == true or self.root == true then
+  if (self.live < foodAlert or self.panic == true or self.root == true) and  self.state ~= 42 then
     local tx = camera.x - love.graphics.getWidth() / 2
     local ty = camera.y - love.graphics.getHeight() / 2
     local x = self.body:getX()
@@ -257,7 +258,7 @@ function PIG:update(dt)
     end
   elseif self.time < 0 and self.root == false and self.state ~= 42 then
 
-    self.time = 0.1
+    self.time = 0.3
     local vx = 32 - math.random(64)
     local vy = 32 - math.random(64)
     local n = math.sqrt(vx * vx + vy * vy)
@@ -265,6 +266,8 @@ function PIG:update(dt)
     vy = vy / n
 
     self.body:applyLinearImpulse(vx*100, vy*100)
+    self.live = self.live - dt * 0.20
+
   end -- PANIC
 
   self.z = self.z + dt * self.zv * 1.2
@@ -286,13 +289,13 @@ function PIG:update(dt)
     self.live = self.live - dt * 0.4
     if self.time < 0 then
       self.time = 0.1
-      self.body:setLinearVelocity(self.vx * 500, self.vy * 500)
     end
   end
   --DEATH
   if self.live < 0 then
     for idx, value in pairs(PIGS) do
       if value == self then
+        if self.state == 42 then self.scene.pig = self.scene.pig + 1 end
         value.fix:destroy()
         table.remove(PIGS, idx)
         return
@@ -355,7 +358,7 @@ return {
     end
   end,
 
-  deploy = function(nb)
+  deploy = function(scene, nb)
     tab = {}
 
     Weed.foreach(function(v)
@@ -371,7 +374,7 @@ return {
 
     local a = 1
     for i=1,nb do
-      Pig.newPig(world, {x=tab[a].obj.body:getX() + math.random(-5, 5),
+      Pig.newPig(scene, world, {x=tab[a].obj.body:getX() + math.random(-5, 5),
                          y=tab[a].obj.body:getY() + math.random(-5, 5), id=0})
       a = a + 1
       if a > #tab then a = 1 end

@@ -1,7 +1,7 @@
 WEED = {}
 WEEDS = {}
 
-local waitT = 2
+local waitT = 6
 
 function  WEED:new(world, p)
   obj = {}
@@ -24,7 +24,7 @@ function  WEED:new(world, p)
   obj.type = "Weed"
   obj.fix:setUserData(obj)
 
-  obj.time = waitT
+  obj.time = waitT + math.random(0, 4)
   obj.live = 1
   return (obj)
 end
@@ -68,7 +68,7 @@ function WEED:update(dt)
     self.time = self.time - dt
     if self.time < 0 then
       self.state = self.state + 1
-      self.time = waitT
+      self.time = waitT + math.random(0, 4)
       self:setId(self.state)
     end
   end
