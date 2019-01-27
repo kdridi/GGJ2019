@@ -4,8 +4,10 @@ script:
 - src/scripts/package v02
 
 before_deploy:
-- bash -c "cd release && zip -9 -r win64.zip win64"
-- bash -c "cd release && zip -9 -r macos.zip macos"
+- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+- git tag $TRAVIS_TAG
+- bash -c "cd release && zip -9 -r win64-${TRAVIS_TAG}.zip win64"
+- bash -c "cd release && zip -9 -r macos-${TRAVIS_TAG}.zip macos"
 
 deploy:
   provider: releases
@@ -16,7 +18,7 @@ deploy:
     - release/win64.zip
     - release/macos.zip
   skip_cleanup: true
-  draft: true
+  draft: false
   on:
     repo: kdridi/GGJ2019
-    tags: false
+    tags: true
