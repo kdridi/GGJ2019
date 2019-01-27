@@ -21,4 +21,4 @@ deploy:
   draft: false
   on:
     repo: kdridi/GGJ2019
-    tags: true
+    tags: false
