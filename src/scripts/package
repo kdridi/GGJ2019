@@ -52,7 +52,7 @@ package() {
 	rm -rf "${vdir}.zip"
 	cd "${vdir}"
 	zip -9 -r "${vdir}.zip" .
-	rm -rf "${ROOTDIR}/release/tmp"
+	rm -rf "${ROOTDIR}/release"
 	mkdir -p "${ROOTDIR}/release/tmp"
 	mv "${vdir}.zip" "${ROOTDIR}/release/tmp/game.love"
 	cd "${ROOTDIR}/release/tmp"
