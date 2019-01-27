@@ -8,15 +8,18 @@ local shader = love.graphics.newShader[[
     vec4 effect(vec4 color, Image tex, vec2 tc, vec2 _)
     {
       vec2 uv = tc.xy * resolution.xy;
-      float dis = length(uv - position) + 1.0 * (time - delay) * cos(time * uv.x) * sin(time * uv.y);
+      float dis = length(uv - position);
       vec4 c = Texel(tex, tc);
       
-      float radius = 1000000.0;
+      float radius = max(resolution.x, resolution.y) / 1.5;
       if (time > delay)
-        radius /= ((time - delay) * speed);
+        radius -= (time - delay) * speed;
+        
+      if (radius < 32)
+        radius = 32;
       
-      float intensity = clamp(radius / (dis * dis), 0.0, 1.0);
-      return color * c * vec4(vec3(intensity), 1.0);
+      float intensity = clamp(radius / dis, 0.0, 1.0);
+      return color * c * vec4(vec3(intensity * intensity), 1.0);
     }
   ]]
   
@@ -67,7 +70,7 @@ local shader = love.graphics.newShader[[
     resolution = { love.graphics.getWidth(), love.graphics.getHeight() },
     position = { 100, 100 },
     time = 0.0,
-    delay = 0.0,
-    speed = 0.0,
+    delay = 40.0,
+    speed = 10.0,
   }
 }

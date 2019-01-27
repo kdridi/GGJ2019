@@ -47,6 +47,8 @@ return {
     if Gamestate.current() == game and Gamestate.current() ~= pause then
       audio.pauseEnter()
       Gamestate.push(pause)
+    elseif Gamestate.current() == pause and Gamestate.current() ~= game then
+      Director.leaveJourney()
     end
   end,
 

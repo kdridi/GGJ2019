@@ -28,8 +28,8 @@ local MAPW = 50
 local MAPH = 40
 local MAPS = 32
 
-local panicTIme = 40
-local startTime = 60
+local amTL = 40
+local pmTL = 20
 
 local context = {}
 
@@ -77,7 +77,7 @@ function scene:enter(previous, dayCount)
   context.dayCount = dayCount
   context.time = 0
 
-  self.time = startTime
+  self.time = amTL + pmTL
   self.panic = false
   self.pig = self.pig + 2
 
@@ -203,7 +203,7 @@ function scene:enter(previous, dayCount)
   Pig.deploy(scene, self.pig)
   self.pig = 0
   --camera
-  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, panicTIme, isDebug())
+  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, amTL, pmTL, isDebug())
   camera = context.camera
 end
 
@@ -214,10 +214,11 @@ rot = function(vx, vy, a)
 end
 
 function scene:update(dt)
+  dt = dt + dt
   world:update(dt)
 
   self.time = self.time - dt
-  if self.time < panicTIme and self.panic == false then
+  if self.time < pmTL and self.panic == false then
     self.panic = true
     Pig.foreach(function(p) p:setPanic(true) end)
   end
@@ -388,8 +389,6 @@ function scene:draw()
   love.graphics.print("X "..Pig.count(), 42, 15+45*3)
 
   local v = 1
-  if self.time < 42 then
-    v = self.time / 42 end
   love.graphics.setColor(v, v, v, 1)
   setFontSize(30)
   love.graphics.print(math.floor(self.time), love.graphics.getWidth() / 2 - 20, 10)

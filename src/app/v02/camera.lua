@@ -6,7 +6,7 @@ CAMERA = {}
 CAMERAS = {}
 
 
-function CAMERA:new(cw, ch, target, w, h, dayTime, debug)
+function CAMERA:new(cw, ch, target, w, h, amTL, pmTL, debug)
   camera = {}
   setmetatable(camera, self)
   self.__index = self
@@ -23,9 +23,8 @@ function CAMERA:new(cw, ch, target, w, h, dayTime, debug)
   
   camera.effect = moonshine(daynight)
   camera.effect.daynight.resolution = { love.graphics.getWidth(), love.graphics.getHeight() }
-  camera.effect.daynight.time = 0.1
-  camera.effect.daynight.delay = dayTime
-  camera.effect.daynight.speed = 100.0
+  camera.effect.daynight.delay = amTL
+  camera.effect.daynight.speed = math.max(love.graphics.getWidth(), love.graphics.getHeight()) / 1.5 / (0.5 * pmTL)
   camera.time = 0.0
   
   return (camera)
@@ -90,9 +89,9 @@ function CAMERA:update(dt)
     end
   end
   
-  camera.time = camera.time + dt
-  camera.effect.daynight.time = camera.time
-  camera.effect.daynight.position = {
+  self.time = self.time + dt
+  self.effect.daynight.time = self.time
+  self.effect.daynight.position = {
     love.graphics.getWidth()  / 2 + self.target.body:getX() - self.x,
     love.graphics.getHeight() / 2 + self.target.body:getY() - self.y
   }
@@ -100,8 +99,8 @@ function CAMERA:update(dt)
 end
 
 return {
-  newCamera = function(cw, ch, target, w, h, debug)
-    obj = CAMERA:new(cw, ch, target, w, h, debug)
+  newCamera = function(cw, ch, target, w, h, amTL, pmTL, debug)
+    obj = CAMERA:new(cw, ch, target, w, h, amTL, pmTL, debug)
     table.insert(CAMERAS, obj)
     return obj
   end
