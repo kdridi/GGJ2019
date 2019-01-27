@@ -6,9 +6,9 @@ script:
 before_deploy:
 - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
 - git tag $TRAVIS_TAG
-- bash -c "cd release && zip -9 -r win64-${TRAVIS_TAG}.zip win64"
-- bash -c "cd release && zip -9 -r macos-${TRAVIS_TAG}.zip macos"
-- bash -c "mv archive.zip release/master-${TRAVIS_TAG}.zip"
+- bash -c "cd release && zip -9 -r binaries-win64-${TRAVIS_TAG}.zip win64"
+- bash -c "cd release && zip -9 -r binaries-macos-${TRAVIS_TAG}.zip macos"
+- bash -c "mv archive.zip release/sources-${TRAVIS_TAG}.zip"
 
 deploy:
   provider: releases
