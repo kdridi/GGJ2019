@@ -1522,7 +1522,8 @@ return {
           gid = 43,
           visible = true,
           properties = {
-            ["Wolf"] = true
+            ["Boar"] = true,
+            ["Wolf"] = false
           }
         },
         {

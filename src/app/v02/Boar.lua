@@ -1,15 +1,15 @@
-WOLF = {}
-WOLFS = {}
+BOAR = {}
+BOARS = {}
 
-local waitT = 0.5
+local waitT = 1
 
-function  WOLF:new(world, p)
+function  BOAR:new(world, p)
   obj = {}
   setmetatable(obj, self)
   self.__index = self
 
 
-  p.width = 64*2
+  p.width = 128-32
   p.height = 64
 
   obj.width = p.width
@@ -18,7 +18,7 @@ function  WOLF:new(world, p)
   obj.shape = love.physics.newRectangleShape(p.width, p.height)
   obj.fix = love.physics.newFixture(obj.body, obj.shape, 2)
 
-  obj.type = "Wolf"
+  obj.type = "Boar"
   obj.fix:setUserData(obj)
 
   obj.id = 0
@@ -33,17 +33,17 @@ function  WOLF:new(world, p)
   return (obj)
 end
 
-function  WOLF:setId(id)
+function  BOAR:setId(id)
   w, h = self.imgSheet:getDimensions()
 
-  local idx = 0
+  local idx = 16
   local idy = 32
 
   self.id = id
   self.squade = love.graphics.newQuad(idx, idy, self.width, self.height, self.imgSheet:getDimensions())
 end
 
-function  WOLF:draw()
+function  BOAR:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
 
@@ -52,7 +52,7 @@ function  WOLF:draw()
 end
 
 
-function  WOLF:findCloser(list)
+function  BOAR:findCloser(list)
   closer = nil
   dmin = 0
 
@@ -72,17 +72,16 @@ function  WOLF:findCloser(list)
   return closer, dmin
 end
 
-function  WOLF:attack(pig)
+function  BOAR:attack(pig)
   if self.state == 0 then
     local vx = pig.body:getX() - self.body:getX()
     local vy = pig.body:getY() - self.body:getY()
     local n = math.sqrt(vx * vx + vy * vy)
 
-    if not power then power = 3000 end
+    if not power then power = 1234 end
     vx = vx / n
     vy = vy / n
     pig.body:applyLinearImpulse(vx * power, vy * power)
-    pig.live = pig.live - 0.33
 
     self.state = 1
     self.atk = waitT
@@ -91,7 +90,7 @@ function  WOLF:attack(pig)
   end
 end
 
-function  WOLF:update(dt)
+function  BOAR:update(dt)
   self.time = self.time - dt
   self.atk = self.atk - dt
   self.closer = nil
@@ -110,7 +109,7 @@ function  WOLF:update(dt)
 
     r = math.random(0, 10)
 
-    if r > 2 and self.closer then
+    if r > 3 and self.closer then
       local vx = self.closer.body:getX() - self.body:getX()
       local vy = self.closer.body:getY() - self.body:getY()
       local n = math.sqrt(vx * vx + vy * vy)
@@ -129,19 +128,19 @@ end
 
 return {
   setImgSheet = function(img, shadow)
-    WOLF.imgSheet = img
-    WOLF.shadowSheet = shadow
+    BOAR.imgSheet = img
+    BOAR.shadowSheet = shadow
   end,
 
-  newWolf = function(world, obj)
-    obj = WOLF:new(world, obj)
-    table.insert(WOLFS, obj)
+  newBoar = function(world, obj)
+    obj = BOAR:new(world, obj)
+    table.insert(BOARS, obj)
     return obj
   end,
 
   foreach = function(f)
     t_c = {}
-    for i, v in pairs(WOLFS) do
+    for i, v in pairs(BOARS) do
       table.insert(t_c, v)
     end
     for i, v in pairs(t_c) do
@@ -150,9 +149,9 @@ return {
   end,
 
   del = function(v)
-    for idx, value in pairs(WOLFS) do
+    for idx, value in pairs(BOARS) do
       if value == v then
-        table.remove(WOLFS, idx)
+        table.remove(BOARS, idx)
         v.fix:destroy()
         return
       end
@@ -160,13 +159,13 @@ return {
   end,
 
   clear = function()
-    while #WOLFS >= 1 do
-      WOLFS[1].fix:destroy()
-      table.remove(WOLFS, 1)
+    while #BOARS >= 1 do
+      BOARS[1].fix:destroy()
+      table.remove(BOARS, 1)
     end
   end,
 
   all = function()
-    return ipair(WOLFS)
+    return ipair(BOARS)
   end
 }
