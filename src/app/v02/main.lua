@@ -17,6 +17,10 @@ function love.keypressed(key)
     Director.startJourney()
   elseif key == 'escape' then
     Director.leaveJourney()
+  elseif isDebug() == true and key == '1' then
+    Director.leaveGame(true)
+  elseif isDebug() == true and key == '2' then
+    Director.leaveGame(false)
   end
 end
 
