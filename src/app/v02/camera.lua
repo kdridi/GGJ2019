@@ -6,7 +6,7 @@ CAMERA = {}
 CAMERAS = {}
 
 
-function CAMERA:new(cw, ch, target, w, h, debug)
+function CAMERA:new(cw, ch, target, w, h, dayTime, debug)
   camera = {}
   setmetatable(camera, self)
   self.__index = self
@@ -24,8 +24,8 @@ function CAMERA:new(cw, ch, target, w, h, debug)
   camera.effect = moonshine(daynight)
   camera.effect.daynight.resolution = { love.graphics.getWidth(), love.graphics.getHeight() }
   camera.effect.daynight.time = 0.1
-  camera.effect.daynight.delay = 5.0
-  camera.effect.daynight.speed = 3.0
+  camera.effect.daynight.delay = dayTime
+  camera.effect.daynight.speed = 100.0
   camera.time = 0.0
   
   return (camera)

@@ -7,6 +7,7 @@ local messages = {
   "La nuit tombe vite, magnez vous !",
   "Le gros porc ? Il s'appelle Gaston !",
   "Le saviez-vous ? Le mot pause commence par la lettre P.",
+  "Soyez un bon père ! Une bonne grosse semaine...",
 }
 
 function scene:enter(previous, dayCount)

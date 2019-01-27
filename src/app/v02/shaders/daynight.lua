@@ -8,7 +8,7 @@ local shader = love.graphics.newShader[[
     vec4 effect(vec4 color, Image tex, vec2 tc, vec2 _)
     {
       vec2 uv = tc.xy * resolution.xy;
-      float dis = length(uv - position) + 10.0 * (time - delay) * cos(time * uv.x) * sin(time * uv.y);
+      float dis = length(uv - position) + 1.0 * (time - delay) * cos(time * uv.x) * sin(time * uv.y);
       vec4 c = Texel(tex, tc);
       
       float radius = 1000000.0;

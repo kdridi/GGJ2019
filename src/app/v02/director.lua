@@ -106,8 +106,12 @@ return {
       audio.introLeave()
       start(1)
     elseif Gamestate.current() == game then
-      audio.gameLeave()
-      start(dayCount + 1)
+      if dayCount == 7 then
+        Director.leaveGame(true)
+      else
+        audio.gameLeave()
+        start(dayCount + 1)
+      end
     end
   end
 }

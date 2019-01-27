@@ -27,7 +27,7 @@ local MAPW = 50
 local MAPH = 40
 local MAPS = 32
 
-local panicTIme = 42
+local panicTIme = 40
 local startTime = 60
 
 local context = {}
@@ -193,7 +193,7 @@ function scene:enter(previous, dayCount)
   Pig.deploy(scene, self.pig)
   self.pig = 0
   --camera
-  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, isDebug())
+  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, panicTIme, isDebug())
   camera = context.camera
 end
 
@@ -207,7 +207,7 @@ function scene:update(dt)
   world:update(dt)
 
   self.time = self.time - dt
-  if self.time < 20 and self.panic == false then
+  if self.time < panicTIme and self.panic == false then
     self.panic = true
     Pig.foreach(function(p) p:setPanic(true) end)
   end
@@ -298,8 +298,12 @@ function scene:update(dt)
     end
   end
 
-  if Pig.count() == 0 then
-    return Director.enterNextDay()
+  if Pig.count() == 0 or self.time < 0 then
+    if self.pig == 0 then
+      return Director.leaveGame(false)
+    else
+      return Director.enterNextDay()
+    end
   end
 
   psystem:update(dt)
