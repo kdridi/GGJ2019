@@ -8,15 +8,14 @@ before_deploy:
 - git tag $TRAVIS_TAG
 - bash -c "cd release && zip -9 -r win64-${TRAVIS_TAG}.zip win64"
 - bash -c "cd release && zip -9 -r macos-${TRAVIS_TAG}.zip macos"
+- bash -c "mv archive.zip release/master-${TRAVIS_TAG}.zip"
 
 deploy:
   provider: releases
   api_key:
     secure: XLfXP2MibP7vhaEP2bAr25/mQxNDkIixmZVaQ2mX+XhIKAS5UnPpee5v3aG2s/o4iRX1iyr77z11j6qHUP6c2S27ZQwn8FazaNvCBuc/jxkZTyoSF9mj8VXWmv0tUVrKrtEZPr3VVZh4jWQaVECbz1jCs49liCEjpKOp0L9PhziBmb5KGH9hMgkSCbTJVrYkIbvaNa1Lpk2vjWVhXwLK5uaqw+A2XbGeXbVtLFJnTyWcIKxXzqvU/FSsY73ful6TCEbjMuuuYQDvJvz6jMzhDgd3WAOIFuaqsjfbvXhURmk0HXDYeKQli/2NcisgCGrSk61v5tnIXcrzwlq7SeRPnM1gZ4+JuqAE5d1E4NA5hWv7m9uqYFqi83smIlIUIMgSKnmiVNiRCFBXbn19kVPu3atZPZHCcZZthwjgl+IucGUY1kRRE/Gvf9IzoYrJNv8F3EM2q+YqSbKDqrJJNeUeJRc6sq3QIBzJNMYwlud7cODkik8uXFNk6bfot3D31gxDEPXVYAm1wHvnOrOApN2zTZDVxVNW5Uzng9BKCiY6WYShWI7oAA2HdyNNixXWIDTMSrNBxu9ARSYsxyPozGmVuBK1SmsRjPbTOXO6uHT9SsLEz6WAd6QsG2g9edwKePDOxoXgqtoFSxXubpq8hOjKbvFC6Ygdnn3B/Z98MA4r8r0=
   file_glob: true
-  file:
-    - archive.zip
-    - release/*.zip
+  file: release/*.zip
   skip_cleanup: true
   draft: false
   on:
