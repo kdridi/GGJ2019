@@ -6,6 +6,7 @@ map = {}
 loader = require "../loader"
 data = require "../map"
 Pig = require "../Pig"
+Wolf = require "../Wolf"
 Bonus = require "../Bonus"
 Player = require "../Player"
 Weed = require "../Weed"
@@ -83,11 +84,12 @@ function scene:enter(previous, dayCount)
   map.objCreateF = function(obj)
     if obj.properties.Pig == true then
       --pig = Pig.newPig(world, obj)
+    elseif obj.properties.Wolf == true then
+        wolf = Wolf.newWolf(world, obj)
     elseif obj.properties.Player == true then
       player = Player.newPlayer(world, obj)
     elseif obj.properties.Weed == true then
       if obj.properties.state then
-        print("IS OK!!!")
         obj.state = obj.properties.state
       end
       weed = Weed.newWeed(world, obj)
@@ -165,16 +167,17 @@ function scene:enter(previous, dayCount)
   Pig.setImgSheet(sheet, shadow)
   Weed.setImgSheet(sheet, shadow)
   Player.setImgSheet(sheet, shadow)
+  Wolf.setImgSheet(sheet, shadow)
   map:initObj(world)
   --end
 
   Pig.deploy(5)
   --camera
-  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
+  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, true)
   camera = context.camera
 end
 
-local rot = function(vx, vy, a)
+rot = function(vx, vy, a)
   rx = vx * math.cos(a) - vy * math.sin(a)
   ry = vx * math.sin(a) + vy * math.cos(a)
   return rx, ry
@@ -254,6 +257,7 @@ function scene:update(dt)
 
   Player.foreach(function(p) p:update(dt) end)
   Weed.foreach(function(w) w:update(dt) end)
+  Wolf.foreach(function(w) w:update(dt) end)
   Pig.foreach(function(p) p:update(dt) end)
 
   for _, body in pairs(world:getBodies()) do
@@ -296,6 +300,8 @@ function scene:draw()
     Pig.foreach(function(pig) pig:drawShadow() end)
     love.graphics.setColor(1, 1, 1, 0.5)
     Weed.foreach(function(w) w:drawShadow() end)
+    --love.graphics.setColor(1, 1, 1, 0.5)
+    --Wolf.foreach(function(w) w:drawShadow() end)
     map:draw(3)--mid
 
     Player.foreach(function(p) p:draw() end)
@@ -306,6 +312,7 @@ function scene:draw()
     love.graphics.setColor(255, 255, 255)
 
     Pig.foreach(function(pig) pig:draw() end)
+    Wolf.foreach(function(w) w:draw() end)
     love.graphics.setShader()
     Weed.foreach(function(w) w:draw() end)
     Bonus.foreach(function(b) b:draw() end)
