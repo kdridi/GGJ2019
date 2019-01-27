@@ -41,6 +41,24 @@ function  PIG:new(world, pig)
   return (obj)
 end
 
+function  PIG:enter(time)
+
+  local vx = home.body:getX() - self.body:getX()
+  local vy = home.body:getY() - self.body:getY()
+  local n = math.sqrt(vx * vx + vy * vy)
+
+  vx = vx / n
+  vy = vy / n
+
+  self.vx = vx
+  self.vy = vy
+  --self.body:getLinearVelocity(vx * 10, vy * 10)
+  self.time = time
+  self.live = 1.
+  self.state = 42
+  self.fix:setSensor(true)
+  self:setId(42)
+end
 
 function  PIG:setRoot(r)
   self.root = r
@@ -74,12 +92,30 @@ function  PIG:setId(id)
   elseif id == 4 then
     idx = 128*5 + 32
     idy = 128 + 32
+  elseif id == 42  then
+    idx = 64*2*3 + 32
+    idy = 0 + 32
   end
   -- idx = 32*4*3 + 32
   -- idy = 0 + 32
-
   self.id = id
   self.squade = love.graphics.newQuad(idx, idy+3, 64*2-32, 64*2-32, self.imgSheet:getDimensions())
+end
+
+function PIG:drawFinal()
+  if self.state == 42 then
+
+    local x = self.body:getX()
+    local y = self.body:getY()
+    local r = self.body:getAngle()
+
+    effect:send("time", (1 - self.live))
+    effect:send("tt", noiseImg)
+    love.graphics.setColor(1, self.live, self.live, 1)
+    love.graphics.setShader(effect)
+    love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
+    love.graphics.setShader()
+  end
 end
 
 function PIG:draw()
@@ -89,13 +125,16 @@ function PIG:draw()
 
 
   if self.root == true then
-    love.graphics.setColor(1, 0.2, math.cos(self.z*2), 1)
+    love.graphics.setColor(1, 0.2, math.cos(self.z*2), self.live)
   else
     love.graphics.setColor(self.live, self.live, self.live)
   end
-  love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
 
-  self:drawEtat()
+  if self.state ~= 42 then
+    love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
+
+    self:drawEtat()
+  end
 end
 
 function PIG:drawEtat()
@@ -141,13 +180,15 @@ end
 
 function PIG:drawShadow()
 
-  local x, y = self.body:getWorldPoints(self.shape:getPoints())
-  local r = self.body:getAngle()
+  if self.state ~= 42 then
+    local x, y = self.body:getWorldPoints(self.shape:getPoints())
+    local r = self.body:getAngle()
 
-  local v = 0.10 + 0.20 * (1 - self.z)
-  love.graphics.setColor(v, v, v, v)
+    local v = 0.10 + 0.20 * (1 - self.z)
+    love.graphics.setColor(v, v, v, v)
 
-  love.graphics.draw(self.shadowSheet, self.squade, self.body:getX()-32/2, self.body:getY() - 20)
+    love.graphics.draw(self.shadowSheet, self.squade, self.body:getX()-32/2, self.body:getY() - 20)
+  end
 end
 
 function  PIG:findCloser(list)
@@ -174,7 +215,7 @@ end
 function PIG:update(dt)
   self.time = self.time - dt
 
-  if self.panic == false and self.root == false then
+  if self.panic == false and self.root == false and self.state ~= 42 then
     self.checkTime = self.checkTime - dt
     self.live = self.live - dt * 0.025
 
@@ -213,7 +254,7 @@ function PIG:update(dt)
         self:setId(self.id)
       end
     end
-  elseif self.time < 0 and self.root == false then
+  elseif self.time < 0 and self.root == false and self.state ~= 42 then
 
     self.time = 0.1
     local vx = 32 - math.random(64)
@@ -236,10 +277,18 @@ function PIG:update(dt)
     self.z = 1
   end
 
-  if self.root == true then
-    self.live = self.live + dt * 0.3
+  if self.root == true then --IF ROOT
+    self.live = self.live - dt * 0.020
   end
 
+  if self.state == 42 then -- IF ENTER THE HOUSE
+    self.live = self.live - dt * 0.8
+    if self.time < 0 then
+      self.time = 0.2
+      self.body:getLinearVelocity(self.vx * 10, self.vy * 10)
+    end
+    print(self.live)
+  end
   --DEATH
   if self.live < 0 then
     for idx, value in pairs(PIGS) do
