@@ -13,6 +13,8 @@ local menu = require 'scenes/menu'
 local game = require 'scenes/game'
 local day = require 'scenes/day'
 local intro = require 'scenes/intro'
+local failure = require 'scenes/failure'
+local success = require 'scenes/success'
 
 local audio = require('audio')
 
@@ -69,6 +71,27 @@ return {
     elseif Gamestate.current() == menu then
       audio.menuLeave()
       love.event.push("quit")
+    elseif Gamestate.current() == success then
+      audio.successLeave()
+      audio.menuEnter()
+      Gamestate.pop()
+    elseif Gamestate.current() == failure then
+      audio.failureLeave()
+      audio.menuEnter()
+      Gamestate.pop()
+    end
+  end,
+  
+  leaveGame = function(status)
+    if Gamestate.current() == game then
+      audio.gameLeave()
+      if status == false then
+        audio.failureEnter()
+        Gamestate.switch(failure)
+      elseif status == true then
+        audio.successEnter()
+        Gamestate.switch(success)
+      end
     end
   end,
 

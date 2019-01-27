@@ -22,6 +22,14 @@ local background_ambiance_02 = love.audio.newSource("asset/sounds/background_amb
 background_ambiance_02:setLooping(true)
 background_ambiance_02:setPitch(1.0)
 
+local background_ambiance_03 = love.audio.newSource("asset/sounds/background_ambiance_03.mp3", "static")
+background_ambiance_03:setLooping(true)
+background_ambiance_03:setPitch(1.0)
+
+local background_ambiance_04 = love.audio.newSource("asset/sounds/background_ambiance_04.mp3", "static")
+background_ambiance_04:setLooping(true)
+background_ambiance_04:setPitch(1.0)
+
 local background_music_01 = love.audio.newSource("asset/sounds/background_music_01.mp3", "static")
 background_music_01:setLooping(true)
 background_music_01:setPitch(1.0)
@@ -43,6 +51,26 @@ fx_kiss_02:setLooping(false)
 fx_kiss_02:setPitch(1.0)
 
 return {
+  successEnter = function()
+    print('successEnter')
+    background_ambiance_03:play()
+  end,
+  
+  successLeave = function()
+    background_ambiance_03:stop()
+    print('successLeave')
+  end,
+  
+  failureEnter = function()
+    print('failureEnter')
+    background_ambiance_04:play()
+  end,
+
+  failureLeave = function()
+    background_ambiance_04:stop()
+    print('failureLeave')
+  end,
+  
   menuEnter = function()
     print('menuEnter')
   end,

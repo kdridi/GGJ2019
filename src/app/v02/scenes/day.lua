@@ -3,9 +3,10 @@ local suit = require('../vendor/suit')
 local context = {}
 
 local messages = {
-  "Rentrez votre cochonaille à la maison avant que le loup s'en occupe...",
+  "Rentrez votre cochonaille à la maison avant que les loups s'en occupent...",
   "La nuit tombe vite, magnez vous !",
-  "Le gros porc ? Il s'appelle Gaston !"
+  "Le gros porc ? Il s'appelle Gaston !",
+  "Le saviez-vous ? Le mot pause commence par la lettre P.",
 }
 
 function scene:enter(previous, dayCount)
