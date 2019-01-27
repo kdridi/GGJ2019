@@ -95,7 +95,7 @@ function  Map:draw(idx)
   if not idx then
     idx = 1
   end
-  love.graphics.setColor(255, 255, 255, 255)
+  --love.graphics.setColor(255, 255, 255, 255)
   --love.graphics.setBlendMode("alpha", "premultiplied")
   love.graphics.draw(self.canvas[idx])
   --  love.graphics.draw(self.imgSheet)

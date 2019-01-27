@@ -3,7 +3,7 @@ local Gamestate = require 'vendor/hump/gamestate'
 function newScene()
     return Gamestate.new()
 end
-  
+
 function setFontSize(size)
   love.graphics.setFont(love.graphics.newFont("asset/fonts/gastoon.ttf", size))
 end
@@ -30,14 +30,16 @@ end
 
 return {
   initialize = function()
-    love.window.setMode(1920, 1080)
-    love.window.setFullscreen(true)
-  
+    love.window.setMode(1280, 720)
+    --love.window.setMode(1920, 1080)
+    --love.window.setFullscreen(true)
+
     Gamestate.registerEvents()
-    audio.menuEnter()
-    Gamestate.switch(menu)
+    --audio.menuEnter()
+    --Gamestate.switch(menu)
+    Gamestate.switch(game)
   end,
-  
+
   pause = function()
     if Gamestate.current() == game and Gamestate.current() ~= pause then
       audio.pauseEnter()
@@ -68,13 +70,13 @@ return {
       love.event.push("quit")
     end
   end,
-    
+
   enterGame = function()
     audio.dayLeave()
     audio.gameEnter()
     Gamestate.switch(game, dayCount)
   end,
-  
+
   enterNextDay = function()
     if Gamestate.current() == intro then
       audio.introLeave()

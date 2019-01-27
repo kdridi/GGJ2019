@@ -8,10 +8,10 @@ function  WEED:new(world, p)
   setmetatable(obj, self)
   self.__index = self
 
-  p.width = 32
-  p.height = 15
+  p.width = 42
+  p.height = 15*2
   if not p.state then
-    p.state = 2
+    p.state = 0
   end
 
   obj.state = p.state
@@ -32,11 +32,11 @@ end
 function  WEED:setId(id)
   w, h = self.imgSheet:getDimensions()
   self.id = id - 1
-  local idx = 16 + 64*id
+  local idx = 42 + 64*2*id
   local idy = 0
 
   self.id = id
-  self.squade = love.graphics.newQuad(idx, idy, 32, 64, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy, 64, 64*2, self.imgSheet:getDimensions())
 end
 
 function  WEED:draw()
@@ -46,7 +46,14 @@ function  WEED:draw()
 
   love.graphics.setColor(self.live, self.live, self.live)
 
-  love.graphics.draw(self.imgSheet, self.squade, x, y - 64+25, r)
+  love.graphics.draw(self.imgSheet, self.squade, x, y - 64*2+25*2, r)
+end
+
+function  WEED:drawShadow()
+
+  local x, y = self.body:getWorldPoints(self.shape:getPoints())
+
+  love.graphics.draw(self.shadowSheet, self.squade, x, y - 64*2+25*2)
 end
 
 function WEED:update(dt)
@@ -84,8 +91,9 @@ end
 --RETURN
 
 return {
-  setImgSheet = function(img)
+  setImgSheet = function(img, shadow)
     WEED.imgSheet = img
+    WEED.shadowSheet = shadow
   end,
 
   newWeed = function(world, x, y)

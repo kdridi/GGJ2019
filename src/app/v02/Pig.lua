@@ -1,13 +1,16 @@
 PIG = {}
 PIGS = {}
 
+local foodD = 64 -- food distance
+local foodAlert = 0.99
+
 function  PIG:new(world, pig)
   obj = {}
   setmetatable(obj, self)
   self.__index = self
 
-  pig.width = 32*2
-  pig.height = 32*2
+  pig.width = 32*2-9
+  pig.height = 32*2-10
 
   obj.body = love.physics.newBody(world, pig.x + pig.width / 2, pig.y + pig.height / 2, "dynamic")
   --obj.body = love.physics.newBody(world, pig.x , pig.y , "dynamic")
@@ -28,6 +31,9 @@ function  PIG:new(world, pig)
 
   obj.live = 1
   obj.panic = false
+
+  obj.z = 1
+  obj.zv = -1
 
   obj.fix:setUserData(obj)
   return (obj)
@@ -51,29 +57,81 @@ function  PIG:setId(id)
   local idy = 0
 
   if id == 0 or id == 1 then
-    idx = 32*4*3 + 32 + (32*4 * id)
+    idx = 64*2*3 + 32 + (64*2 * id)
     idy = 0 + 32
-  else
-    idx = 32*8 + 32/2 + (64 * (id - 2))
-    idy = 0 + 32/2
+  elseif id == 2 or id == 3 then
+    idx = 64*2*4 + 32 + (64*2 * (id - 2))
+    idy = 0 + 32
+  elseif id == 4 then
+    idx = 128*5 + 32
+    idy = 128 + 32
   end
   -- idx = 32*4*3 + 32
   -- idy = 0 + 32
 
   self.id = id
-  self.squade = love.graphics.newQuad(idx, idy, 32*2, 32*2, self.imgSheet:getDimensions())
+  self.squade = love.graphics.newQuad(idx, idy+3, 64*2-32, 64*2-32, self.imgSheet:getDimensions())
 end
 
 function PIG:draw()
-
-  -- local cx, cy = body:getWorldPoints(shape:getPoint())
-  -- love.graphics.circle("line", cx, cy, shape:getRadius())
 
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
 
   love.graphics.setColor(self.live, self.live, self.live)
-  love.graphics.draw(self.imgSheet, self.squade, x, y, r)
+  love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
+
+  self:drawEtat()
+end
+
+function PIG:drawEtat()
+
+  if self.live < foodAlert or self.panic == true then
+    local tx = camera.x - love.graphics.getWidth() / 2
+    local ty = camera.y - love.graphics.getHeight() / 2
+    local x = self.body:getX()
+    local y = self.body:getY()
+    local img = fDown
+
+    rx = x - tx
+    ry = y - ty
+
+    local z = math.sin(self.z*2)*15
+
+    if self.panic then
+      love.graphics.setColor(0.5 * math.sin(self.z*2), math.cos(self.z*2), math.sin(self.z*7), 1)
+    elseif self.live < foodAlert then
+      love.graphics.setColor(1, math.cos(self.z), 0.2, 1) end
+    if rx < 0 or rx > love.graphics.getWidth() or
+       ry < 0 or ry > love.graphics.getHeight() then
+        if (rx <= 0) then rx = 0 img = fLeft end
+        if (ry <= 0) then ry = 0 img = fUp end
+        if (ry >= love.graphics.getHeight()) then ry = love.graphics.getHeight() - 80 img = fDown end
+        if (rx >= love.graphics.getWidth()) then rx = love.graphics.getWidth() - 80 img = fRight end
+        love.graphics.draw(img, rx + tx, ry + ty, 0, 1, 1)
+       else
+         love.graphics.draw(img, x - 37, y - (70 + z), 0, 1, 1)
+    end
+
+  end
+end
+
+function PIG:setPanic(panic)
+  self.panic = panic
+  if self.panic then
+    self:setId(4)
+  end
+end
+
+function PIG:drawShadow()
+
+  local x, y = self.body:getWorldPoints(self.shape:getPoints())
+  local r = self.body:getAngle()
+
+  local v = 0.10 + 0.20 * (1 - self.z)
+  love.graphics.setColor(v, v, v, v)
+
+  love.graphics.draw(self.shadowSheet, self.squade, self.body:getX()-32/2, self.body:getY() - 20)
 end
 
 function  PIG:findCloser(list)
@@ -112,7 +170,7 @@ function PIG:update(dt)
     --END
 
     --GO TO CLOSER
-    if self.weed and self.weedD > 40 then
+    if self.weed and self.weedD > foodD then
       local vx = self.weed.body:getX() - self.body:getX() + (32 - math.random(64))
       local vy = self.weed.body:getY() - self.body:getY() + (32 - math.random(64))
       local n = math.sqrt(vx * vx + vy * vy)
@@ -131,7 +189,7 @@ function PIG:update(dt)
     if self.time < 0 then
       self.id = (self.id + 1) % 2
       self.time = 0.2 + math.rad(1)
-      if self.weed and self.weedD > 40 then
+      if self.weed and self.weedD > foodD then
         self:setId(self.id)
       elseif self.weed then
         self:setId(self.id + 2)
@@ -151,7 +209,16 @@ function PIG:update(dt)
     self.body:applyLinearImpulse(vx*100, vy*100)
   end -- PANIC
 
+  self.z = self.z + dt * self.zv * 1.2
 
+  --check
+  if self.z < 0 then
+    self.zv = self.zv * -1
+    self.z = 0
+  elseif self.z > 1 then
+    self.zv = self.zv * -1
+    self.z = 1
+  end
 
   --DEATH
   if self.live < 0 then
@@ -168,8 +235,9 @@ end
 
 --RETURN
 return {
-  setImgSheet = function(img)
+  setImgSheet = function(img, shadow)
     PIG.imgSheet = img
+    PIG.shadowSheet = shadow
   end,
 
   newPig = function(world, x, y)
@@ -189,11 +257,12 @@ return {
   end,
 
   count = function()
-    local n = 0
-    for idx, value in pairs(PIGS) do
-      n = n + 1
-    end
-    return n
+    return #PIGS
+    -- local n = 0
+    -- for idx, value in pairs(PIGS) do
+    --   n = n + 1
+    -- end
+    -- return n
   end,
 
   del = function(v)
