@@ -86,6 +86,11 @@ function  PLAYER:kick(pig, power)
     self:setId(1)
     screen:setShake(20)
     playFX('punch')
+
+    if pig.root == true and self.medecine >= 1 then
+      pig:setRoot(false)
+      self.medecine = self.medecine - 1
+    end
   end
 end
 

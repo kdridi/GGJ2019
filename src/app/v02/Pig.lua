@@ -87,7 +87,12 @@ function PIG:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
 
-  love.graphics.setColor(self.live, self.live, self.live)
+
+  if self.root == true then
+    love.graphics.setColor(1, 0.2, math.cos(self.z*2), 1)
+  else
+    love.graphics.setColor(self.live, self.live, self.live)
+  end
   love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
 
   self:drawEtat()
