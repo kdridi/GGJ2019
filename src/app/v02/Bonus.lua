@@ -6,6 +6,8 @@ function  BONUS:new(p, img)
   setmetatable(obj, self)
   self.__index = self
 
+  obj.width = p.width
+  obj.height = p.height
   obj.img = img
   obj.body = love.physics.newBody(world, p.x + p.width / 2, p.y + p.height / 2, "dynamic")
   obj.body:setFixedRotation(true)
@@ -15,13 +17,13 @@ function  BONUS:new(p, img)
   obj.fix:setUserData(obj)
 
   if p.idx and p.idy then
-    w, h = self.imgSheet:getDimensions()
+    w, h = obj.img:getDimensions()
 
-    local idx = 0
-    local idy = 32
+    local idx = p.idx
+    local idy = p.idy
 
-    self.id = id
-    self.squade = love.graphics.newQuad(idx, idy, self.width, self.height, self.imgSheet:getDimensions())
+    obj.id = id
+    obj.squade = love.graphics.newQuad(idx, idy, obj.width, obj.height, obj.img:getDimensions())
   end
 
   return (obj)
@@ -32,7 +34,7 @@ function  BONUS:draw()
 
   love.graphics.setColor(1, 1, 1, 1)
   if self.squade then
-    love.graphics.draw(self.imgSheet, self.squade, x, y, r)
+    love.graphics.draw(self.img, self.squade, x, y, r)
   else
     love.graphics.draw(self.img, x, y)
   end

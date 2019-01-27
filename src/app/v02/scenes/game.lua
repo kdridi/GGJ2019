@@ -7,6 +7,7 @@ loader = require "../loader"
 data = require "../map"
 Pig = require "../Pig"
 Wolf = require "../Wolf"
+Boar = require "../Boar"
 Bonus = require "../Bonus"
 Player = require "../Player"
 Weed = require "../Weed"
@@ -82,8 +83,8 @@ function scene:enter(previous, dayCount)
 
   Player.del(player)
   Wolf.clear()
+  Boar.clear()
   if self.isInit == false then
-    print("INIT!!!!!!!!!!")
     Player.del(player)
     Weed.clear()
     Bonus.clear()
@@ -92,12 +93,34 @@ function scene:enter(previous, dayCount)
 
     --init map
     map = loader.loadFromLua(data)
+
+    --init OBJ
+    local sheet = love.graphics.newImage("asset/assets.png")
+    local shadow = love.graphics.newImage("asset/ombres.png")
+    local sheet2 = love.graphics.newImage("asset/assets2.png")
+    local shadow2 = love.graphics.newImage("asset/ombres2.png")
+    pommeImg = love.graphics.newImage("asset/pomme.png")
+    medecineImg = love.graphics.newImage("asset/medecine.png")
+    maisImg = love.graphics.newImage("asset/mais.png")
+    cochonImg = love.graphics.newImage("asset/cochon.png")
+    rootImg = love.graphics.newImage("asset/root.png")
+    noiseImg = love.graphics.newImage("asset/noise.png")
+    boarImg = love.graphics.newImage("asset/bb.png")
+
+    fUp = love.graphics.newImage("asset/haut.png")
+    fDown = love.graphics.newImage("asset/bas.png")
+    fLeft = love.graphics.newImage("asset/gauche.png")
+    fRight = love.graphics.newImage("asset/droite.png")
+    parImg = love.graphics.newImage("asset/part.png")
+    psystem = love.graphics.newParticleSystem(parImg, 400)
+
     map.objCreateF = function(obj)
       if obj.properties.Pig == true then
         --pig = Pig.newPig(world, obj)
       elseif obj.properties.Wolf == true then
-          print("OK!!!")
           wolf = Wolf.newWolf(world, obj)
+      elseif obj.properties.Boar == true then
+          boar = Boar.newBoar(world, obj)
       elseif obj.properties.Player == true then
         objStart = obj
       elseif obj.properties.Weed == true then
@@ -113,9 +136,11 @@ function scene:enter(previous, dayCount)
         b.type = "Pomme"
         b.fix:setSensor(true)
       elseif obj.properties.Medecine == true then
-        obj.width = 64
+        obj.width = 128-32
         obj.height = 64
-        b = Bonus.newBonus(obj, medecineImg)
+        obj.idx = 128+16
+        obj.idy = 128*2+32
+        b = Bonus.newBonus(obj, sheet2)
         b.type = "Medecine"
         b.fix:setSensor(true)
       elseif obj.properties.Mais == true then
@@ -125,9 +150,11 @@ function scene:enter(previous, dayCount)
         b.type = "Mais"
         b.fix:setSensor(true)
       elseif obj.properties.Root == true then
-        obj.width = 64
+        obj.width = 128-64
         obj.height = 64
-        b = Bonus.newBonus(obj, rootImg)
+        obj.idx = 128*2+32
+        obj.idy = 32+16
+        b = Bonus.newBonus(obj, sheet2)
         b.type = "Root"
         b.fix:setSensor(true)
       elseif obj.properties.collidable == true then --DEFAULT COLLIDER
@@ -150,24 +177,6 @@ function scene:enter(previous, dayCount)
     end
     --end
 
-    --init OBJ
-    local sheet = love.graphics.newImage("asset/assets.png")
-    local shadow = love.graphics.newImage("asset/ombres.png")
-    local sheet2 = love.graphics.newImage("asset/assets2.png")
-    local shadow2 = love.graphics.newImage("asset/ombres2.png")
-    pommeImg = love.graphics.newImage("asset/pomme.png")
-    medecineImg = love.graphics.newImage("asset/medecine.png")
-    maisImg = love.graphics.newImage("asset/mais.png")
-    cochonImg = love.graphics.newImage("asset/cochon.png")
-    rootImg = love.graphics.newImage("asset/root.png")
-    noiseImg = love.graphics.newImage("asset/noise.png")
-
-    fUp = love.graphics.newImage("asset/haut.png")
-    fDown = love.graphics.newImage("asset/bas.png")
-    fLeft = love.graphics.newImage("asset/gauche.png")
-    fRight = love.graphics.newImage("asset/droite.png")
-    parImg = love.graphics.newImage("asset/part.png")
-    psystem = love.graphics.newParticleSystem(parImg, 400)
     --effect  = love.graphics.newShader("toto.frag")
     effect  = love.graphics.newShader("des.frag")
 
@@ -182,6 +191,7 @@ function scene:enter(previous, dayCount)
     Weed.setImgSheet(sheet, shadow)
     Player.setImgSheet(sheet, shadow)
     Wolf.setImgSheet(sheet2, shadow2)
+    Boar.setImgSheet(boarImg, shadow2)
     map:initObj(world)
     --end
     self.isInit = true
@@ -277,6 +287,7 @@ function scene:update(dt)
   Player.foreach(function(p) p:update(dt) end)
   Weed.foreach(function(w) w:update(dt) end)
   Wolf.foreach(function(w) w:update(dt) end)
+  Boar.foreach(function(b) b:update(dt) end)
   Pig.foreach(function(p) p:update(dt) end)
 
   for _, body in pairs(world:getBodies()) do
@@ -336,6 +347,7 @@ function scene:draw()
 
     Pig.foreach(function(pig) pig:draw() end)
     Wolf.foreach(function(w) w:draw() end)
+    Boar.foreach(function(w) w:draw() end)
     love.graphics.setShader()
     Weed.foreach(function(w) w:draw() end)
     Bonus.foreach(function(b) b:draw() end)

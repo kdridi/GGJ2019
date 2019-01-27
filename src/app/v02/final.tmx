@@ -703,7 +703,8 @@
   </object>
   <object id="49" gid="43" x="2368" y="2688" width="64" height="64">
    <properties>
-    <property name="Wolf" type="bool" value="true"/>
+    <property name="Boar" type="bool" value="true"/>
+    <property name="Wolf" type="bool" value="false"/>
    </properties>
   </object>
   <object id="51" gid="43" x="2752" y="2816" width="64" height="64">
