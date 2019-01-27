@@ -21,7 +21,7 @@ function  WOLF:new(world, p)
 
   obj.id = 0
   obj.time = 0
-  obj.atk = waitT
+  obj.atk = 0
   obj:setId(0)
 
   obj.closer = nil

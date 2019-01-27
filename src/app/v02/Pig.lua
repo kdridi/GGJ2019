@@ -57,6 +57,7 @@ function  PIG:enter(time)
   self.live = 1.
   self.state = 42
   self.fix:setSensor(true)
+  self.body:setLinearVelocity(self.vx * 500, self.vy * 500)
   self:setId(42)
 end
 
@@ -102,22 +103,6 @@ function  PIG:setId(id)
   self.squade = love.graphics.newQuad(idx, idy+3, 64*2-32, 64*2-32, self.imgSheet:getDimensions())
 end
 
-function PIG:drawFinal()
-  if self.state == 42 then
-
-    local x = self.body:getX()
-    local y = self.body:getY()
-    local r = self.body:getAngle()
-
-    effect:send("time", (1 - self.live))
-    effect:send("tt", noiseImg)
-    love.graphics.setColor(1, self.live, self.live, 1)
-    love.graphics.setShader(effect)
-    love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
-    love.graphics.setShader()
-  end
-end
-
 function PIG:draw()
 
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
@@ -134,6 +119,22 @@ function PIG:draw()
     love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
 
     self:drawEtat()
+  end
+end
+
+function PIG:drawFinal()
+  if self.state == 42 then
+
+    local x, y = self.body:getWorldPoints(self.shape:getPoints())
+    local r = self.body:getAngle()
+    local r = self.body:getAngle()
+
+    effect:send("time", (1 - self.live))
+    effect:send("tt", noiseImg)
+    love.graphics.setColor(1, self.live, self.live, 1)
+    love.graphics.setShader(effect)
+    love.graphics.draw(self.imgSheet, self.squade, x, y - 4 * self.z, r)
+    love.graphics.setShader()
   end
 end
 
@@ -282,10 +283,10 @@ function PIG:update(dt)
   end
 
   if self.state == 42 then -- IF ENTER THE HOUSE
-    self.live = self.live - dt * 0.8
+    self.live = self.live - dt * 0.4
     if self.time < 0 then
-      self.time = 0.2
-      self.body:getLinearVelocity(self.vx * 10, self.vy * 10)
+      self.time = 0.1
+      self.body:setLinearVelocity(self.vx * 500, self.vy * 500)
     end
   end
   --DEATH
