@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="44">
+<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="49">
  <tileset firstgid="1" source="assets.tsx"/>
  <tileset firstgid="151" source="sol.tsx"/>
  <tileset firstgid="301" source="ombres.tsx"/>
  <tileset firstgid="451" source="pomme.tsx"/>
  <tileset firstgid="452" source="medecine.tsx"/>
+ <tileset firstgid="453" source="root.tsx"/>
  <layer id="10" name="sol" width="80" height="80">
   <data encoding="csv">
 300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,
@@ -625,6 +626,31 @@
   <object id="43" gid="452" x="2240" y="3072" width="64" height="64">
    <properties>
     <property name="Medecine" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="44" gid="453" x="2112" y="2816" width="64" height="64">
+   <properties>
+    <property name="Root" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="45" gid="453" x="2304" y="2560" width="64" height="64">
+   <properties>
+    <property name="Root" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="46" gid="453" x="2304" y="2304" width="64" height="64">
+   <properties>
+    <property name="Root" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="47" gid="453" x="2688" y="2304" width="64" height="64">
+   <properties>
+    <property name="Root" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="48" gid="453" x="2816" y="2560" width="64" height="64">
+   <properties>
+    <property name="Root" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

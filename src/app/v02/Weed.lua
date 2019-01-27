@@ -46,7 +46,13 @@ function  WEED:draw()
 
   love.graphics.setColor(self.live, self.live, self.live)
 
+  local t = 1 - self.live
+  --print(t)
+  effect:send("time", t-0.2)
+  effect:send("tt", noiseImg)
+  love.graphics.setShader(effect)
   love.graphics.draw(self.imgSheet, self.squade, x, y - 64*2+25*2, r)
+  love.graphics.setShader()
 end
 
 function  WEED:drawShadow()

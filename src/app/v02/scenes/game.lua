@@ -55,6 +55,12 @@ function scene:init()
       elseif b:getUserData().type == "Medecine" and a:getUserData().type == "Player" then
         a:getUserData():addMedecine(1)
         Bonus.del(b:getUserData())
+      elseif a:getUserData().type == "Root" and (b:getUserData().type == "Player" or b:getUserData().type == "Pig") then
+        b:getUserData():setRoot(true)
+        Bonus.del(a:getUserData())
+      elseif b:getUserData().type == "Root" and (a:getUserData().type == "Player" or a:getUserData().type == "Pig") then
+        a:getUserData():setRoot(true)
+        Bonus.del(b:getUserData())
       end
     end
   end, nil, nil, nil)
@@ -95,16 +101,20 @@ function scene:enter(previous, dayCount)
     elseif obj.properties.Medecine == true then
       obj.width = 64
       obj.height = 64
-      print(obj)
       b = Bonus.newBonus(obj, medecineImg)
       b.type = "Medecine"
       b.fix:setSensor(true)
-    elseif obj.properties.Medecine == true then
+    elseif obj.properties.Mais == true then
       obj.width = 64
       obj.height = 64
-      print(obj)
       b = Bonus.newBonus(obj, maisImg)
       b.type = "Mais"
+      b.fix:setSensor(true)
+    elseif obj.properties.Root == true then
+      obj.width = 64
+      obj.height = 64
+      b = Bonus.newBonus(obj, rootImg)
+      b.type = "Root"
       b.fix:setSensor(true)
     elseif obj.properties.collidable == true then --DEFAULT COLLIDER
       body = love.physics.newBody(world, obj.x + obj.width / 2, obj.y + obj.height / 2)
@@ -133,11 +143,24 @@ function scene:enter(previous, dayCount)
   medecineImg = love.graphics.newImage("asset/medecine.png")
   maisImg = love.graphics.newImage("asset/mais.png")
   cochonImg = love.graphics.newImage("asset/cochon.png")
+  rootImg = love.graphics.newImage("asset/root.png")
+  noiseImg = love.graphics.newImage("asset/noise.png")
 
   fUp = love.graphics.newImage("asset/haut.png")
   fDown = love.graphics.newImage("asset/bas.png")
   fLeft = love.graphics.newImage("asset/gauche.png")
   fRight = love.graphics.newImage("asset/droite.png")
+  parImg = love.graphics.newImage("asset/part.png")
+  psystem = love.graphics.newParticleSystem(parImg, 400)
+  --effect  = love.graphics.newShader("toto.frag")
+  effect  = love.graphics.newShader("des.frag")
+
+	psystem:setParticleLifetime(0.25, 0.7) -- Particles live at least 2s and at most 5s.
+	psystem:setSizeVariation(0, 1)
+  --psystem:setEmissionRate(5)
+	--psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.
+	psystem:setColors(0, 0, 0, 1, 1, 1, 1, 0) -- Fade to transparency.
+  --psystem:pause()
 
   Pig.setImgSheet(sheet, shadow)
   Weed.setImgSheet(sheet, shadow)
@@ -147,8 +170,14 @@ function scene:enter(previous, dayCount)
 
   Pig.deploy(5)
   --camera
-  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, true)
+  context.camera = Camera.newCamera(200, 200, player, MAPS, MAPS, false)
   camera = context.camera
+end
+
+local rot = function(vx, vy, a)
+  rx = vx * math.cos(a) - vy * math.sin(a)
+  ry = vx * math.sin(a) + vy * math.cos(a)
+  return rx, ry
 end
 
 function scene:update(dt)
@@ -179,6 +208,19 @@ function scene:update(dt)
   if love.keyboard.isDown("x") then --PUSH
     local pig, d = player:findCloser(Pig)
     if pig and d < 120 then
+      local vx = pig.body:getX() - player.body:getX()
+      local vy = pig.body:getY() - player.body:getY()
+      local n = math.sqrt(vx * vx + vy * vy)
+      vx = vx / n
+      vy = vy / n
+
+      vx1, vy1 = rot(vx, vy, -0.5)
+      vx2, vy2 = rot(vx, vy, 0.5)
+      psystem:setLinearAcceleration(vx1 * 5000, vy1 * 5000, vx2 * 8000, vy2 * 8000)
+      -- psystem:setPosition(pig.body:getX() - (camera.x - love.graphics.getWidth() / 2),
+      --                     pig.body:getY() - (camera.y - love.graphics.getHeight() / 2))
+      psystem:setPosition(pig.body:getX(), pig.body:getY())
+      psystem:emit(16)
       player:kick(pig)
     end
   end --END
@@ -220,7 +262,7 @@ function scene:update(dt)
 
     vx = vx * (0.95)
     vy = vy * (0.95)
-    r = r * 0.95
+    r = r * 0.90
     body:setLinearVelocity(vx, vy)
     body:setAngularVelocity(r)
   end
@@ -236,6 +278,8 @@ function scene:update(dt)
   if Pig.count() == 0 then
     return Director.enterNextDay()
   end
+
+  psystem:update(dt)
 end
 
 function scene:draw()
@@ -254,13 +298,15 @@ function scene:draw()
     Weed.foreach(function(w) w:drawShadow() end)
     map:draw(3)--mid
 
-    --Player.foreach(function(pig) pig:draw() end)
-    player:draw()
+    Player.foreach(function(p) p:draw() end)
+    --player:draw()
     -- love.graphics.setColor(0.76, 0.18, 0.05)
     -- love.graphics.rectangle("fill", ball.body:getX() - 16, ball.body:getY() - 16, 32, 32)
 
     love.graphics.setColor(255, 255, 255)
+
     Pig.foreach(function(pig) pig:draw() end)
+    love.graphics.setShader()
     Weed.foreach(function(w) w:draw() end)
     Bonus.foreach(function(b) b:draw() end)
 
@@ -268,6 +314,9 @@ function scene:draw()
     map:draw(4)--top
     love.graphics.setColor(255, 255, 255)
     map:draw(5)--top2
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.draw(psystem)
+
   end)
 
 

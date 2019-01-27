@@ -3,6 +3,7 @@ PIGS = {}
 
 local foodD = 64 -- food distance
 local foodAlert = 0.99
+local density = 2
 
 function  PIG:new(world, pig)
   obj = {}
@@ -35,12 +36,20 @@ function  PIG:new(world, pig)
   obj.z = 1
   obj.zv = -1
 
+  obj.root = false
   obj.fix:setUserData(obj)
   return (obj)
 end
 
-function  PIG:Kick(v)
 
+function  PIG:setRoot(r)
+  self.root = r
+  if self.root == true then
+    self.fix:setDensity(density * 10000)
+  else
+    self.fix:setDensity(density)
+  end
+  self.body:resetMassData()
 end
 
 function  PIG:distanceFrom(x, y)
@@ -86,7 +95,7 @@ end
 
 function PIG:drawEtat()
 
-  if self.live < foodAlert or self.panic == true then
+  if self.live < foodAlert or self.panic == true or self.root == true then
     local tx = camera.x - love.graphics.getWidth() / 2
     local ty = camera.y - love.graphics.getHeight() / 2
     local x = self.body:getX()
@@ -100,6 +109,8 @@ function PIG:drawEtat()
 
     if self.panic then
       love.graphics.setColor(0.5 * math.sin(self.z*2), math.cos(self.z*2), math.sin(self.z*7), 1)
+    elseif self.root == true then
+      love.graphics.setColor(0.2, 1, math.cos(self.z), 1)
     elseif self.live < foodAlert then
       love.graphics.setColor(1, math.cos(self.z), 0.2, 1) end
     if rx < 0 or rx > love.graphics.getWidth() or
@@ -158,7 +169,7 @@ end
 function PIG:update(dt)
   self.time = self.time - dt
 
-  if self.panic == false then
+  if self.panic == false and self.root == false then
     self.checkTime = self.checkTime - dt
     self.live = self.live - dt * 0.025
 
@@ -197,7 +208,7 @@ function PIG:update(dt)
         self:setId(self.id)
       end
     end
-  elseif self.time < 0 then
+  elseif self.time < 0 and self.root == false then
 
     self.time = 0.1
     local vx = 32 - math.random(64)
@@ -218,6 +229,10 @@ function PIG:update(dt)
   elseif self.z > 1 then
     self.zv = self.zv * -1
     self.z = 1
+  end
+
+  if self.root == true then
+    self.live = self.live + dt * 0.3
   end
 
   --DEATH

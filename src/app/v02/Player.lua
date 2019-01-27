@@ -29,6 +29,8 @@ function  PLAYER:new(world, p)
   obj.pomme = 1
   obj.medecine = 1
   obj.mais = 1
+
+  obj.root = false
   return (obj)
 end
 
@@ -42,6 +44,10 @@ end
 
 function  PLAYER:addMais(nb)
   self.mais = self.mais + nb
+end
+
+function  PLAYER:setRoot(r)
+  self.root = r
 end
 
 function  PLAYER:findCloser(list)

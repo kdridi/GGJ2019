@@ -9,7 +9,7 @@ return {
   tilewidth = 64,
   tileheight = 64,
   nextlayerid = 13,
-  nextobjectid = 44,
+  nextobjectid = 49,
   properties = {},
   tilesets = {
     {
@@ -126,6 +126,32 @@ return {
       margin = 0,
       columns = 1,
       image = "asset/medecine.png",
+      imagewidth = 64,
+      imageheight = 64,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 64,
+        height = 64
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 1,
+      tiles = {}
+    },
+    {
+      name = "root",
+      firstgid = 453,
+      filename = "root.tsx",
+      tilewidth = 64,
+      tileheight = 64,
+      spacing = 0,
+      margin = 0,
+      columns = 1,
+      image = "asset/root.png",
       imagewidth = 64,
       imageheight = 64,
       tileoffset = {
@@ -1256,6 +1282,86 @@ return {
           visible = true,
           properties = {
             ["Medecine"] = true
+          }
+        },
+        {
+          id = 44,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2112,
+          y = 2816,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 453,
+          visible = true,
+          properties = {
+            ["Root"] = true
+          }
+        },
+        {
+          id = 45,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2304,
+          y = 2560,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 453,
+          visible = true,
+          properties = {
+            ["Root"] = true
+          }
+        },
+        {
+          id = 46,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2304,
+          y = 2304,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 453,
+          visible = true,
+          properties = {
+            ["Root"] = true
+          }
+        },
+        {
+          id = 47,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2688,
+          y = 2304,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 453,
+          visible = true,
+          properties = {
+            ["Root"] = true
+          }
+        },
+        {
+          id = 48,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2816,
+          y = 2560,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 453,
+          visible = true,
+          properties = {
+            ["Root"] = true
           }
         }
       }
