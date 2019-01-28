@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="64" tileheight="64" infinite="0" nextlayerid="14" nextobjectid="220">
+<map version="1.2" tiledversion="2018.12.22" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="64" tileheight="64" infinite="0" nextlayerid="14" nextobjectid="222">
  <tileset firstgid="1" source="assets.tsx"/>
  <tileset firstgid="151" source="ombres.tsx"/>
  <tileset firstgid="301" source="pomme.tsx"/>
@@ -1148,7 +1148,7 @@
     <property name="state" type="int" value="1"/>
    </properties>
   </object>
-  <object id="216" gid="68" x="2496" y="1856" width="64" height="64">
+  <object id="216" gid="68" x="2624" y="1600" width="64" height="64">
    <properties>
     <property name="Weed" type="bool" value="true"/>
     <property name="state" type="int" value="1"/>
@@ -1156,32 +1156,32 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="obj">
-  <object id="33" gid="301" x="3643.19" y="1690.76" width="64" height="64">
+  <object id="33" gid="301" x="3584" y="1728" width="64" height="64">
    <properties>
     <property name="Pomme" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="36" gid="301" x="1538.88" y="1663.56" width="64" height="64">
+  <object id="36" gid="301" x="1728" y="1792" width="64" height="64">
    <properties>
     <property name="Pomme" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="38" gid="301" x="3669.01" y="3645.23" width="64" height="64">
+  <object id="38" gid="301" x="3584" y="3584" width="64" height="64">
    <properties>
     <property name="Pomme" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="39" gid="301" x="1545.97" y="3543.61" width="64" height="64">
+  <object id="39" gid="301" x="1792" y="3520" width="64" height="64">
    <properties>
     <property name="Pomme" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="40" gid="302" x="2520.42" y="1610.87" width="64" height="64">
+  <object id="40" gid="302" x="3520" y="1728" width="64" height="64">
    <properties>
     <property name="Medecine" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="43" gid="302" x="2512.39" y="3803.34" width="64" height="64">
+  <object id="43" gid="302" x="3520" y="3584" width="64" height="64">
    <properties>
     <property name="Medecine" type="bool" value="true"/>
    </properties>
@@ -1201,7 +1201,7 @@
     <property name="Root" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="47" gid="303" x="3008" y="2368" width="64" height="64">
+  <object id="47" gid="303" x="3520" y="2048" width="64" height="64">
    <properties>
     <property name="Root" type="bool" value="true"/>
    </properties>
@@ -1211,47 +1211,7 @@
     <property name="Pomme" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="155" gid="301" x="256" y="576" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="156" gid="301" x="256" y="640" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="157" gid="301" x="192" y="640" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="158" gid="301" x="3584" y="576" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="159" gid="301" x="3648" y="576" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="160" gid="301" x="3584" y="640" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="161" gid="301" x="3648" y="640" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="162" gid="301" x="4800" y="4864" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="163" gid="301" x="4864" y="4800" width="64" height="64">
    <properties>
     <property name="Pomme" type="bool" value="true"/>
    </properties>
@@ -1261,27 +1221,7 @@
     <property name="Pomme" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="165" gid="301" x="4800.7" y="4791.71" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="166" gid="301" x="320" y="4928" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="167" gid="301" x="384" y="4864" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="168" gid="301" x="320" y="4864" width="64" height="64">
-   <properties>
-    <property name="Pomme" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="169" gid="301" x="384" y="4928" width="64" height="64">
    <properties>
     <property name="Pomme" type="bool" value="true"/>
    </properties>
@@ -1321,19 +1261,24 @@
     <property name="Root" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="217" gid="302" x="1782.01" y="2868.88" width="64" height="64">
+  <object id="217" gid="302" x="1856" y="3520" width="64" height="64">
    <properties>
     <property name="Medecine" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="218" gid="302" x="1460.54" y="1827.93" width="64" height="64">
+  <object id="218" gid="302" x="1664" y="1792" width="64" height="64">
    <properties>
     <property name="Medecine" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="219" gid="302" x="3676.38" y="3224.79" width="64" height="64">
+  <object id="220" gid="301" x="2688" y="4736" width="64" height="64">
    <properties>
-    <property name="Medecine" type="bool" value="true"/>
+    <property name="Pomme" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="221" gid="301" x="2589.51" y="630.074" width="64" height="64">
+   <properties>
+    <property name="Pomme" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

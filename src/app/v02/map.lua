@@ -9,7 +9,7 @@ return {
   tilewidth = 64,
   tileheight = 64,
   nextlayerid = 14,
-  nextobjectid = 217,
+  nextobjectid = 222,
   properties = {},
   tilesets = {
     {
@@ -2823,8 +2823,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2496,
-          y = 1856,
+          x = 2624,
+          y = 1600,
           width = 64,
           height = 64,
           rotation = 0,
@@ -2853,8 +2853,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 3643.19,
-          y = 1690.76,
+          x = 3584,
+          y = 1728,
           width = 64,
           height = 64,
           rotation = 0,
@@ -2869,8 +2869,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1538.88,
-          y = 1663.56,
+          x = 1728,
+          y = 1792,
           width = 64,
           height = 64,
           rotation = 0,
@@ -2885,8 +2885,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 3669.01,
-          y = 3645.23,
+          x = 3584,
+          y = 3584,
           width = 64,
           height = 64,
           rotation = 0,
@@ -2901,8 +2901,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 1545.97,
-          y = 3543.61,
+          x = 1792,
+          y = 3520,
           width = 64,
           height = 64,
           rotation = 0,
@@ -2917,8 +2917,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2520.42,
-          y = 1610.87,
+          x = 3520,
+          y = 1728,
           width = 64,
           height = 64,
           rotation = 0,
@@ -2933,8 +2933,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 2512.39,
-          y = 3803.34,
+          x = 3520,
+          y = 3584,
           width = 64,
           height = 64,
           rotation = 0,
@@ -2997,8 +2997,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 3008,
-          y = 2368,
+          x = 3520,
+          y = 2048,
           width = 64,
           height = 64,
           rotation = 0,
@@ -3014,70 +3014,6 @@ return {
           type = "",
           shape = "rectangle",
           x = 192,
-          y = 576,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 155,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 256,
-          y = 576,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 156,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 256,
-          y = 640,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 157,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 192,
-          y = 640,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 158,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3584,
           y = 576,
           width = 64,
           height = 64,
@@ -3105,70 +3041,6 @@ return {
           }
         },
         {
-          id = 160,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3584,
-          y = 640,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 161,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 3648,
-          y = 640,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 162,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 4800,
-          y = 4864,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 163,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 4864,
-          y = 4800,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
           id = 164,
           name = "",
           type = "",
@@ -3185,75 +3057,11 @@ return {
           }
         },
         {
-          id = 165,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 4800.7,
-          y = 4791.71,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
           id = 166,
           name = "",
           type = "",
           shape = "rectangle",
           x = 320,
-          y = 4928,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 167,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 384,
-          y = 4864,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 168,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 320,
-          y = 4864,
-          width = 64,
-          height = 64,
-          rotation = 0,
-          gid = 301,
-          visible = true,
-          properties = {
-            ["Pomme"] = true
-          }
-        },
-        {
-          id = 169,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 384,
           y = 4928,
           width = 64,
           height = 64,
@@ -3374,6 +3182,70 @@ return {
           visible = true,
           properties = {
             ["Root"] = true
+          }
+        },
+        {
+          id = 217,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1856,
+          y = 3520,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 302,
+          visible = true,
+          properties = {
+            ["Medecine"] = true
+          }
+        },
+        {
+          id = 218,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1664,
+          y = 1792,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 302,
+          visible = true,
+          properties = {
+            ["Medecine"] = true
+          }
+        },
+        {
+          id = 220,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2688,
+          y = 4736,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 301,
+          visible = true,
+          properties = {
+            ["Pomme"] = true
+          }
+        },
+        {
+          id = 221,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2589.51,
+          y = 630.074,
+          width = 64,
+          height = 64,
+          rotation = 0,
+          gid = 301,
+          visible = true,
+          properties = {
+            ["Pomme"] = true
           }
         }
       }
