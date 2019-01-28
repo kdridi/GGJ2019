@@ -36,6 +36,7 @@ local context = {}
 function scene:init()
   screen:setDimensions(love.graphics.getWidth(), love.graphics.getHeight())
 
+  math.randomseed(os.time())
   print("init")
   self.pig = 1
   self.isInit = false
@@ -202,7 +203,7 @@ function scene:enter(previous, dayCount)
   print("pig: "..self.pig)
   Pig.deploy(scene, self.pig)
 
-  for p=1,9+(dayCount*2) do
+  for p=1,3+dayCount do
     obj.width = 64
     obj.height = 64
     obj.x = 64 + math.random(0, 64*62)
@@ -211,7 +212,7 @@ function scene:enter(previous, dayCount)
     b.type = "Pomme"
     b.fix:setSensor(true)
   end
-  for p=1,4+dayCount do
+  for p=1,1+dayCount do
     obj.width = 128-64
     obj.height = 64
     obj.x = 64 + math.random(0, 64*62)
@@ -224,7 +225,7 @@ function scene:enter(previous, dayCount)
   end
 
 
-  for p=1,4+dayCount do
+  for p=1,1+dayCount/2 do
     obj.width = 128-32
     obj.height = 64
     obj.x = 64 + math.random(0, 64*62)
@@ -250,8 +251,9 @@ function scene:enter(previous, dayCount)
     local dx = 64 + math.random(0, 64*62)
     local dy = 64 + math.random(0, 64*62)
 
-    if i >= 5 then
+    if i >= 4 then
       wolf = Wolf.newWolf(world, {x=dx, y=dy})
+      print("Wolf")
     end
   end
   self.pig = 0
