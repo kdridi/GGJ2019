@@ -241,17 +241,15 @@ function scene:enter(previous, dayCount)
     local dx = 64 + math.random(0, 64*62)
     local dy = 64 + math.random(0, 64*62)
 
-    if i >= 2 then
-      boar = Boar.newBoar(world, {x=dx, y=dy})
-      print("boar")
-    end
+    boar = Boar.newBoar(world, {x=dx, y=dy})
+    print("boar")
   end
 
-  for i=1,dayCount,5 do --CREATION WOLF
+  for i=1,dayCount,3 do --CREATION WOLF
     local dx = 64 + math.random(0, 64*62)
     local dy = 64 + math.random(0, 64*62)
 
-    if i >= 4 then
+    if dayCount > 1 then
       wolf = Wolf.newWolf(world, {x=dx, y=dy})
       print("Wolf")
     end

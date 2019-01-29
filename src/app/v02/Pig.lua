@@ -2,7 +2,7 @@ PIG = {}
 PIGS = {}
 
 local foodD = 64 -- food distance
-local foodAlert = 0.99
+local foodAlert = 0.75
 local density = 2
 
 function  PIG:new(scene, world, pig)

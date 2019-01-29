@@ -30,6 +30,8 @@ function  WOLF:new(world, p)
   obj.state = 0
   obj.d = 0
 
+  self.live = 1
+
   return (obj)
 end
 
@@ -46,8 +48,9 @@ end
 function  WOLF:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
+  local v = self.live
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(v, v, v, 1)
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
 end
 
@@ -132,6 +135,18 @@ function  WOLF:update(dt)
       self.body:applyLinearImpulse(math.random(2000), math.random(2000))
     end
   end
+
+  --DEATH
+  if self.live < 0 then
+    for idx, value in pairs(WOLFS) do
+      if value == self then
+        value.fix:destroy()
+        table.remove(WOLFS, idx)
+        return
+      end
+    end--FOR
+  end--IF
+
 end
 
 --RETURN

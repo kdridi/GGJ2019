@@ -30,6 +30,7 @@ function  BOAR:new(world, p)
   obj.state = 0
   obj.d = 0
 
+  self.live = 1.
   return (obj)
 end
 
@@ -46,8 +47,9 @@ end
 function  BOAR:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
+  local v = 0.5 + self.live/2
 
-  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.setColor(v, v, v, 1)
   love.graphics.draw(self.imgSheet, self.squade, x, y, r)
 end
 
@@ -105,7 +107,7 @@ function  BOAR:update(dt)
   self.closer = nil
 
   if self.atk < 0 then
-    
+
     self.closer, self.d = self:findCloser(Pig)
     self.state = 0
     if self.closer and self.d < 160 then
@@ -132,6 +134,19 @@ function  BOAR:update(dt)
       self.body:applyLinearImpulse(math.random(2000), math.random(2000))
     end
   end
+
+  --DEATH
+  if self.live < 0 then
+    for idx, value in pairs(BOARS) do
+      if value == self then
+        value.fix:destroy()
+        table.remove(BOARS, idx)
+        return
+      end
+    end--FOR
+  end--IF
+
+
 end
 
 --RETURN

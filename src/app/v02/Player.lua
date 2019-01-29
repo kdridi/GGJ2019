@@ -83,6 +83,12 @@ function  PLAYER:kick(pig, power)
 
     if pig.type == "Wolf" or pig.type == "Boar" then power = 5000 end
 
+    if pig.type == "Wolf" then
+      pig.live = pig.live - 0.26 end
+
+    if pig.type == "Board" then
+      pig.live = pig.live - 0.11 end
+
     vx = vx / n
     vy = vy / n
     pig.body:applyLinearImpulse(vx * power, vy * power)
