@@ -28,8 +28,8 @@ local MAPW = 50
 local MAPH = 40
 local MAPS = 32
 
-local amTL = 80
-local pmTL = 50
+local amTL = 60
+local pmTL = 40
 
 local context = {}
 
@@ -456,9 +456,19 @@ function scene:draw()
   love.graphics.print("X "..Pig.count(), 42, 15+45*3)
 
   local v = 1
+
+  if self.time - 1 <= pmTL and pmTL - (self.time - 1) <= 4 then
+    local v = math.sin((((pmTL + 1) - self.time)))
+    love.graphics.setColor(0.7, 0.1, 0.1, v)
+    setFontSize(50)
+    love.graphics.print("Ca va être tout noir !", love.graphics.getWidth() / 4, love.graphics.getHeight() / 3)
+    setFontSize(40)
+    love.graphics.print("RENTREZ VOS ENFANT", love.graphics.getWidth() / 3, love.graphics.getHeight() / 2)
+  end
   love.graphics.setColor(v, v, v, 1)
   setFontSize(30)
   love.graphics.print(math.floor(self.time), love.graphics.getWidth() / 2 - 20, 10)
+
 
   suit.draw()
 end

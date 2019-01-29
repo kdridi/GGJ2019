@@ -132,7 +132,7 @@ function PIG:drawFinal()
     local r = self.body:getAngle()
     local r = self.body:getAngle()
 
-    effect:send("time", (1 - self.live))
+    effect:send("time", (1 - self.live)-0.33)
     effect:send("tt", noiseImg)
     love.graphics.setColor(1, self.live, self.live, 1)
     love.graphics.setShader(effect)
