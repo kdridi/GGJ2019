@@ -111,11 +111,12 @@ function PIG:draw()
   local x, y = self.body:getWorldPoints(self.shape:getPoints())
   local r = self.body:getAngle()
 
+  local v = 0.25 + 0.75 * self.live
 
   if self.root == true then
     love.graphics.setColor(1, 0.2, math.cos(self.z*2), self.live)
   else
-    love.graphics.setColor(self.live, self.live, self.live)
+    love.graphics.setColor(v, v, v)
   end
 
   if self.state ~= 42 then
@@ -221,7 +222,7 @@ function PIG:update(dt)
 
   if self.panic == false and self.root == false and self.state ~= 42 then
     self.checkTime = self.checkTime - dt
-    self.live = self.live - dt * 0.025
+    self.live = self.live - dt * 0.066
 
     --NEED TO FIND CLOSER
     if self.checkTime < 0 then
@@ -298,6 +299,7 @@ function PIG:update(dt)
     for idx, value in pairs(PIGS) do
       if value == self then
         if self.state == 42 then self.scene.pig = self.scene.pig + 1 end
+        Death.newDeath(wold, {x=self.body:getX()-(64*2-32)/2, y=self.body:getY()-(64*2-32)/2})
         value.fix:destroy()
         table.remove(PIGS, idx)
         return

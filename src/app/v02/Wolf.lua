@@ -39,7 +39,7 @@ function  WOLF:setId(id)
   w, h = self.imgSheet:getDimensions()
 
   local idx = 0
-  local idy = 32
+  local idy = 32+id*128
 
   self.id = id
   self.squade = love.graphics.newQuad(idx, idy, self.width, self.height, self.imgSheet:getDimensions())
@@ -95,6 +95,8 @@ function  WOLF:attack(pig)
     vy = vy / n
     pig.body:applyLinearImpulse(vx * power, vy * power)
     pig.live = pig.live - 0.33
+    if pig.live <= 0 then
+      self:setId(1) end
 
     self.state = 1
     self.atk = waitT
@@ -109,6 +111,7 @@ function  WOLF:update(dt)
   self.closer = nil
 
   if self.atk < 0 then
+    self:setId(0)
     self.closer, self.d = self:findCloser(Pig)
     self.state = 0
     if self.closer and self.d < 160 then

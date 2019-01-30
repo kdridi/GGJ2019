@@ -11,6 +11,7 @@ Boar = require "../Boar"
 Bonus = require "../Bonus"
 Player = require "../Player"
 Weed = require "../Weed"
+Death = require "../Death"
 inspect = require "../vendor/inspect"
 Camera = require "../camera"
 screen = require "../vendor/shack/shack"
@@ -193,6 +194,7 @@ function scene:enter(previous, dayCount)
     Player.setImgSheet(sheet, shadow)
     Wolf.setImgSheet(sheet2, shadow2)
     Boar.setImgSheet(boarImg, shadow2)
+    Death.setImgSheet(sheet2, shadow2)
     map:initObj(world)
     --end
     self.isInit = true
@@ -378,6 +380,9 @@ function scene:update(dt)
     if self.pig == 0 then
       return Director.leaveGame(false)
     else
+      Pig.foreach(function(p)
+        Death.newDeath(wold, {x=p.body:getX()-(64*2-32)/2, y=p.body:getY()-(64*2-32)/2})
+      end)
       return Director.enterNextDay()
     end
   end
@@ -409,6 +414,7 @@ function scene:draw()
 
     love.graphics.setColor(255, 255, 255)
 
+    Death.foreach(function(d) d:draw() end)
     Bonus.foreach(function(b) b:draw() end)
     Pig.foreach(function(pig) pig:draw() end)
     Wolf.foreach(function(w) w:draw() end)
